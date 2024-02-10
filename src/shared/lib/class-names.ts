@@ -1,0 +1,1 @@
+export const classNames = (...args: (string | undefined)[]) => args.filter(s => s).join(' ');

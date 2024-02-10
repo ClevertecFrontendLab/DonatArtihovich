@@ -1,0 +1,48 @@
+.downloadCard {
+    border-radius: 2px;
+    border: none;
+}
+
+.cardHeader {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-light-6);
+}
+
+.cardSubheader {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}
+
+.headerWrapper {
+    padding: 12px 24px;
+    gap: 8px;
+}
+
+.downloadButtonText {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-title-85);
+}
+
+.downloadButton {
+    border: none;
+    box-shadow: none;
+    margin: 12px 0;
+    width: 120px;
+    height: 32px;
+
+    &:focus {
+        :global .ant-wave {
+            display: none;
+        }
+    }
+}

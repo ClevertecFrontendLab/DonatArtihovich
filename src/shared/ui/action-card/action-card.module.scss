@@ -1,0 +1,43 @@
+.actionCard,
+.cardDivider {
+    width: 240px;
+}
+
+.actionCard {
+    padding: 0;
+    border-radius: 2px;
+}
+
+.cardTitle {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+    margin: 12px;
+}
+
+.cardButton {
+    border: none;
+    margin: 12px;
+    box-shadow: none;
+
+    &:focus {
+        :global .ant-wave {
+            display: none;
+        }
+    }
+}
+
+.cardButtonTitle {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-6);
+}
+
+.cardDivider {
+    margin: 0;
+}

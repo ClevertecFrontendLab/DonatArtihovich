@@ -1,0 +1,46 @@
+.sider {
+    max-width: 208px;
+    // height: 100vh;
+    background: #ffffff !important;
+    position: relative;
+}
+
+.siderFlex {
+    height: 100%;
+}
+
+.logoWrapper {
+    height: 64px;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+    padding: 16px;
+    margin-top: 30px;
+}
+
+.siderMenu {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+}
+
+.exitButtonWrapper {
+    width: 100%;
+}
+
+.exitButton {
+    border: none;
+    border-radius: 0;
+
+    &:focus {
+        :global .ant-wave {
+            display: none;
+        }
+    }
+}
+
+.toggleSidebarButton {
+    position: absolute;
+    top: 50%;
+    right: -20px;
+    transform: translateY(-50%);
+}

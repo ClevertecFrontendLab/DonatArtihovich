@@ -1,0 +1,44 @@
+.content {
+    width: 100%;
+    padding: 24px;
+    gap: 16px;
+}
+
+.abilitiesCardText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-light-9);
+}
+
+.aboutCardText {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.abilitiesCard,
+.aboutCard,
+.actionCardsWrapper {
+    // padding: 24px;
+    width: 752px;
+    box-sizing: border-box;
+}
+
+.abilitiesCard,
+.aboutCard {
+    border-radius: 2px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: var(--character-light-primary-inverse);
+    border: none;
+}
+
+.abilitiesCard {
+    margin-bottom: 8px;
+}
+
+.abilitiesCardText,
+.aboutCardText {
+    margin: 0;
+}
