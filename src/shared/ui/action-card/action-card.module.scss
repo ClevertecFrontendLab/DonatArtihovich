@@ -1,3 +1,5 @@
+@import '@shared/mixins/button';
+
 .actionCard,
 .cardDivider {
     width: 240px;
@@ -22,11 +24,7 @@
     margin: 12px;
     box-shadow: none;
 
-    &:focus {
-        :global .ant-wave {
-            display: none;
-        }
-    }
+    @include button;
 }
 
 .cardButtonTitle {

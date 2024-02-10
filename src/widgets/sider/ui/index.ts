@@ -1,0 +1,1 @@
+export { PageSider } from '../sider'

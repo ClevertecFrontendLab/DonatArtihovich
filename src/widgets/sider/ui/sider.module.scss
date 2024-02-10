@@ -1,3 +1,5 @@
+@import '@shared/mixins/button';
+
 .sider {
     max-width: 208px;
     // height: 100vh;
@@ -31,16 +33,22 @@
     border: none;
     border-radius: 0;
 
-    &:focus {
-        :global .ant-wave {
-            display: none;
-        }
-    }
+    @include button;
 }
 
 .toggleSidebarButton {
+    box-shadow: none;
+    border-radius: 0;
+    border: none;
+    @include button;
+
     position: absolute;
     top: 50%;
-    right: -20px;
-    transform: translateY(-50%);
+    right: -30px;
+    z-index: 10;
+    // width: 100px;
+    // height: 10px;
+    // border-bottom: 50px solid transparent;
+    // border-left: 50px solid transparent;
+    // border-right: 50px solid transparent;
 }

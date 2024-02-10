@@ -9,7 +9,7 @@ export const PageHeader = () => {
     return (
         <Header className={cls.header}>
             <Typography.Text>Главная</Typography.Text>
-            <Flex justify='space-between' align='center'>
+            <Flex justify='space-between' align='flex-start'>
                 <Typography.Title level={1} className={cls.headerTitle}>
                     Приветствуем тебя в CleverFit — приложении,<br /> которое поможет тебе добиться своей мечты!
                 </Typography.Title>
