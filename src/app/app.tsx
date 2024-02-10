@@ -1,7 +1,7 @@
 import { MainPage } from "@pages/main-page"
 import { PageFooter } from "@widgets/footer"
 import { PageHeader } from "@widgets/header"
-import { PageSider } from "@widgets/sider/ui"
+import { PageSider } from "@widgets/sider"
 import { Flex, Layout } from "antd"
 import { HashRouter, Route, Routes } from "react-router-dom"
 import backgroundImage from '@assets/images/background.png';

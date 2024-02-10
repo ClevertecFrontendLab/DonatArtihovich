@@ -1,2 +1,2 @@
-export { PageSider } from './sider/ui'
+export { PageSider } from './sider'
 export { PageHeader } from './header'

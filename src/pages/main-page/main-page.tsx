@@ -1,4 +1,4 @@
-import { MainContent } from '@widgets/content';
+import { MainContent } from '@widgets/main-content';
 
 export const MainPage: React.FC = () => {
 

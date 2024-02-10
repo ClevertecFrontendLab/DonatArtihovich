@@ -1,6 +1,6 @@
 import { Card, Flex, Typography } from "antd"
 import { Content } from "antd/es/layout/layout"
-import cls from './content.module.scss'
+import cls from './main-content.module.scss'
 import { ActionCard } from "@shared/ui"
 import { CalendarOutlined, HeartFilled, IdcardOutlined } from "@ant-design/icons"
 
