@@ -66,6 +66,28 @@ button:focus-visible {
         background-color: #f9f9f9;
     }
 } */
+@font-face {
+    font-family: 'Inter';
+    src:
+        url('./assets/fonts/Inter/Inter-VariableFont_slnt\,wght.ttf') format('ttf'),
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src:
+        url('./assets/fonts/Roboto/Roboto-Black.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-BlackItalic.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-Bold.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-BoldItalic.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-Italic.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-Light.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-LightItalic.ttf') fromat('ttf'),
+        url('./assets/fonts/Roboto/Roboto-Medium.ttf') fromat(' ttf'),
+        url('./assets/fonts/Roboto/Roboto-MediumItalic.ttf') fromat(' ttf'),
+        url('./assets/fonts/Roboto/Roboto-Regular.ttf') fromat(' ttf'),
+        url('./assets/fonts/Roboto/Roboto-Thin.ttf') fromat(' ttf'),
+        url('./assets/fonts/Roboto/Roboto-ThinItalic.ttf') fromat('ttf'),
+}
 
 :root {
     --character-light-title-85: #262626;

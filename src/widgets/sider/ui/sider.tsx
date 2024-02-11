@@ -7,6 +7,7 @@ import fitIcon from '@assets/images/fit.svg'
 import exitIcon from '@assets/images/exit.svg'
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { useState } from 'react';
+import classNames from 'classnames';
 
 const menuItems: MenuItemType[] = [
     { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined /> },
@@ -16,20 +17,20 @@ const menuItems: MenuItemType[] = [
 ]
 
 export const PageSider = () => {
-    const [isMenu, setIsMenu] = useState(true);
+    const [isCollapsed, setisCollapsed] = useState(true);
 
     const toggleMenu = () => {
-        setIsMenu(!isMenu)
+        setisCollapsed(!isCollapsed)
     }
 
     return (
-        <Layout.Sider className={cls.sider} collapsed={!isMenu}>
+        <Layout.Sider className={classNames(cls.sider, isCollapsed && cls.collapsed)} collapsed={isCollapsed} width={'14.5vw'} collapsedWidth={'64'}>
             <Flex vertical justify='space-between' className={cls.siderFlex}>
-                <Flex vertical gap={50}>
-                    <Flex className={cls.logoWrapper} justify='center' align='flex-end'>
-                        <Flex>
-                            {isMenu && <Icon component={() => <img src={cleverIcon} />} />}
-                            <Icon component={() => <img src={fitIcon} />} />
+                <Flex vertical className={cls.siderMainWrapper}>
+                    <Flex className={cls.logoWrapper} justify={!isCollapsed ? 'flex-start' : 'center'} align='flex-end'>
+                        <Flex align='baseline'>
+                            {!isCollapsed && <Icon component={() => <img src={cleverIcon} />} />}
+                            <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
                         </Flex>
                     </Flex>
                     <Menu
@@ -45,15 +46,19 @@ export const PageSider = () => {
                         icon={<Icon component={() => <img src={exitIcon}></img>} />}
                         className={cls.exitButton}
                     >
-                        {isMenu && 'Выход'}
+                        {!isCollapsed && 'Выход'}
                     </Button>
                 </Flex>
             </Flex>
-            <Button
-                className={cls.toggleSidebarButton}
-                icon={isMenu ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
-                onClick={toggleMenu}
-            />
+            <Flex vertical justify='center' className={cls.toggleSidebarButtonWrapper}>
+                <Button
+                    className={cls.toggleSidebarButton}
+                    icon={!isCollapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+                    onClick={toggleMenu}
+                    style={{ width: 20, height: 32 }}
+                />
+            </Flex>
+
         </Layout.Sider>
     )
 }

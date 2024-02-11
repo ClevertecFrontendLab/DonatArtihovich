@@ -1,7 +1,8 @@
 @import '@shared/mixins/button';
 
 .sider {
-    max-width: 208px;
+    // max-width: 220px;
+    // width: 30vw;
     // height: 100vh;
     background: #ffffff !important;
     position: relative;
@@ -11,10 +12,14 @@
     height: 100%;
 }
 
+.siderMainWrapper {
+    gap: 37px;
+}
+
 .logoWrapper {
     height: 64px;
     box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25), 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-    padding: 16px;
+    padding: 17px 30px 15px;
     margin-top: 30px;
 }
 
@@ -22,11 +27,29 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    margin: 0;
+    // margin: 1px 0 0;
+
+    :global {
+        .ant-menu-item {
+            // background: red;
+            padding: 0 12px !important;
+
+            // margin: 0;
+            .ant-menu-title-content {
+                font-family: var(--font-family);
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 130%;
+                color: var(--character-light-title-85);
+            }
+        }
+    }
 }
 
 .exitButtonWrapper {
     width: 100%;
+    display: flex;
+    justify-content: flex-start;
 }
 
 .exitButton {
@@ -34,21 +57,92 @@
     border-radius: 0;
 
     @include button;
+
+    // :global {
+    // .ant-btn {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0 15px 10px;
+    gap: 20px;
+    // }
+    // }
+}
+
+.toggleSidebarButtonWrapper {
+    position: absolute;
+    top: 47%;
+    right: -20px;
+    z-index: 10;
+    height: 60px;
+    background-color: #ffffff;
+    clip-path: polygon(0 0, 100% 10%, 100% 90%, 0% 100%)
 }
 
 .toggleSidebarButton {
     box-shadow: none;
     border-radius: 0;
     border: none;
+
     @include button;
 
-    position: absolute;
-    top: 50%;
-    right: -30px;
-    z-index: 10;
-    // width: 100px;
-    // height: 10px;
-    // border-bottom: 50px solid transparent;
-    // border-left: 50px solid transparent;
-    // border-right: 50px solid transparent;
+    width: 20px;
 }
+
+.collapsed {
+    .logoWrapper {
+        box-shadow: none;
+        margin-top: 27px;
+    }
+
+    .fitIcon {
+        width: 30px;
+        height: 25px;
+    }
+
+    .exitButton {
+        align-self: center;
+    }
+
+    :global {
+        .ant-menu-item {
+            justify-content: center !important;
+            position: relative;
+            // background-color: red;
+        }
+
+        .ant-menu-item-icon {
+            position: absolute;
+            top: 30%;
+            left: 36.5%;
+        }
+
+        .ant-menu-item-content {
+            display: none;
+        }
+    }
+}
+
+// .upperTriangle {
+//     width: 0;
+//     height: 0;
+//     border-bottom: 20px solid #ffffff;
+//     border-right: 20px solid transparent;
+// }
+
+// .lowerTriangle {
+//     width: 0;
+//     height: 0;
+//     border-top: 20px solid #ffffff;
+//     border-right: 20px solid transparent;
+// }
+
+// :global {
+//     .siderMenu .ant-menu-title-content {
+//         font-family: var(--font-family);
+//         font-weight: 400;
+//         font-size: 14px;
+//         line-height: 130%;
+//         color: var(--character-light-title-85);
+//     }
+// }

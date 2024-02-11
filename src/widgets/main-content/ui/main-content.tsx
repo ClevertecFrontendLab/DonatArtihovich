@@ -3,11 +3,12 @@ import { Content } from "antd/es/layout/layout"
 import cls from './main-content.module.scss'
 import { ActionCard } from "@shared/ui"
 import { CalendarOutlined, HeartFilled, IdcardOutlined } from "@ant-design/icons"
+import { useWindowSize } from "@uidotdev/usehooks"
 
 export const MainContent = () => {
 
     return (
-        <Content>
+        <Content style={{ flex: 1 }}>
             <Flex vertical className={cls.content}>
                 <Card className={cls.abilitiesCard}>
                     <Typography.Text className={cls.abilitiesCardText}>
@@ -20,7 +21,7 @@ export const MainContent = () => {
                 </Card>
                 <Card className={cls.aboutCard}>
                     <Typography.Text className={cls.aboutCardText}>
-                        CleverFit — это не просто приложение, а твой личный помощник в мире фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!
+                        CleverFit — это не просто приложение, а твой личный помощник в<br /> мире фитнеса. Не откладывай на завтра — начни тренироваться уже сегодня!
                     </Typography.Text>
                 </Card>
                 <Flex justify='space-between' className={cls.actionCardsWrapper}>

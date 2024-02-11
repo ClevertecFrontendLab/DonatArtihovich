@@ -12,7 +12,7 @@ export const App = () => {
     return (
         <HashRouter>
             <Layout style={{ backgroundImage: `url(${backgroundImage})` }} className={cls.app}>
-                <Flex>
+                <Flex style={{ width: '100vw' }}>
                     <PageSider />
                     <Layout style={{ background: 'transparent' }}>
                         <Flex vertical>

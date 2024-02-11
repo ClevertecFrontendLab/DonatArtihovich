@@ -1,16 +1,39 @@
 .header {
-    background: #ffffff;
+    background: var(--primary-light-1);
     height: fit-content;
-    width: 85.9vw;
+    // width: 85.9vw;
+    padding: 0;
+}
+
+.wrapper {
+    padding: 15px 22px 8px;
+    gap: 15px;
 }
 
 .headerTitle {
     margin: 0;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 38px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.pageTitle {
+    // margin-top: -30px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
 }
 
 .settingsButton {
     border: none;
     box-shadow: none;
+    background-color: transparent;
+    padding-top: 0;
+    margin: -5px 9px 0 0;
 
     &:focus {
         :global .ant-wave {

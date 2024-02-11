@@ -26,6 +26,7 @@
     "@ant-design/icons": "^4.8.1",
     "@reduxjs/toolkit": "^2.0.1",
     "@types/antd": "^1.0.0",
+    "@uidotdev/usehooks": "^2.4.1",
     "antd": "^5.14.0",
     "classnames": "^2.5.1",
     "normalize.css": "^8.0.1",
