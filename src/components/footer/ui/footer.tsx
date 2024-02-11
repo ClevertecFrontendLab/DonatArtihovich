@@ -1,4 +1,4 @@
-import { DownloadCard } from "@shared/ui"
+import { DownloadCard } from "@components/download-card"
 import { Flex } from "antd"
 import { Footer } from "antd/es/layout/layout"
 import Link from "antd/es/typography/Link"

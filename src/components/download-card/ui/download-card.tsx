@@ -1,5 +1,5 @@
 import { Button, Card, Divider, Flex, Typography } from "antd"
-import { classNames } from "@shared/lib";
+import { classNames } from "@utils/lib";
 import cls from './download-card.module.scss'
 import Link from "antd/es/typography/Link";
 import { AndroidFilled, AppleFilled } from "@ant-design/icons";

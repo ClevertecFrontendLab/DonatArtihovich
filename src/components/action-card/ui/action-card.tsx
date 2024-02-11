@@ -1,5 +1,5 @@
 import { Button, Card, Divider, Flex, Typography } from "antd"
-import { classNames } from "@shared/lib";
+import { classNames } from "@utils/lib";
 import cls from './action-card.module.scss'
 
 interface IActionCardProps {

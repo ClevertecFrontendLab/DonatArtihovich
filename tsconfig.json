@@ -19,11 +19,9 @@
         "baseUrl": ".",
         "paths": {
             "@public/*": ["./public/*"],
-            "@shared/*": ["./src/shared/*"],
-            "@widgets/*": ["./src/widgets/*"],
-            "@app/*": ["./src/app/*"],
             "@constants/*": ["./src/constants/*"],
-            "@hooks/*": ["src/shared/hooks/*"],
+            "@components/*": ["./src/components/*"],
+            "@hooks/*": ["./src/hooks/*"],
             "@pages/*": ["./src/pages/*"],
             "@redux/*": ["./src/redux/*"],
             "@types/*": ["./src/types/*"],

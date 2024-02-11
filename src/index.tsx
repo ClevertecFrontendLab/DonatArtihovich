@@ -1,8 +1,8 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { App } from '@app/app';
-import { store } from '@app/store';
+import { App } from '@components/app/app';
+import { store } from '@redux/configure-store';
 import 'normalize.css';
 import './index.scss';
 
