@@ -1,10 +1,7 @@
 @import '@utils/mixins/button';
 
 .sider {
-    // max-width: 220px;
-    // width: 30vw;
-    // height: 100vh;
-    background: #ffffff !important;
+    background: #fff !important;
     position: relative;
 }
 
@@ -27,14 +24,11 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-    // margin: 1px 0 0;
 
     :global {
         .ant-menu-item {
-            // background: red;
             padding: 0 12px !important;
 
-            // margin: 0;
             .ant-menu-title-content {
                 font-family: var(--font-family);
                 font-weight: 400;
@@ -58,15 +52,11 @@
 
     @include button;
 
-    // :global {
-    // .ant-btn {
     display: flex;
     justify-content: flex-start;
     align-items: center;
     padding: 0 15px 10px;
     gap: 20px;
-    // }
-    // }
 }
 
 .toggleSidebarButtonWrapper {
@@ -75,7 +65,7 @@
     right: -20px;
     z-index: 10;
     height: 60px;
-    background-color: #ffffff;
+    background-color: #fff;
     clip-path: polygon(0 0, 100% 10%, 100% 90%, 0% 100%)
 }
 
@@ -108,7 +98,6 @@
         .ant-menu-item {
             justify-content: center !important;
             position: relative;
-            // background-color: red;
         }
 
         .ant-menu-item-icon {
@@ -122,27 +111,3 @@
         }
     }
 }
-
-// .upperTriangle {
-//     width: 0;
-//     height: 0;
-//     border-bottom: 20px solid #ffffff;
-//     border-right: 20px solid transparent;
-// }
-
-// .lowerTriangle {
-//     width: 0;
-//     height: 0;
-//     border-top: 20px solid #ffffff;
-//     border-right: 20px solid transparent;
-// }
-
-// :global {
-//     .siderMenu .ant-menu-title-content {
-//         font-family: var(--font-family);
-//         font-weight: 400;
-//         font-size: 14px;
-//         line-height: 130%;
-//         color: var(--character-light-title-85);
-//     }
-// }

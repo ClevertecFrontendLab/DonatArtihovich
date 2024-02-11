@@ -1,5 +1,6 @@
 module.exports = {
     extends: require.resolve('arui-presets-lint/stylelint'),
+    customSyntax: 'postcss-scss',
     rules: {
         'selector-pseudo-class-no-unknown': [
             true,
