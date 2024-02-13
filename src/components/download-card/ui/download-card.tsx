@@ -10,7 +10,7 @@ interface IDownloadCardProps {
 
 export const DownloadCard = ({ className }: IDownloadCardProps) => {
     return (
-        <Card className={classNames(className, cls.downloadCard)} bodyStyle={{ padding: 0 }}>
+        <Card className={classNames(className, cls.downloadCard)}>
             <Flex vertical className={cls.headerWrapper}>
                 <Link className={cls.cardHeader}>Скачать на телефон</Link>
                 <Typography.Text className={cls.cardSubheader}>Доступно в PRO-тарифе</Typography.Text>

@@ -22,7 +22,7 @@ export const ActionCard = ({
     const { width } = useWindowSize()
 
     return (
-        <Card className={classNames(className, cls.actionCard, isStretched && cls.cardStretched)} bodyStyle={{ padding: 0 }}>
+        <Card className={classNames(className, cls.actionCard, isStretched && cls.cardStretched)}>
             <Flex vertical align='center' justify={width && width < 1200 ? 'space-between' : 'center'} className={cls.cardFlex}>
                 <Typography.Text className={cls.cardTitle}>{title}</Typography.Text>
                 <Divider className={cls.cardDivider} />

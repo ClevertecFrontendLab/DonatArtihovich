@@ -3,6 +3,12 @@
 .downloadCard {
     border-radius: 2px;
     border: none;
+
+    :global {
+        .ant-card-body {
+            padding: 0;
+        }
+    }
 }
 
 .cardHeader {
