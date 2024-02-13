@@ -1,14 +1,9 @@
 .app {
+    background-position: center;
+    background-size: cover;
     position: relative;
     max-width: 1440px;
     background: transparent;
-}
-
-.wrapper {
-    background-position: center;
-    background-size: cover;
-    display: flex;
-    justify-content: center;
 }
 
 @media(max-width: 702px) {

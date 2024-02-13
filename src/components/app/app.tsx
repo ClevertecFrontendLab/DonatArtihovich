@@ -15,8 +15,8 @@ export const App = () => {
 
     return (
         <HashRouter>
-            <div className={cls.wrapper} style={{ backgroundImage: `url(${backgroundImage})` }}>
-                <Layout className={cls.app} data-test-id='app'>
+            <Row justify='center' className={cls.wrapper}>
+                <Layout className={cls.app} data-test-id='app' style={{ backgroundImage: `url(${backgroundImage})` }}>
                     <Row style={{ width: '100vw' }}>
                         <PageSider
                             isCollapsed={isSiderCollapsed}
@@ -35,7 +35,7 @@ export const App = () => {
                         </Layout>
                     </Row>
                 </Layout>
-            </div>
+            </Row>
         </HashRouter>
     )
 }
