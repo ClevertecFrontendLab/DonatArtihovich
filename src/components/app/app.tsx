@@ -15,25 +15,27 @@ export const App = () => {
 
     return (
         <HashRouter>
-            <Layout style={{ backgroundImage: `url(${backgroundImage})` }} className={cls.app} data-test-id='app'>
-                <div style={{ width: '100vw', display: 'flex' }}>
-                    <PageSider
-                        isCollapsed={isSiderCollapsed}
-                        setIsCollapsed={setIsSiderCollapsed}
-                    />
-                    <Layout style={{ background: 'transparent' }} className={cls.contentLayout}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <PageHeader
-                                isSiderCollapsed={isSiderCollapsed}
-                            />
-                            <Routes>
-                                <Route path='/' element={<MainPage isSiderCollapsed={isSiderCollapsed} />} />
-                            </Routes>
-                            <PageFooter isSiderCollapsed={isSiderCollapsed} />
-                        </div>
-                    </Layout>
-                </div>
-            </Layout>
+            <div className={cls.wrapper} style={{ backgroundImage: `url(${backgroundImage})` }}>
+                <Layout className={cls.app} data-test-id='app'>
+                    <div style={{ width: '100vw', display: 'flex' }}>
+                        <PageSider
+                            isCollapsed={isSiderCollapsed}
+                            setIsCollapsed={setIsSiderCollapsed}
+                        />
+                        <Layout style={{ background: 'transparent' }} className={cls.contentLayout}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <PageHeader
+                                    isSiderCollapsed={isSiderCollapsed}
+                                />
+                                <Routes>
+                                    <Route path='/' element={<MainPage isSiderCollapsed={isSiderCollapsed} />} />
+                                </Routes>
+                                <PageFooter isSiderCollapsed={isSiderCollapsed} />
+                            </div>
+                        </Layout>
+                    </div>
+                </Layout>
+            </div>
         </HashRouter>
     )
 }
