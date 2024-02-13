@@ -2,7 +2,7 @@ import { MainPage } from "@pages/main-page"
 import { PageFooter } from "@components/footer"
 import { PageHeader } from "@components/header"
 import { PageSider } from "@components/sider"
-import { Layout } from "antd"
+import { Layout, Row } from "antd"
 import { HashRouter, Route, Routes } from "react-router-dom"
 import backgroundImage from '@assets/images/background.png';
 import cls from './app.module.scss'
@@ -17,7 +17,7 @@ export const App = () => {
         <HashRouter>
             <div className={cls.wrapper} style={{ backgroundImage: `url(${backgroundImage})` }}>
                 <Layout className={cls.app} data-test-id='app'>
-                    <div style={{ width: '100vw', display: 'flex' }}>
+                    <Row style={{ width: '100vw' }}>
                         <PageSider
                             isCollapsed={isSiderCollapsed}
                             setIsCollapsed={setIsSiderCollapsed}
@@ -33,7 +33,7 @@ export const App = () => {
                                 <PageFooter isSiderCollapsed={isSiderCollapsed} />
                             </div>
                         </Layout>
-                    </div>
+                    </Row>
                 </Layout>
             </div>
         </HashRouter>

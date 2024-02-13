@@ -1,4 +1,4 @@
-import { Button, Divider, Flex, Layout, Menu, } from 'antd'
+import { Button, Divider, Layout, Menu, Row, } from 'antd'
 import cls from './sider.module.scss'
 import { CalendarOutlined, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import Icon from '@ant-design/icons/lib/components/Icon';
@@ -35,28 +35,28 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
             width={width && width >= 834 ? '208' : '29.44vw'}
             collapsedWidth={width && width < 702 ? '29.44vw' : '64'}
         >
-            <Flex vertical justify='space-between' className={cls.siderFlex}>
-                <Flex vertical className={cls.siderMainWrapper}>
-                    <Flex
+            <div className={cls.siderFlex}>
+                <div className={cls.siderMainWrapper}>
+                    <Row
                         className={cls.logoWrapper}
-                        justify={!isCollapsed ? 'flex-start' : 'center'}
-                        align='flex-end'
+                        justify={!isCollapsed ? 'start' : 'center'}
+                        align='bottom'
                     >
-                        <Flex align='baseline'>
+                        <Row>
                             {isCollapsed
                                 ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
                                 : <Icon component={() => <img src={logoIcon} className={cls.logoIcon} />} />
                             }
-                        </Flex>
-                    </Flex>
+                        </Row>
+                    </Row>
                     <Menu
                         mode='inline'
                         className={cls.siderMenu}
                         items={menuItems}
                     />
-                </Flex>
+                </div>
 
-                <Flex vertical>
+                <div style={{ display: 'flex', flexDirection: 'column' }}>
                     <Divider style={{ margin: 0 }} />
                     <Button
                         icon={<Icon component={() => <img src={exitIcon}></img>} />}
@@ -64,9 +64,9 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                     >
                         {!isCollapsed && 'Выход'}
                     </Button>
-                </Flex>
-            </Flex>
-            <Flex vertical justify='center' align='center' className={cls.toggleSidebarButtonWrapper}>
+                </div>
+            </div>
+            <Row justify='center' align='middle' className={cls.toggleSidebarButtonWrapper}>
                 <Button
                     className={cls.toggleSidebarButton}
                     icon={!isCollapsed
@@ -80,7 +80,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                     style={{ width: 20, height: 32 }}
                     data-test-id={width && width >= 702 ? 'sider-switch' : 'sider-switch-mobile'}
                 />
-            </Flex>
+            </Row>
         </Layout.Sider>
     )
 }

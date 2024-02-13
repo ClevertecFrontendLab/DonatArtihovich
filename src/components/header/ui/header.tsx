@@ -1,6 +1,6 @@
 import { Header } from "antd/lib/layout/layout"
 import cls from './header.module.scss'
-import { Button, Flex, Typography } from "antd"
+import { Button, Row, Typography } from "antd"
 import { SettingOutlined } from "@ant-design/icons"
 import { useResize } from "@hooks/use-resize"
 interface PageHeaderProps {
@@ -12,9 +12,9 @@ export const PageHeader = ({ isSiderCollapsed }: PageHeaderProps) => {
     if (width)
         return (
             <Header className={cls.header}>
-                <Flex vertical className={cls.wrapper}>
+                <Row className={cls.wrapper}>
                     <Typography.Text className={cls.pageTitle}>Главная</Typography.Text>
-                    <Flex justify='space-between' align='flex-start'>
+                    <Row justify='space-between' align='top'>
                         <Typography.Title
                             level={width > 900
                                 ? 1
@@ -33,8 +33,8 @@ export const PageHeader = ({ isSiderCollapsed }: PageHeaderProps) => {
                         >
                             {width >= 540 && 'Настройки'}
                         </Button>
-                    </Flex>
-                </Flex>
+                    </Row>
+                </Row>
             </Header>
         )
 }

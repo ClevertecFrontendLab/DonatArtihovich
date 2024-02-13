@@ -27,5 +27,5 @@ export const ActionCard = ({
                 </Typography.Text>
             </Button>
         </div>
-    </Card >
+    </Card>
 )
