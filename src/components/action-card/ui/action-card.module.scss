@@ -55,7 +55,6 @@
 
     .cardButton {
         margin: 12px 0;
-        // height: fit-content;
     }
 }
 
@@ -63,19 +62,20 @@
 
     .actionCard,
     .cardDivider {
-        width: 134px;
+        width: 182px;
     }
 
     .cardTitle {
         margin: 12px 24px;
     }
 
-    .cardStretched {
+    .cardStretched,
+    .cardDivider {
         width: 230px;
     }
 }
 
-@media(max-width: 834px) {
+@media(max-width: 830px) {
 
     .actionCard,
     .cardDivider {
