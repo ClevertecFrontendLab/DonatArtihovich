@@ -44,3 +44,9 @@
 
     @include button;
 }
+
+@media(max-width: 835px) {
+    .headerWrapper {
+        padding-top: 9px;
+    }
+}

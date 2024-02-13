@@ -2,12 +2,16 @@ import { Button, Divider, Flex, Layout, Menu, } from 'antd'
 import cls from './sider.module.scss'
 import { CalendarOutlined, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import Icon from '@ant-design/icons/lib/components/Icon';
-import cleverIcon from '@assets/images/clever.svg'
+import logoIcon from '@assets/images/logo.svg'
 import fitIcon from '@assets/images/fit.svg'
 import exitIcon from '@assets/images/exit.svg'
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
-import { useState } from 'react';
 import classNames from 'classnames';
+
+interface PageSiderProps {
+    isCollapsed: boolean;
+    setIsCollapsed: (b: boolean) => void;
+}
 
 const menuItems: MenuItemType[] = [
     { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined /> },
@@ -16,21 +20,21 @@ const menuItems: MenuItemType[] = [
     { label: 'Профиль', key: 'profile', icon: <IdcardOutlined /> },
 ]
 
-export const PageSider = () => {
-    const [isCollapsed, setisCollapsed] = useState(true);
-
+export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
     const toggleMenu = () => {
-        setisCollapsed(!isCollapsed)
+        setIsCollapsed(!isCollapsed)
     }
 
     return (
-        <Layout.Sider className={classNames(cls.sider, isCollapsed && cls.collapsed)} collapsed={isCollapsed} width={'14.5vw'} collapsedWidth={'64'}>
+        <Layout.Sider className={classNames(cls.sider, isCollapsed && cls.collapsed)} collapsed={isCollapsed} width={'208'} collapsedWidth={'64'}>
             <Flex vertical justify='space-between' className={cls.siderFlex}>
                 <Flex vertical className={cls.siderMainWrapper}>
                     <Flex className={cls.logoWrapper} justify={!isCollapsed ? 'flex-start' : 'center'} align='flex-end'>
                         <Flex align='baseline'>
-                            {!isCollapsed && <Icon component={() => <img src={cleverIcon} />} />}
-                            <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
+                            {isCollapsed
+                                ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
+                                : <Icon component={() => <img src={logoIcon} className={cls.logoIcon} />} />
+                            }
                         </Flex>
                     </Flex>
                     <Menu

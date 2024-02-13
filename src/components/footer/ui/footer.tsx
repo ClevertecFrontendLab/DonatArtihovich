@@ -3,11 +3,16 @@ import { Flex } from "antd"
 import { Footer } from "antd/es/layout/layout"
 import Link from "antd/es/typography/Link"
 import cls from './footer.module.scss'
+import classNames from "classnames"
 
-export const PageFooter = () => {
+interface PageFooterProps {
+    isSiderCollapsed: boolean;
+}
+
+export const PageFooter = ({ isSiderCollapsed }: PageFooterProps) => {
 
     return (
-        <Footer className={cls.footerWrapper}>
+        <Footer className={classNames(cls.footerWrapper, isSiderCollapsed && cls.footerStretched)}>
             <Flex justify='space-between' align='flex-end' className={cls.footer}>
                 <Link className={cls.footerLink}>Смотреть отзывы</Link>
                 <DownloadCard />

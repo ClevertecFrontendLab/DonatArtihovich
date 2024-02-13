@@ -12,3 +12,21 @@
     text-align: center;
     color: var(--primary-light-6);
 }
+
+@media(max-width: 835px) {
+    .footerWrapper {
+        padding-top: 237px;
+    }
+
+    .footerLink {
+        margin: 0 13px 13px;
+    }
+
+    .footerStretched {
+        padding-top: 362px;
+
+        .footerLink {
+            margin: 0 11px 10px;
+        }
+    }
+}

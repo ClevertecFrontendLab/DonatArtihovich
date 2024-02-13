@@ -39,3 +39,28 @@
 .cardDivider {
     margin: 0;
 }
+
+@media(max-width: 1200px) {
+    .actionCard {
+        width: 18vw;
+    }
+
+    .cardButton {
+        margin: 12px 0;
+        // height: fit-content;
+    }
+}
+
+@media(max-width: 835px) {
+    .actionCard {
+        width: 22vw;
+    }
+
+    .cardTitle {
+        margin: 12px 24px;
+    }
+
+    .cardStretched {
+        width: 27.5vw;
+    }
+}

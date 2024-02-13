@@ -47,3 +47,36 @@
 .aboutCardText {
     margin: 0;
 }
+
+@media(max-width: 1200px) {
+
+    .abilitiesCard,
+    .aboutCard,
+    .actionCardsWrapper {
+        width: 60vw;
+    }
+}
+
+@media (max-width: 835px) {
+
+    .abilitiesCard,
+    .aboutCard,
+    .actionCardsWrapper {
+        width: 69.3vw;
+    }
+
+    .abilitiesCard {
+
+        :global {
+            .ant-card-body {
+                padding: 19px;
+            }
+        }
+    }
+
+    .abilitiesCardStretched,
+    .aboutCardStretched,
+    .actionCardsWrapperStretched {
+        width: 86.7vw;
+    }
+}

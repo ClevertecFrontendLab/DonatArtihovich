@@ -62,7 +62,7 @@
 .toggleSidebarButtonWrapper {
     position: absolute;
     top: 47%;
-    right: -20px;
+    right: -19px;
     z-index: 10;
     height: 60px;
     background-color: #fff;
@@ -108,6 +108,45 @@
 
         .ant-menu-item-content {
             display: none;
+        }
+    }
+}
+
+
+@media(max-width: 835px) {
+    .toggleSidebarButtonWrapper {
+        height: 65px;
+    }
+
+    .collapsed {
+        // .siderMenu {
+        //     :global {
+        //         .ant-menu-item-icon {
+        //             width: 12px;
+        //             height: 12px;
+        //         }
+        //     }
+        // }
+
+        .exitButton {
+            padding-top: 14px;
+        }
+
+        .toggleSidebarButton {
+            :global {
+                .anticon {
+                    width: 12px;
+                    height: 12px;
+                }
+            }
+        }
+
+        .toggleSidebarButtonWrapper {
+            top: 47.5%;
+        }
+
+        .siderMainWrapper {
+            gap: 40px;
         }
     }
 }

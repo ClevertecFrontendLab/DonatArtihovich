@@ -1,8 +1,12 @@
 import { MainContent } from '@components/main-content';
 
-export const MainPage: React.FC = () => {
+interface MainPageProps {
+    isSiderCollapsed: boolean;
+}
+
+export const MainPage = ({ isSiderCollapsed }: MainPageProps) => {
 
     return (
-        <MainContent />
+        <MainContent isSiderCollapsed={isSiderCollapsed} />
     )
 };

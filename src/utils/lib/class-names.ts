@@ -1,1 +1,1 @@
-export const classNames = (...args: (string | undefined)[]) => args.filter(s => s).join(' ');
+export const classNames = (...args: (string | undefined | false)[]) => args.filter(s => s).join(' ');
