@@ -112,6 +112,11 @@
     }
 }
 
+@media (max-width: 1200px) {
+    .logoWrapper {
+        box-shadow: none;
+    }
+}
 
 @media(max-width: 835px) {
     .toggleSidebarButtonWrapper {
@@ -119,15 +124,6 @@
     }
 
     .collapsed {
-        // .siderMenu {
-        //     :global {
-        //         .ant-menu-item-icon {
-        //             width: 12px;
-        //             height: 12px;
-        //         }
-        //     }
-        // }
-
         .exitButton {
             padding-top: 14px;
         }
