@@ -16,7 +16,7 @@ export const DownloadCard = ({ className }: IDownloadCardProps) => {
                 <Typography.Text className={cls.cardSubheader}>Доступно в PRO-тарифе</Typography.Text>
             </Flex>
             <Divider style={{ margin: 0 }} />
-            <Flex>
+            <Flex className={cls.buttonsFlex}>
                 <Button
                     icon={<AndroidFilled color='black' />}
                     className={cls.downloadButton}

@@ -50,3 +50,26 @@
         padding-top: 9px;
     }
 }
+
+@media(max-width: 540px) {
+    .downloadCard {
+        width: 328px;
+    }
+
+    .headerWrapper {
+        padding-top: 13px;
+        padding-bottom: 11px;
+        text-align: center;
+    }
+
+    .buttonsFlex {
+        justify-content: center;
+
+    }
+
+    .downloadButton {
+        padding-top: 0;
+        // padding-left: 1px;
+        width: 164px;
+    }
+}

@@ -12,44 +12,45 @@ interface MainContentProps {
 export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
     const { width } = useWindowSize()
 
-    return (
-        <Content style={{ flex: 1 }}>
-            <Flex vertical className={cls.content}>
-                <Card className={classNames(cls.abilitiesCard, isSiderCollapsed && cls.abilitiesCardStretched)}>
-                    <Typography.Text className={cls.abilitiesCardText}>
-                        С CleverFit ты сможешь:
-                        <br />— планировать свои тренировки на календаре, выбирая тип{width && width < 900 && !isSiderCollapsed && <br />} и уровень нагрузки;
-                        <br />— отслеживать свои достижения в разделе статистики,{width && width < 900 && !isSiderCollapsed && <br />} сравнивая свои результаты с нормами и рекордами;
-                        <br />— создавать свой профиль, где ты можешь загружать свои фото,{width && width < 900 && !isSiderCollapsed && <br />} видео и отзывы о тренировках;
-                        <br />— выполнять расписанные тренировки для разных частей тела,{width && width < 900 && !isSiderCollapsed && <br />} следуя подробным инструкциям и советам профессиональных тренеров.
-                    </Typography.Text>
-                </Card>
-                <Card className={classNames(cls.aboutCard, isSiderCollapsed && cls.aboutCardStretched)}>
-                    <Typography.Text className={cls.aboutCardText}>
-                        CleverFit — это не просто приложение, а твой{width && width < 900 && !isSiderCollapsed && <br />} личный помощник в{width && width > 900 && !isSiderCollapsed && <br />} мире фитнеса. Не откладывай{width && width < 900 && !isSiderCollapsed && <br />} на завтра — начни тренироваться{width && width < 900 && isSiderCollapsed && <br />} уже сегодня!
-                    </Typography.Text>
-                </Card>
-                <Flex justify='space-between' className={classNames(cls.actionCardsWrapper, isSiderCollapsed && cls.actionCardsWrapperStretched)}>
-                    <ActionCard
-                        title='Расписать тренировки'
-                        buttonTitle='Тренировки'
-                        buttonIcon={<HeartFilled style={{ color: 'var(--primary-light-6)' }} />}
-                        isStretched={isSiderCollapsed}
-                    />
-                    <ActionCard
-                        title='Назначить календарь'
-                        buttonTitle='Календарь'
-                        buttonIcon={<CalendarOutlined style={{ color: 'var(--primary-light-6)' }} />}
-                        isStretched={isSiderCollapsed}
-                    />
-                    <ActionCard
-                        title='Заполнить профиль'
-                        buttonTitle='Профиль'
-                        buttonIcon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
-                        isStretched={isSiderCollapsed}
-                    />
+    if (width)
+        return (
+            <Content>
+                <Flex vertical className={cls.content}>
+                    <Card className={classNames(cls.abilitiesCard, isSiderCollapsed && cls.abilitiesCardStretched)}>
+                        <Typography.Text className={cls.abilitiesCardText}>
+                            С CleverFit ты сможешь:
+                            <br />— планировать свои тренировки{width < 540 && <br />} на календаре, выбирая тип{width && (width < 900 && !isSiderCollapsed || width < 702) && <br />} и уровень нагрузки;
+                            <br />— отслеживать свои достижения{width < 540 && <br />} в разделе статистики,{width && width < 900 && !isSiderCollapsed && <br />} сравнивая{width < 540 && <br />} свои результаты{width < 900 && isSiderCollapsed && width > 702 && <br />} с нормами{width < 540 && <br />} и рекордами;
+                            <br />— создавать свой профиль, где{width < 540 && <br />} ты можешь загружать свои фото,{width && width < 900 && !isSiderCollapsed && <br />} видео и отзывы {width && width < 900 && isSiderCollapsed && width > 702 && <br />} о тренировках;
+                            <br />— выполнять расписанные тренировки для разных частей тела,{width && width < 900 && !isSiderCollapsed && <br />} следуя подробным инструкциям{width < 540 && <br />} и советам профессиональных тренеров.
+                        </Typography.Text>
+                    </Card>
+                    <Card className={classNames(cls.aboutCard, isSiderCollapsed && cls.aboutCardStretched)}>
+                        <Typography.Text className={cls.aboutCardText}>
+                            CleverFit — это не просто приложение, а твой{width && width < 900 && !isSiderCollapsed && <br />} личный помощник в{width && width > 900 && !isSiderCollapsed && <br />} мире фитнеса. Не откладывай{width && width < 900 && !isSiderCollapsed && <br />} на завтра — начни тренироваться{width && (width > 900 || (isSiderCollapsed && width > 702)) && <br />} уже сегодня!
+                        </Typography.Text>
+                    </Card>
+                    <Flex vertical={width <= 540} justify='space-between' align='center' className={classNames(cls.actionCardsWrapper, isSiderCollapsed && cls.actionCardsWrapperStretched)}>
+                        <ActionCard
+                            title='Расписать тренировки'
+                            buttonTitle='Тренировки'
+                            buttonIcon={<HeartFilled style={{ color: 'var(--primary-light-6)' }} />}
+                            isStretched={isSiderCollapsed}
+                        />
+                        <ActionCard
+                            title='Назначить календарь'
+                            buttonTitle='Календарь'
+                            buttonIcon={<CalendarOutlined style={{ color: 'var(--primary-light-6)' }} />}
+                            isStretched={isSiderCollapsed}
+                        />
+                        <ActionCard
+                            title='Заполнить профиль'
+                            buttonTitle='Профиль'
+                            buttonIcon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
+                            isStretched={isSiderCollapsed}
+                        />
+                    </Flex>
                 </Flex>
-            </Flex>
-        </Content>
-    )
+            </Content>
+        )
 }

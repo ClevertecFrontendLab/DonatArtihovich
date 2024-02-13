@@ -13,7 +13,6 @@
     margin: 0;
     font-family: var(--font-family);
     font-weight: 700;
-    font-size: 38px;
     line-height: 130%;
     color: var(--character-light-title-85);
 }
@@ -43,5 +42,33 @@
 @media(max-width: 1200px) {
     .headerTitle {
         font-size: 24px;
+    }
+}
+
+@media(max-width: 702px) {
+    .header {
+        width: 100vw;
+    }
+}
+
+@media(max-width: 540px) {
+
+    .headerTitle {
+        margin-bottom: 14px !important;
+    }
+
+    .settingsButton {
+        background-color: #fff;
+        border: 1px solid var(--character-light-border);
+        border-radius: 100px;
+        padding: 4px 10px;
+        width: 32px;
+        height: 32px;
+        margin-right: 2px;
+    }
+
+    .wrapper {
+        gap: 6px;
+        padding-bottom: 0;
     }
 }

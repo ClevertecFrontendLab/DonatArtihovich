@@ -41,7 +41,9 @@
 }
 
 @media(max-width: 1200px) {
-    .actionCard {
+
+    .actionCard,
+    .cardDivider {
         width: 18vw;
     }
 
@@ -52,7 +54,9 @@
 }
 
 @media(max-width: 835px) {
-    .actionCard {
+
+    .actionCard,
+    .cardDivider {
         width: 22vw;
     }
 
@@ -62,5 +66,29 @@
 
     .cardStretched {
         width: 27.5vw;
+    }
+}
+
+@media(max-width: 834px) {
+
+    .actionCard,
+    .cardDivider {
+        width: 18vw;
+    }
+}
+
+@media(max-width: 702px) {
+
+    .actionCard,
+    .cardDivider {
+        width: 25vw;
+    }
+}
+
+@media(max-width: 540px) {
+
+    .actionCard,
+    .cardDivider {
+        width: 328px;
     }
 }

@@ -124,6 +124,8 @@
     }
 
     .collapsed {
+        box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+
         .exitButton {
             padding-top: 14px;
         }
@@ -139,10 +141,99 @@
 
         .toggleSidebarButtonWrapper {
             top: 47.5%;
+
+            :global {
+                .anticon {
+                    width: 16px;
+                    height: 16px;
+                }
+            }
         }
 
         .siderMainWrapper {
             gap: 40px;
+        }
+    }
+}
+
+@media(max-width: 702px) {
+    .sider {
+        position: absolute !important;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        z-index: 100;
+    }
+
+    .toggleSidebarButtonWrapper {
+        top: 24px;
+        width: 32px;
+        height: 48px;
+        right: -31px;
+    }
+
+    .collapsed {
+        .toggleSidebarButtonWrapper {
+            top: 24px;
+        }
+
+        left: -29.44vw;
+    }
+}
+
+@media(max-width: 540px) {
+    .sider {
+        height: 100vh;
+    }
+
+    .siderMainWrapper {
+        gap: 8px;
+    }
+
+    .logoWrapper {
+        margin-top: 0;
+        padding: 14px 0;
+        height: 50px;
+        justify-content: center;
+
+        img {
+            width: 72px;
+        }
+    }
+
+    .siderMenu {
+        gap: 8px;
+        align-items: flex-start !important;
+
+        :global {
+
+            .ant-menu-item {
+                height: 42px;
+                margin: 0;
+                padding-left: 10px !important;
+                // text-align: center;
+            }
+
+            .ant-menu-title-content {
+                margin: 0 !important;
+            }
+
+            .anticon {
+                display: none !important;
+            }
+        }
+    }
+
+    .exitButton {
+        font-size: 14px;
+        justify-content: center;
+        text-align: center;
+        padding: 20px 0;
+
+        :global {
+            .ant-btn-icon {
+                display: none;
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import fitIcon from '@assets/images/fit.svg'
 import exitIcon from '@assets/images/exit.svg'
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import classNames from 'classnames';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 interface PageSiderProps {
     isCollapsed: boolean;
@@ -21,15 +22,26 @@ const menuItems: MenuItemType[] = [
 ]
 
 export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
+    const { width } = useWindowSize()
+
     const toggleMenu = () => {
         setIsCollapsed(!isCollapsed)
     }
 
     return (
-        <Layout.Sider className={classNames(cls.sider, isCollapsed && cls.collapsed)} collapsed={isCollapsed} width={'208'} collapsedWidth={'64'}>
+        <Layout.Sider
+            className={classNames(cls.sider, isCollapsed && cls.collapsed)}
+            collapsed={isCollapsed}
+            width={width && width >= 834 ? '208' : '29.44vw'}
+            collapsedWidth={width && width < 702 ? '29.44vw' : '64'}
+        >
             <Flex vertical justify='space-between' className={cls.siderFlex}>
                 <Flex vertical className={cls.siderMainWrapper}>
-                    <Flex className={cls.logoWrapper} justify={!isCollapsed ? 'flex-start' : 'center'} align='flex-end'>
+                    <Flex
+                        className={cls.logoWrapper}
+                        justify={!isCollapsed ? 'flex-start' : 'center'}
+                        align='flex-end'
+                    >
                         <Flex align='baseline'>
                             {isCollapsed
                                 ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
@@ -54,15 +66,21 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                     </Button>
                 </Flex>
             </Flex>
-            <Flex vertical justify='center' className={cls.toggleSidebarButtonWrapper}>
+            <Flex vertical justify='center' align='center' className={cls.toggleSidebarButtonWrapper}>
                 <Button
                     className={cls.toggleSidebarButton}
-                    icon={!isCollapsed ? <MenuFoldOutlined /> : <MenuUnfoldOutlined />}
+                    icon={!isCollapsed
+                        ? <MenuFoldOutlined
+                            width={width && width < 540 ? 16 : undefined}
+                        />
+                        : <MenuUnfoldOutlined
+                            width={width && width < 540 ? 16 : undefined}
+                        />}
                     onClick={toggleMenu}
                     style={{ width: 20, height: 32 }}
+                    data-test-id={width && width >= 702 ? 'sider-switch' : 'sider-switch-mobile'}
                 />
             </Flex>
-
         </Layout.Sider>
     )
 }

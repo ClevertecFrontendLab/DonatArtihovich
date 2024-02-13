@@ -7,19 +7,21 @@ import { HashRouter, Route, Routes } from "react-router-dom"
 import backgroundImage from '@assets/images/background.png';
 import cls from './app.module.scss'
 import { useState } from "react"
+import { useWindowSize } from "@uidotdev/usehooks"
 
 export const App = () => {
-    const [isSiderCollapsed, setIsSiderCollapsed] = useState(false);
+    const { width } = useWindowSize()
+    const [isSiderCollapsed, setIsSiderCollapsed] = useState<boolean>(!width ? false : width < 702);
 
     return (
         <HashRouter>
-            <Layout style={{ backgroundImage: `url(${backgroundImage})` }} className={cls.app}>
+            <Layout style={{ backgroundImage: `url(${backgroundImage})` }} className={cls.app} data-test-id='app'>
                 <Flex style={{ width: '100vw' }}>
                     <PageSider
                         isCollapsed={isSiderCollapsed}
                         setIsCollapsed={setIsSiderCollapsed}
                     />
-                    <Layout style={{ background: 'transparent' }}>
+                    <Layout style={{ background: 'transparent' }} className={cls.contentLayout}>
                         <Flex vertical>
                             <PageHeader
                                 isSiderCollapsed={isSiderCollapsed}

@@ -1,6 +1,7 @@
 .footerWrapper {
     background: transparent;
     padding: 156px 26px 40px;
+    margin: 0;
 }
 
 .footerLink {
@@ -16,10 +17,11 @@
 @media(max-width: 835px) {
     .footerWrapper {
         padding-top: 237px;
+        padding-left: 28px;
     }
 
     .footerLink {
-        margin: 0 13px 13px;
+        margin-bottom: 13px;
     }
 
     .footerStretched {
@@ -28,5 +30,20 @@
         .footerLink {
             margin: 0 11px 10px;
         }
+    }
+}
+
+@media (max-width: 540px) {
+    .footer {
+        align-items: center;
+        gap: 24px;
+    }
+
+    .footerWrapper {
+        padding: 0 0 42px;
+    }
+
+    .footerLink {
+        margin-top: 9px !important;
     }
 }
