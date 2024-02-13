@@ -42,12 +42,12 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                         justify={!isCollapsed ? 'start' : 'center'}
                         align='bottom'
                     >
-                        <Row>
+                        <div style={{ display: 'flex' }}>
                             {isCollapsed
                                 ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
                                 : <Icon component={() => <img src={logoIcon} className={cls.logoIcon} />} />
                             }
-                        </Row>
+                        </div>
                     </Row>
                     <Menu
                         mode='inline'

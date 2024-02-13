@@ -14,7 +14,7 @@ export const PageHeader = ({ isSiderCollapsed }: PageHeaderProps) => {
             <Header className={cls.header}>
                 <Row className={cls.wrapper}>
                     <Typography.Text className={cls.pageTitle}>Главная</Typography.Text>
-                    <Row justify='space-between' align='top'>
+                    <Row justify='space-between' align='top' wrap={false}>
                         <Typography.Title
                             level={width > 900
                                 ? 1
