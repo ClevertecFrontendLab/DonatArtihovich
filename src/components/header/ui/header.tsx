@@ -2,13 +2,12 @@ import { Header } from "antd/lib/layout/layout"
 import cls from './header.module.scss'
 import { Button, Flex, Typography } from "antd"
 import { SettingOutlined } from "@ant-design/icons"
-import { useWindowSize } from "@uidotdev/usehooks"
-
+import { useResize } from "@hooks/use-resize"
 interface PageHeaderProps {
     isSiderCollapsed: boolean;
 }
 export const PageHeader = ({ isSiderCollapsed }: PageHeaderProps) => {
-    const { width } = useWindowSize()
+    const { width } = useResize()
 
     if (width)
         return (

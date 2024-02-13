@@ -3,14 +3,14 @@ import { Content } from "antd/es/layout/layout"
 import cls from './main-content.module.scss'
 import { ActionCard } from "@components/action-card"
 import { CalendarOutlined, HeartFilled, IdcardOutlined } from "@ant-design/icons"
-import { useWindowSize } from "@uidotdev/usehooks"
-import classNames from "classnames"
+import { useResize } from "@hooks/use-resize"
+import { classNames } from "@utils/lib/class-names"
 
 interface MainContentProps {
     isSiderCollapsed: boolean;
 }
 export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
-    const { width } = useWindowSize()
+    const { width } = useResize()
 
     if (width)
         return (

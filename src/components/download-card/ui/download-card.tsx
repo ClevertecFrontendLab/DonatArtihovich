@@ -1,4 +1,4 @@
-import { Button, Card, Divider, Flex, Typography } from "antd"
+import { Button, Card, Divider, Typography } from "antd"
 import { classNames } from "@utils/lib";
 import cls from './download-card.module.scss'
 import Link from "antd/es/typography/Link";
@@ -11,12 +11,12 @@ interface IDownloadCardProps {
 export const DownloadCard = ({ className }: IDownloadCardProps) => {
     return (
         <Card className={classNames(className, cls.downloadCard)}>
-            <Flex vertical className={cls.headerWrapper}>
+            <div className={cls.headerWrapper}>
                 <Link className={cls.cardHeader}>Скачать на телефон</Link>
                 <Typography.Text className={cls.cardSubheader}>Доступно в PRO-тарифе</Typography.Text>
-            </Flex>
+            </div>
             <Divider style={{ margin: 0 }} />
-            <Flex className={cls.buttonsFlex}>
+            <div className={cls.buttonsFlex}>
                 <Button
                     icon={<AndroidFilled color='black' />}
                     className={cls.downloadButton}
@@ -37,7 +37,7 @@ export const DownloadCard = ({ className }: IDownloadCardProps) => {
                         Apple iOS
                     </Typography.Text>
                 </Button>
-            </Flex>
+            </div>
         </Card >
     )
 }

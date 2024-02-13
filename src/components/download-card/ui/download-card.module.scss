@@ -28,6 +28,8 @@
 }
 
 .headerWrapper {
+    display: flex;
+    flex-direction: column;
     padding: 12px 24px;
     gap: 8px;
 }
@@ -69,13 +71,12 @@
     }
 
     .buttonsFlex {
+        display: flex;
         justify-content: center;
-
     }
 
     .downloadButton {
         padding-top: 0;
-        // padding-left: 1px;
         width: 164px;
     }
 }
