@@ -1,5 +1,4 @@
 .content {
-    width: 100%;
     padding: 24px;
     gap: 16px;
     display: flex;
@@ -7,6 +6,7 @@
 }
 
 .abilitiesCardText {
+    font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
     line-height: 130%;
@@ -14,10 +14,21 @@
 }
 
 .aboutCardText {
+    font-family: var(--font-family);
     font-weight: 500;
     font-size: 20px;
     line-height: 130%;
     color: var(--character-light-title-85);
+}
+
+.actionCardsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.abilitiesCard {
+    padding: 6px;
 }
 
 .abilitiesCard,
@@ -48,6 +59,10 @@
 .abilitiesCardText,
 .aboutCardText {
     margin: 0;
+}
+
+.aboutCard {
+    padding: 24px;
 }
 
 @media(max-width: 1200px) {

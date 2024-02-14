@@ -3,6 +3,8 @@
 .downloadCard {
     border-radius: 2px;
     border: none;
+    width: 240px;
+    background: var(--character-light-primary-inverse);
 
     :global {
         .ant-card-body {
@@ -34,6 +36,11 @@
     gap: 8px;
 }
 
+.buttonsFlex {
+    display: flex;
+    justify-content: center;
+}
+
 .downloadButtonText {
     font-family: var(--font-family);
     font-weight: 400;
@@ -46,11 +53,29 @@
 .downloadButton {
     border: none;
     box-shadow: none;
-    margin: 12px 0;
+    margin: 16px 8px;
     width: 120px;
     height: 32px;
+    background: var(--character-light-primary-inverse);
+    display: flex;
+    gap: 5px;
+    height: fit-content;
+
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-title-85);
 
     @include button;
+
+    :global {
+        .anticon {
+            width: 14px;
+            height: 14px;
+        }
+    }
 }
 
 @media(max-width: 835px) {

@@ -17,7 +17,7 @@ export const App = () => {
         <HashRouter>
             <Row justify='center' className={cls.wrapper}>
                 <Layout className={cls.app} data-test-id='app' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                    <div style={{ width: '100vw', display: 'flex', flexWrap: 'nowrap' }}>
+                    <div style={{ display: 'flex' }}>
                         <PageSider
                             isCollapsed={isSiderCollapsed}
                             setIsCollapsed={setIsSiderCollapsed}

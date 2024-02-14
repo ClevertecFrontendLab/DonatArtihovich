@@ -1,4 +1,4 @@
-import { Button, Divider, Layout, Menu, Row, } from 'antd'
+import { Button, Divider, Layout, Menu } from 'antd'
 import cls from './sider.module.scss'
 import { CalendarOutlined, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import Icon from '@ant-design/icons/lib/components/Icon';
@@ -15,10 +15,10 @@ interface PageSiderProps {
 }
 
 const menuItems: MenuItemType[] = [
-    { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined /> },
-    { label: 'Тренировки', key: 'workouts', icon: <HeartFilled /> },
-    { label: 'Достижения', key: 'scores', icon: <TrophyFilled /> },
-    { label: 'Профиль', key: 'profile', icon: <IdcardOutlined /> },
+    { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined style={{ color: 'var(--primary-light-9)' }} /> },
+    { label: 'Тренировки', key: 'workouts', icon: <HeartFilled style={{ color: 'var(--primary-light-9)' }} /> },
+    { label: 'Достижения', key: 'scores', icon: <TrophyFilled style={{ color: 'var(--primary-light-9)' }} /> },
+    { label: 'Профиль', key: 'profile', icon: <IdcardOutlined style={{ color: 'var(--primary-light-9)' }} /> },
 ]
 
 export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
@@ -37,18 +37,14 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
         >
             <div className={cls.siderFlex}>
                 <div className={cls.siderMainWrapper}>
-                    <Row
+                    <div
                         className={cls.logoWrapper}
-                        justify={!isCollapsed ? 'start' : 'center'}
-                        align='bottom'
                     >
-                        <div style={{ display: 'flex' }}>
-                            {isCollapsed
-                                ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
-                                : <Icon component={() => <img src={logoIcon} className={cls.logoIcon} />} />
-                            }
-                        </div>
-                    </Row>
+                        {isCollapsed
+                            ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
+                            : <Icon component={() => <img src={logoIcon} className={cls.logoIcon} />} />
+                        }
+                    </div>
                     <Menu
                         mode='inline'
                         className={cls.siderMenu}
@@ -66,7 +62,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                     </Button>
                 </div>
             </div>
-            <Row justify='center' align='middle' className={cls.toggleSidebarButtonWrapper}>
+            <div className={cls.toggleSidebarButtonWrapper}>
                 <Button
                     className={cls.toggleSidebarButton}
                     icon={!isCollapsed
@@ -80,7 +76,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                     style={{ width: 20, height: 32 }}
                     data-test-id={width && width >= 702 ? 'sider-switch' : 'sider-switch-mobile'}
                 />
-            </Row>
+            </div>
         </Layout.Sider>
     )
 }

@@ -3,7 +3,18 @@
     background-size: cover;
     position: relative;
     max-width: 1440px;
+    width: 100vw;
     background: transparent;
+    overflow: hidden;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.contentLayout {
+    flex-basis: 100%;
 }
 
 @media(max-width: 702px) {
