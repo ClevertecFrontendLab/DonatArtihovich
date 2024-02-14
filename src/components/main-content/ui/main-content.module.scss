@@ -72,6 +72,16 @@
     .actionCardsWrapper {
         width: 60vw;
     }
+
+    .abilitiesCard {
+        padding: 27px;
+
+        :global {
+            .ant-card-body {
+                padding: 0 !important;
+            }
+        }
+    }
 }
 
 @media (max-width: 835px) {

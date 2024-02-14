@@ -52,12 +52,15 @@
 
 .downloadButton {
     border: none;
-    box-shadow: none;
-    margin: 16px 8px;
-    width: 120px;
+    // box-shadow: none;
+    margin: 16px 0;
     height: 32px;
+    width: 120px;
+    box-sizing: border-box;
     background: var(--character-light-primary-inverse);
     display: flex;
+    justify-content: center;
+    align-items: center;
     gap: 5px;
     height: fit-content;
 
@@ -80,7 +83,11 @@
 
 @media(max-width: 835px) {
     .headerWrapper {
-        padding-top: 9px;
+        padding: 12px 26px;
+    }
+
+    .downloadButton {
+        margin: 19px 0;
     }
 }
 

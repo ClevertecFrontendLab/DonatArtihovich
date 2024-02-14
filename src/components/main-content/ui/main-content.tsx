@@ -21,8 +21,8 @@ export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
                             С CleverFit ты сможешь:
                             <br />— планировать свои тренировки{width < 540 && <br />} на календаре, выбирая тип{width && (width < 900 && !isSiderCollapsed || width < 702) && <br />} и уровень нагрузки;
                             <br />— отслеживать свои достижения{width < 540 && <br />} в разделе статистики,{width && width < 900 && !isSiderCollapsed && <br />} сравнивая{width < 540 && <br />} свои результаты{(width < 900 && isSiderCollapsed && width > 702 || width > 1200) && <br />} с нормами{width < 540 && <br />} и рекордами;
-                            <br />— создавать свой профиль, где{width < 540 && <br />} ты можешь загружать свои фото,{width && width < 900 && !isSiderCollapsed && <br />} видео и отзывы {(width < 900 && isSiderCollapsed && width > 702) || width > 1200 && <br />} о тренировках;
-                            <br />— выполнять расписанные тренировки для разных частей тела,{width && width < 900 && !isSiderCollapsed && <br />} следуя подробным{width > 1200 && <br />}инструкциям{width < 540 && <br />} и советам профессиональных тренеров.
+                            <br />— создавать свой профиль, где{width < 540 && <br />} ты можешь загружать свои фото,{width && width < 900 && !isSiderCollapsed && <br />} видео и отзывы {(width < 900 && isSiderCollapsed && width > 702) || width > 1200 && <br />}о тренировках;
+                            <br />— выполнять расписанные тренировки для разных частей тела,{width && width < 900 && !isSiderCollapsed && <br />} следуя подробным{width > 1200 && <br />} инструкциям{width < 540 && <br />} и советам профессиональных тренеров.
                         </Typography.Text>
                     </Card>
                     <Card className={classNames(cls.aboutCard, isSiderCollapsed && cls.aboutCardStretched)}>
