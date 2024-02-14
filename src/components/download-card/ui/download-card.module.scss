@@ -1,0 +1,109 @@
+@import '@utils/mixins/button';
+
+.downloadCard {
+    border-radius: 2px;
+    border: none;
+    width: 240px;
+    background: var(--character-light-primary-inverse);
+
+    :global {
+        .ant-card-body {
+            padding: 0;
+        }
+    }
+}
+
+.cardHeader {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-light-6);
+}
+
+.cardSubheader {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}
+
+.headerWrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 12px 24px;
+    gap: 8px;
+}
+
+.buttonsFlex {
+    display: flex;
+    justify-content: center;
+}
+
+.downloadButtonText {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-title-85);
+}
+
+.downloadButton {
+    border: none;
+    // box-shadow: none;
+    margin: 16px 0;
+    height: 32px;
+    width: 120px;
+    box-sizing: border-box;
+    background: var(--character-light-primary-inverse);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+    height: fit-content;
+
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-title-85);
+
+    @include button;
+
+    :global {
+        .anticon {
+            width: 14px;
+            height: 14px;
+        }
+    }
+}
+
+@media(max-width: 835px) {
+    .headerWrapper {
+        padding: 12px 26px;
+    }
+
+    .downloadButton {
+        margin: 19px 0;
+    }
+}
+
+@media(max-width: 540px) {
+    .downloadCard {
+        width: 328px;
+    }
+
+    .headerWrapper {
+        padding-top: 13px;
+        padding-bottom: 11px;
+        text-align: center;
+    }
+
+    .downloadButton {
+        padding-top: 1px;
+        width: 164px;
+    }
+}

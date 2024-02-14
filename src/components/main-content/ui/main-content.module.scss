@@ -1,0 +1,153 @@
+.content {
+    padding: 24px;
+    gap: 16px;
+    display: flex;
+    flex-direction: column;
+}
+
+.abilitiesCardText {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--primary-light-9);
+}
+
+.aboutCardText {
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.actionCardsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.abilitiesCard {
+    padding: 6px;
+}
+
+.abilitiesCard,
+.aboutCard,
+.actionCardsWrapper {
+    width: 752px;
+    box-sizing: border-box;
+}
+
+.abilitiesCard,
+.aboutCard {
+    border-radius: 2px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: var(--character-light-primary-inverse);
+    border: none;
+}
+
+.abilitiesCard {
+    margin-bottom: 8px;
+
+    :global {
+        .ant-card-body {
+            padding: 20px;
+        }
+    }
+}
+
+.abilitiesCardText,
+.aboutCardText {
+    margin: 0;
+}
+
+.aboutCard {
+    padding: 24px;
+}
+
+@media(max-width: 1200px) {
+
+    .abilitiesCard,
+    .aboutCard,
+    .actionCardsWrapper {
+        width: 60vw;
+    }
+
+    .abilitiesCard {
+        padding: 27px;
+
+        :global {
+            .ant-card-body {
+                padding: 0 !important;
+            }
+        }
+    }
+}
+
+@media (max-width: 835px) {
+
+    .abilitiesCard,
+    .aboutCard,
+    .actionCardsWrapper {
+        width: 69.3vw;
+    }
+
+    .abilitiesCard,
+    .aboutCard {
+        padding: 24.5px;
+    }
+
+    .abilitiesCardStretched,
+    .aboutCardStretched,
+    .actionCardsWrapperStretched {
+        width: 86.5vw;
+    }
+}
+
+@media (max-width: 834px) {
+
+    .abilitiesCard,
+    .aboutCard,
+    .actionCardsWrapper {
+        width: 60vw;
+    }
+}
+
+@media(max-width: 702px) {
+
+    .abilitiesCard,
+    .aboutCard,
+    .actionCardsWrapper {
+        width: 91.11vw;
+    }
+}
+
+@media(max-width: 540px) {
+
+    .content {
+        padding-left: 0;
+        padding-right: 0;
+        align-items: center;
+    }
+
+    .actionCardsWrapper {
+        gap: 8px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .abilitiesCard,
+    .aboutCard {
+        padding: 17px;
+        padding-left: 16px;
+    }
+
+    // .abilitiesCard,
+    // .aboutCard {
+    //     :global {
+    //         .ant-card-body {
+    //             padding: 16px;
+    //         }
+    //     }
+    // }
+}

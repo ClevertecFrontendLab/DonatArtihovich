@@ -19,8 +19,8 @@
         "baseUrl": ".",
         "paths": {
             "@public/*": ["./public/*"],
-            "@components/*": ["./src/components/*"],
             "@constants/*": ["./src/constants/*"],
+            "@components/*": ["./src/components/*"],
             "@hooks/*": ["./src/hooks/*"],
             "@pages/*": ["./src/pages/*"],
             "@redux/*": ["./src/redux/*"],
@@ -39,5 +39,5 @@
         ]
     },
     "include": ["src"],
-    "references": [{ "path": "./tsconfig.node.json" }]
+    "references": [{ "path": "./tsconfig.node.json" }],
 }

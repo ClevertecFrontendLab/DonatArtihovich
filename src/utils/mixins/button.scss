@@ -1,0 +1,7 @@
+@mixin button {
+    &:focus {
+        :global .ant-wave {
+            display: none;
+        }
+    }
+}
