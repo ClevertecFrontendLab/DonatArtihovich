@@ -3,14 +3,14 @@ import { Footer } from "antd/es/layout/layout"
 import Link from "antd/es/typography/Link"
 import cls from './footer.module.scss'
 import classNames from "classnames"
-import { useResize } from "@hooks/use-resize"
+import { useWindowSize } from "@uidotdev/usehooks"
 
 interface PageFooterProps {
     isSiderCollapsed: boolean;
 }
 
 export const PageFooter = ({ isSiderCollapsed }: PageFooterProps) => {
-    const { width } = useResize()
+    const { width } = useWindowSize()
 
     if (width)
         return (

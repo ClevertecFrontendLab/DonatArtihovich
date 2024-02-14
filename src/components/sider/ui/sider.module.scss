@@ -185,10 +185,23 @@
 @media(max-width: 835px) {
     .toggleSidebarButtonWrapper {
         height: 65px;
+        top: 47.5%;
+    }
+
+    .logoWrapper {
+        padding-top: 13px;
+    }
+
+    .siderMenu {
+        margin-top: 27px;
     }
 
     .collapsed {
         box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+
+        .siderMenu {
+            margin-top: 19px;
+        }
 
         .exitButton {
             padding-top: 14px;
@@ -204,7 +217,7 @@
         }
 
         .toggleSidebarButtonWrapper {
-            top: 47.5%;
+            top: 47%;
 
             :global {
                 .anticon {
@@ -251,7 +264,7 @@
     }
 
     .siderMainWrapper {
-        gap: 8px;
+        gap: 0;
     }
 
     .logoWrapper {
@@ -266,6 +279,7 @@
     }
 
     .siderMenu {
+        margin-top: 0;
         gap: 8px;
         align-items: flex-start !important;
 
@@ -275,7 +289,6 @@
                 height: 42px;
                 margin: 0;
                 padding-left: 10px !important;
-                // text-align: center;
             }
 
             .ant-menu-title-content {
@@ -295,7 +308,7 @@
         padding: 20px 0;
 
         :global {
-            .ant-btn-icon {
+            .anticon {
                 display: none;
             }
         }

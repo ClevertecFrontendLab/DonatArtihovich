@@ -7,7 +7,7 @@ import fitIcon from '@assets/images/fit.svg'
 import exitIcon from '@assets/images/exit.svg'
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { classNames } from '@utils/lib/class-names';
-import { useResize } from '@hooks/use-resize';
+import { useWindowSize } from '@uidotdev/usehooks';
 
 interface PageSiderProps {
     isCollapsed: boolean;
@@ -22,7 +22,7 @@ const menuItems: MenuItemType[] = [
 ]
 
 export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
-    const { width } = useResize()
+    const { width } = useWindowSize()
 
     const toggleMenu = () => {
         setIsCollapsed(!isCollapsed)

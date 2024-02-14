@@ -7,10 +7,10 @@ import { HashRouter, Route, Routes } from "react-router-dom"
 import backgroundImage from '@assets/images/background.png';
 import cls from './app.module.scss'
 import { useState } from "react"
-import { useResize } from "@hooks/use-resize"
+import { useWindowSize } from "@uidotdev/usehooks"
 
 export const App = () => {
-    const { width } = useResize()
+    const { width } = useWindowSize()
     const [isSiderCollapsed, setIsSiderCollapsed] = useState<boolean>(!width ? false : width < 702);
 
     return (

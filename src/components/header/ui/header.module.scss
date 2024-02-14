@@ -65,6 +65,13 @@
     }
 }
 
+@media(max-width: 835px) {
+    .wrapper {
+        padding-left: 24px;
+        padding-bottom: 21px;
+    }
+}
+
 @media(max-width: 702px) {
     .header {
         width: 100vw;
@@ -73,7 +80,8 @@
 
 @media(max-width: 540px) {
     .headerTitle {
-        margin-bottom: 14px !important;
+        margin-bottom: 24px !important;
+        font-size: 20px;
     }
 
     .settingsButton {
@@ -83,7 +91,10 @@
         padding: 4px 10px;
         width: 32px;
         height: 32px;
-        margin-right: 2px;
+        margin: -5px 2px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     .wrapper {

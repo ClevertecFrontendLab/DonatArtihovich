@@ -92,13 +92,9 @@
         width: 69.3vw;
     }
 
-    .abilitiesCard {
-
-        :global {
-            .ant-card-body {
-                padding: 20px 24px;
-            }
-        }
+    .abilitiesCard,
+    .aboutCard {
+        padding: 24.5px;
     }
 
     .abilitiesCardStretched,
@@ -136,18 +132,22 @@
 
     .actionCardsWrapper {
         gap: 8px;
+        flex-direction: column;
+        align-items: center;
     }
 
     .abilitiesCard,
     .aboutCard {
-        :global {
-            .ant-card-body {
-                padding: 16px;
-            }
-        }
+        padding: 17px;
+        padding-left: 16px;
     }
 
-    .actionCardsWrapper {
-        flex-direction: column;
-    }
+    // .abilitiesCard,
+    // .aboutCard {
+    //     :global {
+    //         .ant-card-body {
+    //             padding: 16px;
+    //         }
+    //     }
+    // }
 }
