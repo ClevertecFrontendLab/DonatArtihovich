@@ -1,0 +1,1 @@
+export {RegistrationResultPage} from './ui/registration-result'

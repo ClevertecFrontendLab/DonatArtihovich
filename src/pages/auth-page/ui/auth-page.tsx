@@ -4,8 +4,12 @@ import { useState } from "react"
 import cls from './auth-page.module.scss'
 import { classNames } from "@utils/lib"
 
-export const AuthPage = () => {
-    const [selectedMode, setSelectedMode] = useState<string>('login')
+interface AuthPageProps {
+    defaultMode?: 'login' | 'registration'
+}
+
+export const AuthPage = ({ defaultMode = 'login' }: AuthPageProps) => {
+    const [selectedMode, setSelectedMode] = useState<string>(defaultMode)
 
     return (
         <ModalPage className={classNames(selectedMode === 'registration' && cls.registrationModal)}>
