@@ -16,8 +16,8 @@ export const App = () => {
         <HistoryRouter history={history}>
             <Routes>
                 <Route path={Paths.MAIN} element={<MainPage isSiderCollapsed={isSiderCollapsed} setIsSiderCollapsed={setIsSiderCollapsed} />} />
-                <Route path={Paths.AUTH} element={<AuthPage />}></Route>
-                <Route path={Paths.REGISTRATION} element={<AuthPage defaultMode="registration" />}></Route>
+                <Route path={Paths.AUTH} element={<AuthPage mode='login' />}></Route>
+                <Route path={Paths.REGISTRATION} element={<AuthPage mode="registration" />}></Route>
                 <Route path={Paths.REGISTRATION_SUCCESS} element={<RegistrationResultPage success={true} />}></Route>
                 <Route path={Paths.REGISTRATION_USER_EXIST_ERROR} element={<RegistrationResultPage success={false} />}></Route>
                 <Route path={Paths.REGISTRATION_ERROR} element={<RegistrationResultPage success={false} isUncertainError={true} />}></Route>

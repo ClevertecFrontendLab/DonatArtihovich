@@ -3,14 +3,14 @@ import logoIcon from '@assets/images/logo.svg'
 import cls from './auth-form.module.scss'
 import Icon from "@ant-design/icons"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { GooglePlusOutlined } from "@ant-design/icons"
 import { classNames } from "@utils/lib"
 import { useWindowSize } from "@uidotdev/usehooks"
+import { Paths } from "@utils/const/paths"
 
 interface AuthFormProps {
-    selectedMode: string;
-    setSelectedMode: (b: string) => void;
+    mode: string;
 }
 
 const menuItems: MenuProps['items'] = [
@@ -24,24 +24,26 @@ const menuItems: MenuProps['items'] = [
     }
 ]
 
-export const AuthForm = ({ selectedMode, setSelectedMode }: AuthFormProps) => {
+export const AuthForm = ({ mode }: AuthFormProps) => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
+
+    const navigate = useNavigate()
 
     const { width } = useWindowSize()
 
     const onMenuClick: MenuProps['onClick'] = (e) => {
-        setSelectedMode(e.key)
+        navigate(e.key === 'login' ? Paths.AUTH : Paths.REGISTRATION)
     }
 
     return (
-        <div className={classNames(cls.form, selectedMode === 'registration' && cls.registrationForm)}>
+        <div className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
             <Icon
                 component={() => <img src={logoIcon} />}
                 className={cls.logoImage}
             />
             <Menu
                 onClick={onMenuClick}
-                selectedKeys={[selectedMode]}
+                selectedKeys={[mode]}
                 mode='horizontal'
                 items={menuItems}
                 className={cls.menu}
@@ -53,7 +55,7 @@ export const AuthForm = ({ selectedMode, setSelectedMode }: AuthFormProps) => {
                     className={cls.emailInput}
                 />
 
-                {selectedMode === 'registration' ?
+                {mode === 'registration' ?
                     <Form.Item help='Пароль не менее 8 символов, с заглавной буквой и цифрой'>
                         <Input.Password
                             placeholder="Пароль"
@@ -66,14 +68,14 @@ export const AuthForm = ({ selectedMode, setSelectedMode }: AuthFormProps) => {
                     />
                 }
 
-                {selectedMode === 'registration' &&
+                {mode === 'registration' &&
                     <Input.Password
                         placeholder="Повторите пароль"
                         className={cls.passwordInput}
                     />
                 }
 
-                {selectedMode === 'login' &&
+                {mode === 'login' &&
                     <div className={cls.checkboxWrapper}>
                         <Checkbox
                             checked={isChecked}
@@ -88,7 +90,7 @@ export const AuthForm = ({ selectedMode, setSelectedMode }: AuthFormProps) => {
 
             <div className={cls.buttonsWrapper}>
                 <Button className={cls.submitButton}>Войти</Button>
-                <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{selectedMode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
+                <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{mode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
             </div>
         </div>
     )
