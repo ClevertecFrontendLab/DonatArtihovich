@@ -24,4 +24,17 @@
 .content {
     position: absolute;
     z-index: 50;
+    top: 6%;
+}
+
+@media (max-width: 900px) {
+    .content {
+        top: 16.3%;
+    }
+}
+
+@media(max-width: 700px) {
+    .content {
+        top: 17%;
+    }
 }

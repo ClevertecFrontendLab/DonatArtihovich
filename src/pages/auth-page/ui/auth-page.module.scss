@@ -1,0 +1,21 @@
+.registrationModal {
+    top: 14%;
+}
+
+@media(max-height: 760px) {
+    .registrationModal {
+        top: 0.6%;
+    }
+}
+
+@media(max-width: 900px) {
+    .registrationModal {
+        top: 19%;
+    }
+}
+
+@media (max-width: 600px) {
+    .registrationModal {
+        top: 14%;
+    }
+}

@@ -1,10 +1,17 @@
 import { Button, Checkbox, Form, Input, Menu, MenuProps } from "antd"
 import logoIcon from '@assets/images/logo.svg'
 import cls from './auth-form.module.scss'
-import Icon from "@ant-design/icons/lib/components/Icon"
+import Icon from "@ant-design/icons"
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import { GoogleOutlined, GooglePlusOutlined } from "@ant-design/icons"
+import { GooglePlusOutlined } from "@ant-design/icons"
+import { classNames } from "@utils/lib"
+import { useWindowSize } from "@uidotdev/usehooks"
+
+interface AuthFormProps {
+    selectedMode: string;
+    setSelectedMode: (b: string) => void;
+}
 
 const menuItems: MenuProps['items'] = [
     {
@@ -17,15 +24,17 @@ const menuItems: MenuProps['items'] = [
     }
 ]
 
-export const AuthForm = () => {
-    const [selectedMode, setSelectedMode] = useState<string>('login')
+export const AuthForm = ({ selectedMode, setSelectedMode }: AuthFormProps) => {
+    const [isChecked, setIsChecked] = useState<boolean>(false)
+
+    const { width } = useWindowSize()
 
     const onMenuClick: MenuProps['onClick'] = (e) => {
         setSelectedMode(e.key)
     }
 
     return (
-        <div className={cls.form}>
+        <div className={classNames(cls.form, selectedMode === 'registration' && cls.registrationForm)}>
             <Icon
                 component={() => <img src={logoIcon} />}
                 className={cls.logoImage}
@@ -41,23 +50,46 @@ export const AuthForm = () => {
                 <Input
                     addonBefore='e-mail:'
                     type='text'
-                    className={cls.loginEmailInput}
-                />
-                <Input.Password
-                    placeholder="Пароль"
-                    className={cls.loginPasswordInput}
+                    className={cls.emailInput}
                 />
 
-                <div className={cls.checkboxWrapper}>
-                    <Checkbox className={cls.checkboxInput}>Запомнить меня</Checkbox>
-                    <Link to='' className={cls.passwordForgetLink}>Забыли пароль?</Link>
-                </div>
+                {selectedMode === 'registration' ?
+                    <Form.Item help='Пароль не менее 8 символов, с заглавной буквой и цифрой'>
+                        <Input.Password
+                            placeholder="Пароль"
+                            className={cls.passwordInput}
+                        />
+                    </Form.Item>
+                    : <Input.Password
+                        placeholder="Пароль"
+                        className={cls.passwordInput}
+                    />
+                }
 
-                <div className={cls.buttonsWrapper}>
-                    <Button className={cls.submitButton}>Войти</Button>
-                    <Button icon={<GooglePlusOutlined />} className={cls.googleButton}>Войти через Google</Button>
-                </div>
+                {selectedMode === 'registration' &&
+                    <Input.Password
+                        placeholder="Повторите пароль"
+                        className={cls.passwordInput}
+                    />
+                }
+
+                {selectedMode === 'login' &&
+                    <div className={cls.checkboxWrapper}>
+                        <Checkbox
+                            checked={isChecked}
+                            onChange={() => setIsChecked(!isChecked)}
+                            className={cls.checkboxInput}
+                        >Запомнить меня</Checkbox>
+                        <Link to='' className={cls.passwordForgetLink}>Забыли пароль?</Link>
+                    </div>
+
+                }
             </Form.Item>
+
+            <div className={cls.buttonsWrapper}>
+                <Button className={cls.submitButton}>Войти</Button>
+                <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{selectedMode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
+            </div>
         </div>
     )
 }
