@@ -5,6 +5,9 @@ import { PageHeader } from '@components/header';
 import { Layout, Row } from 'antd';
 import backgroundImage from '@assets/images/background.png';
 import cls from './main-page.module.scss'
+import { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@utils/const/paths';
 
 interface MainPageProps {
     isSiderCollapsed: boolean;
@@ -12,6 +15,11 @@ interface MainPageProps {
 }
 
 export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProps) => {
+    const navigate = useNavigate()
+
+    useEffect(() => {
+        navigate(Paths.AUTH)
+    }, [])
 
     return (
         <Row justify='center' className={cls.wrapper}>
