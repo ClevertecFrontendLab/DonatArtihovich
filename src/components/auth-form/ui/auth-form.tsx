@@ -41,7 +41,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     const validatePassword = (_: any, value: string) => {
         const { getFieldValue } = form
 
-        if (value && value !== getFieldValue('passoword')) {
+        if (value && value !== getFieldValue('password')) {
             return Promise.reject(new Error('Пароли не совпадают'))
         }
 
@@ -49,7 +49,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
 
     return (
-        <Form onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
+        <Form form={form} onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
             <Icon
                 component={() => <img src={logoIcon} />}
                 className={cls.logoImage}
