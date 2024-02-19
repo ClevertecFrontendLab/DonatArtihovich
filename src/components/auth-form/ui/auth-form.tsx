@@ -26,17 +26,30 @@ const menuItems: MenuProps['items'] = [
 
 export const AuthForm = ({ mode }: AuthFormProps) => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
-
+    const [form] = Form.useForm()
     const navigate = useNavigate()
-
     const { width } = useWindowSize()
 
     const onMenuClick: MenuProps['onClick'] = (e) => {
         navigate(e.key === 'login' ? Paths.AUTH : Paths.REGISTRATION)
     }
 
+    const onSubmit = (values: Record<string, string>) => {
+        console.log(values)
+    }
+
+    const validatePassword = (_: any, value: string) => {
+        const { getFieldValue } = form
+
+        if (value && value !== getFieldValue('passoword')) {
+            return Promise.reject(new Error('Пароли не совпадают'))
+        }
+
+        return Promise.resolve()
+    }
+
     return (
-        <div className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
+        <Form onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
             <Icon
                 component={() => <img src={logoIcon} />}
                 className={cls.logoImage}
@@ -48,50 +61,83 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                 items={menuItems}
                 className={cls.menu}
             />
-            <Form.Item className={cls.loginForm}>
-                <Input
-                    addonBefore='e-mail:'
-                    type='text'
+            <div className={cls.loginForm}>
+                <Form.Item
                     className={cls.emailInput}
-                />
-
+                    name='email'
+                    rules={mode === 'registration' ? [{
+                        required: true,
+                        pattern: /\S+@\S+\.\S+/,
+                        message: ''
+                    }]
+                        : undefined}
+                >
+                    <Input
+                        addonBefore='e-mail:'
+                        type='text'
+                    />
+                </Form.Item>
                 {mode === 'registration' ?
-                    <Form.Item help='Пароль не менее 8 символов, с заглавной буквой и цифрой'>
+                    <Form.Item
+                        help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                        className={cls.passwordInput}
+                        name='password'
+                        rules={[
+                            {
+                                required: true,
+                                pattern: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+                            }
+                        ]}
+                    >
                         <Input.Password
                             placeholder="Пароль"
-                            className={cls.passwordInput}
                         />
                     </Form.Item>
-                    : <Input.Password
-                        placeholder="Пароль"
-                        className={cls.passwordInput}
-                    />
+                    : <Form.Item className={cls.passwordInput} name='password'>
+                        <Input.Password
+                            placeholder="Пароль"
+                        />
+                    </Form.Item>
                 }
 
                 {mode === 'registration' &&
-                    <Input.Password
-                        placeholder="Повторите пароль"
-                        className={cls.passwordInput}
-                    />
-                }
+                    <Form.Item className={cls.passwordInput} name='passwordRepeat'
+                        rules={[
+                            {
+                                required: true,
+                                message: ''
+                            },
+                            {
+                                validator: validatePassword,
+                                message: 'Пароли не совпадают'
+                            }
+                        ]}
+                    >
+                        <Input.Password
+                            placeholder="Повторите пароль"
+                        />
+                    </Form.Item>}
 
                 {mode === 'login' &&
                     <div className={cls.checkboxWrapper}>
-                        <Checkbox
-                            checked={isChecked}
-                            onChange={() => setIsChecked(!isChecked)}
-                            className={cls.checkboxInput}
-                        >Запомнить меня</Checkbox>
+                        <Form.Item name='remember'>
+                            <Checkbox
+                                checked={isChecked}
+                                onChange={() => setIsChecked(!isChecked)}
+                                className={cls.checkboxInput}
+                            >
+                                Запомнить меня
+                            </Checkbox>
+                        </Form.Item>
                         <Link to='' className={cls.passwordForgetLink}>Забыли пароль?</Link>
                     </div>
-
                 }
-            </Form.Item>
+            </div>
 
             <div className={cls.buttonsWrapper}>
-                <Button className={cls.submitButton}>Войти</Button>
+                <Button className={cls.submitButton} htmlType='submit' type='primary'>Войти</Button>
                 <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{mode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
             </div>
-        </div>
+        </Form>
     )
 }

@@ -54,23 +54,20 @@
 .loginForm {
     padding-top: 24px;
     margin-bottom: 28px;
-
-    :global {
-        .ant-form-item-control-input-content {
-            display: flex;
-            flex-direction: column;
-            gap: 32px;
-        }
-    }
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
 }
 
 .emailInput {
-    // width: 368px !important;
-    // margin-bottom: 32px;
+    // &.ant-form-item-has-error {
+    //     border: 5px solid red;
+    // }
 
     :global {
         .ant-input-group {
             border-radius: 2px;
+            overflow: hidden;
             width: 368px;
             height: 40px;
             display: flex;
@@ -106,6 +103,24 @@
             color: var(--character-light-title-85);
             background: var(--character-light-table-header);
         }
+
+        .ant-input-group-wrapper-status-error {
+            .ant-input {
+                border-color: var(--character-light-error);
+                // border-radius: 2px;
+                border-left: 1px solid var(--character-light-border);
+            }
+
+            .ant-input-group-addon {
+                border-bottom: 1px solid var(--character-light-error);
+                border-left: 1px solid var(--character-light-error);
+                border-top: 1px solid var(--character-light-error);
+            }
+        }
+
+        .ant-form-item-explain {
+            position: absolute;
+        }
     }
 }
 
@@ -117,7 +132,7 @@
     height: 40px !important;
     box-sizing: border-box;
     height: fit-content;
-    // margin-bottom: 32px;
+    position: relative;
 
     :global {
         .ant-input-password {
@@ -151,6 +166,8 @@
             font-size: 12px;
             line-height: 130%;
             color: var(--character-light-secondary-45);
+            position: absolute;
+            left: 0;
         }
     }
 }
@@ -162,7 +179,7 @@
         font-size: 12px;
         line-height: 130%;
         color: var(--character-light-secondary-45);
-        margin-top: 2px;
+        margin-top: 10px;
     }
 }
 
@@ -258,12 +275,31 @@
 .registrationForm {
     height: 686px;
 
-    .emailInput {
-        margin-top: 8px;
-    }
-
     .buttonsWrapper {
         margin-top: 30px;
+    }
+
+    .passwordInput:last-child {
+        margin-top: 12px;
+    }
+
+    :global {
+        .ant-form-item-has-error {
+            border-color: var(--character-light-error);
+
+            .ant-form-item-explain-error {
+                color: var(--character-light-error);
+            }
+        }
+
+        .ant-form-item-has-success:not(:first-child) {
+            border: 1px solid var(--primary-light-5);
+            box-shadow: 0 0 0 2px rgba(47, 84, 235, 0.2);
+        }
+    }
+
+    .emailInput {
+        margin-top: 8px;
     }
 }
 
@@ -384,12 +420,7 @@
 
         .loginForm {
             padding-top: 16px;
-
-            :global {
-                .ant-form-item-control-input-content {
-                    gap: 0;
-                }
-            }
+            gap: 0;
         }
 
         .buttonsWrapper {
