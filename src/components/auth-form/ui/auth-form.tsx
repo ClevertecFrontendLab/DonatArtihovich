@@ -2,15 +2,30 @@ import { Button, Checkbox, Form, Input, Menu, MenuProps } from "antd"
 import logoIcon from '@assets/images/logo.svg'
 import cls from './auth-form.module.scss'
 import Icon from "@ant-design/icons"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
 import { GooglePlusOutlined } from "@ant-design/icons"
 import { classNames } from "@utils/lib"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { Paths } from "@utils/const/paths"
+import { useRegisterUserMutation, useLoginUserMutation } from "@redux/api/auth-api"
+import { useAppDispatch } from "@hooks/typed-react-redux-hooks"
+import { setUser } from "@redux/model/user/user-slice"
 
 interface AuthFormProps {
     mode: string;
+}
+
+interface IRegisterValues {
+    email: string;
+    password: string;
+    passwordRepeat: string;
+}
+
+interface ILoginValues {
+    email: string;
+    password: string;
+    remember: boolean;
 }
 
 const menuItems: MenuProps['items'] = [
@@ -28,14 +43,58 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
     const [form] = Form.useForm()
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
     const { width } = useWindowSize()
+
+    const [registerUser, {
+        isLoading: isRegisterLoading,
+        isSuccess: isRegisterSuccess,
+        isError: isRegisterError,
+        error: registerError
+    }] = useRegisterUserMutation()
+
+    const [loginUser, {
+        data: loginData,
+        isLoading: isLoginLoading,
+        isSuccess: isLoginSuccess,
+        isError: isLoginError,
+        error: loginError,
+    }] = useLoginUserMutation()
+
+    useEffect(() => {
+        if (isRegisterError) {
+            console.error(registerError)
+        }
+
+        if (isLoginError) {
+            console.error(loginError)
+        }
+    }, [isLoginError, isRegisterError])
+
+    useEffect(() => {
+        if (isRegisterSuccess) {
+            console.log('success')
+        }
+
+        if (isLoginSuccess) {
+            localStorage.setItem('user', loginData.accessToken)
+            dispatch(setUser({ token: loginData.accessToken }))
+            console.log(loginData.accessToken)
+        }
+    }, [isLoginSuccess, isRegisterSuccess])
 
     const onMenuClick: MenuProps['onClick'] = (e) => {
         navigate(e.key === 'login' ? Paths.AUTH : Paths.REGISTRATION)
     }
 
-    const onSubmit = (values: Record<string, string>) => {
-        console.log(values)
+    const onSubmit = (values: IRegisterValues | ILoginValues) => {
+        console.log(mode, ': ', values)
+
+        if (mode === 'registration') {
+            registerUser(values)
+        } else {
+            loginUser(values)
+        }
     }
 
     const validatePassword = (_: any, value: string) => {
