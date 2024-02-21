@@ -1,3 +1,3 @@
 import { RootState } from "../../configure-store";
 
-export const userSelector = (state: RootState) => state.authApi
+export const userSelector = (state: RootState) => state.user

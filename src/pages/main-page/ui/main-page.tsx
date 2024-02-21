@@ -18,7 +18,9 @@ export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProp
     const navigate = useNavigate()
 
     useEffect(() => {
-        navigate(Paths.AUTH)
+        if (!localStorage.getItem('user')) {
+            navigate(Paths.AUTH)
+        }
     }, [])
 
     return (

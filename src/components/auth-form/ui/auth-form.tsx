@@ -11,6 +11,7 @@ import { Paths } from "@utils/const/paths"
 import { useRegisterUserMutation, useLoginUserMutation } from "@redux/api/auth-api"
 import { useAppDispatch } from "@hooks/typed-react-redux-hooks"
 import { setUser } from "@redux/model/user/user-slice"
+import { AuthLoader } from "@components/loader"
 
 interface AuthFormProps {
     mode: string;
@@ -63,7 +64,13 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
     useEffect(() => {
         if (isRegisterError) {
-            console.error(registerError)
+            const error = registerError as IError;
+
+            if (error.data.statusCode === 409) {
+                navigate(Paths.REGISTRATION_USER_EXIST_ERROR);
+            } else {
+                navigate(Paths.REGISTRATION_ERROR);
+            }
         }
 
         if (isLoginError) {
@@ -73,13 +80,17 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
     useEffect(() => {
         if (isRegisterSuccess) {
-            console.log('success')
+            navigate(Paths.REGISTRATION_SUCCESS);
         }
 
         if (isLoginSuccess) {
-            localStorage.setItem('user', loginData.accessToken)
             dispatch(setUser({ token: loginData.accessToken }))
-            console.log(loginData.accessToken)
+
+            if (isChecked) {
+                localStorage.setItem('user', loginData.accessToken)
+            }
+
+            navigate(Paths.MAIN);
         }
     }, [isLoginSuccess, isRegisterSuccess])
 
@@ -108,95 +119,99 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
 
     return (
-        <Form form={form} onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
-            <Icon
-                component={() => <img src={logoIcon} />}
-                className={cls.logoImage}
-            />
-            <Menu
-                onClick={onMenuClick}
-                selectedKeys={[mode]}
-                mode='horizontal'
-                items={menuItems}
-                className={cls.menu}
-            />
-            <div className={cls.loginForm}>
-                <Form.Item
-                    className={cls.emailInput}
-                    name='email'
-                    rules={mode === 'registration' ? [{
-                        required: true,
-                        pattern: /\S+@\S+\.\S+/,
-                        message: ''
-                    }]
-                        : undefined}
-                >
-                    <Input
-                        addonBefore='e-mail:'
-                        type='text'
-                    />
-                </Form.Item>
-                {mode === 'registration' ?
+        <>
+            {(isLoginLoading || isRegisterLoading) && <AuthLoader />}
+            <Form form={form} onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
+                <Icon
+                    component={() => <img src={logoIcon} />}
+                    className={cls.logoImage}
+                />
+                <Menu
+                    onClick={onMenuClick}
+                    selectedKeys={[mode]}
+                    mode='horizontal'
+                    items={menuItems}
+                    className={cls.menu}
+                />
+                <div className={cls.loginForm}>
                     <Form.Item
-                        help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
-                        className={cls.passwordInput}
-                        name='password'
-                        rules={[
-                            {
-                                required: true,
-                                pattern: /^(?=.*[A-Z])(?=.*\d).{8,}$/
-                            }
-                        ]}
+                        className={cls.emailInput}
+                        name='email'
+                        rules={mode === 'registration' ? [{
+                            required: true,
+                            pattern: /\S+@\S+\.\S+/,
+                            message: ''
+                        }]
+                            : undefined}
                     >
-                        <Input.Password
-                            placeholder="Пароль"
+                        <Input
+                            addonBefore='e-mail:'
+                            type='text'
                         />
                     </Form.Item>
-                    : <Form.Item className={cls.passwordInput} name='password'>
-                        <Input.Password
-                            placeholder="Пароль"
-                        />
-                    </Form.Item>
-                }
-
-                {mode === 'registration' &&
-                    <Form.Item className={cls.passwordInput} name='passwordRepeat'
-                        rules={[
-                            {
-                                required: true,
-                                message: ''
-                            },
-                            {
-                                validator: validatePassword,
-                                message: 'Пароли не совпадают'
-                            }
-                        ]}
-                    >
-                        <Input.Password
-                            placeholder="Повторите пароль"
-                        />
-                    </Form.Item>}
-
-                {mode === 'login' &&
-                    <div className={cls.checkboxWrapper}>
-                        <Form.Item name='remember'>
-                            <Checkbox
-                                checked={isChecked}
-                                onChange={() => setIsChecked(!isChecked)}
-                                className={cls.checkboxInput}
-                            >
-                                Запомнить меня
-                            </Checkbox>
+                    {mode === 'registration' ?
+                        <Form.Item
+                            help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
+                            className={cls.passwordInput}
+                            name='password'
+                            rules={[
+                                {
+                                    required: true,
+                                    pattern: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+                                }
+                            ]}
+                        >
+                            <Input.Password
+                                placeholder="Пароль"
+                            />
                         </Form.Item>
-                        <Link to='' className={cls.passwordForgetLink}>Забыли пароль?</Link>
-                    </div>
-                }
-            </div>
+                        : <Form.Item className={cls.passwordInput} name='password'>
+                            <Input.Password
+                                placeholder="Пароль"
+                            />
+                        </Form.Item>
+                    }
 
-            <div className={cls.buttonsWrapper}>
-                <Button className={cls.submitButton} htmlType='submit' type='primary'>Войти</Button>
-                <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{mode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
-            </div>
-        </Form>
+                    {mode === 'registration' &&
+                        <Form.Item className={cls.passwordInput} name='passwordRepeat'
+                            rules={[
+                                {
+                                    required: true,
+                                    message: ''
+                                },
+                                {
+                                    validator: validatePassword,
+                                    message: 'Пароли не совпадают'
+                                }
+                            ]}
+                        >
+                            <Input.Password
+                                placeholder="Повторите пароль"
+                            />
+                        </Form.Item>}
+
+                    {mode === 'login' &&
+                        <div className={cls.checkboxWrapper}>
+                            <Form.Item name='remember'>
+                                <Checkbox
+                                    checked={isChecked}
+                                    onChange={() => setIsChecked(!isChecked)}
+                                    value={isChecked}
+                                    className={cls.checkboxInput}
+                                >
+                                    Запомнить меня
+                                </Checkbox>
+                            </Form.Item>
+                            <Link to='' className={cls.passwordForgetLink}>Забыли пароль?</Link>
+                        </div>
+                    }
+                </div>
+
+                <div className={cls.buttonsWrapper}>
+                    <Button className={cls.submitButton} htmlType='submit' type='primary'>Войти</Button>
+                    <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{mode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
+                </div>
+            </Form>
+        </>
     )
 }
