@@ -6267,6 +6267,11 @@ react-use-event-hook@^0.9.6:
   resolved "https://registry.yarnpkg.com/react-use-event-hook/-/react-use-event-hook-0.9.6.tgz#cbe75361a366a9abd65d9513851a8f2fcc3f6e08"
   integrity sha512-wNchkFrrlz64QQOJOf5+dFjy+27bJEwtS1SgliRXVsU60wo3pSntNRlwDws2qPHwrAP/wlm5IyQHBlPCya0JIQ==
 
+react-verification-input@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/react-verification-input/-/react-verification-input-4.1.0.tgz#241f954d0ef376020844fe5c3b679061048a220c"
+  integrity sha512-RUYJjy2ZM9eMbWATIPNzrCfrxbp8vWNiTOFajxHx/DEK5AWMLAVpaQbhBMb68e13T91uGGragvL9LMAUOh2GrA==
+
 react-virtual@^2.3.2:
   version "2.10.4"
   resolved "https://registry.yarnpkg.com/react-virtual/-/react-virtual-2.10.4.tgz#08712f0acd79d7d6f7c4726f05651a13b24d8704"

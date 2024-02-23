@@ -104,20 +104,6 @@
             background: var(--character-light-table-header);
         }
 
-        .ant-input-group-wrapper-status-error {
-            .ant-input {
-                border-color: var(--character-light-error);
-                // border-radius: 2px;
-                border-left: 1px solid var(--character-light-border);
-            }
-
-            .ant-input-group-addon {
-                border-bottom: 1px solid var(--character-light-error);
-                border-left: 1px solid var(--character-light-error);
-                border-top: 1px solid var(--character-light-error);
-            }
-        }
-
         .ant-form-item-explain {
             position: absolute;
         }
@@ -300,6 +286,21 @@
 
     .emailInput {
         margin-top: 8px;
+
+        :global {
+            .ant-input-group-wrapper-status-error {
+                .ant-input {
+                    border-color: var(--character-light-error);
+                    border-left: 1px solid var(--character-light-border);
+                }
+
+                .ant-input-group-addon {
+                    border-bottom: 1px solid var(--character-light-error);
+                    border-left: 1px solid var(--character-light-error);
+                    border-top: 1px solid var(--character-light-error);
+                }
+            }
+        }
     }
 }
 

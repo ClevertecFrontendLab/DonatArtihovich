@@ -42,6 +42,7 @@ const menuItems: MenuProps['items'] = [
 
 export const AuthForm = ({ mode }: AuthFormProps) => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
+    const [isEmailValid, setIsEmailValid] = useState<boolean>(true)
     const [form] = Form.useForm()
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -117,6 +118,15 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         return Promise.resolve()
     }
 
+    const onEmailChange = () => {
+        console.log('email change')
+        form.validateFields(['email']).then(() => {
+            setIsEmailValid(true)
+        }).catch(() => {
+            setIsEmailValid(false)
+        })
+    }
+
     return (
         <>
             {(isLoginLoading || isRegisterLoading) && <AuthLoader />}
@@ -136,16 +146,18 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                     <Form.Item
                         className={cls.emailInput}
                         name='email'
-                        rules={mode === 'registration' ? [{
-                            required: true,
-                            pattern: /\S+@\S+\.\S+/,
-                            message: ''
-                        }]
-                            : undefined}
+                        rules={[
+                            {
+                                required: true,
+                                pattern: /\S+@\S+\.\S+/,
+                                message: ''
+                            }
+                        ]}
                     >
                         <Input
                             addonBefore='e-mail:'
                             type='text'
+                            onChange={onEmailChange}
                         />
                     </Form.Item>
                     {mode === 'registration' ?
@@ -201,7 +213,19 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                     Запомнить меня
                                 </Checkbox>
                             </Form.Item>
-                            <Link to='' className={cls.passwordForgetLink}>Забыли пароль?</Link>
+                            {isEmailValid
+                                ? <Link
+                                    to={Paths.CONFIRM_EMAIL}
+                                    className={cls.passwordForgetLink}
+                                >
+                                    Забыли пароль?
+                                </Link>
+                                : <span
+                                    className={cls.passwordForgetLink}
+                                >
+                                    Забыли пароль?
+                                </span>
+                            }
                         </div>
                     }
                 </div>

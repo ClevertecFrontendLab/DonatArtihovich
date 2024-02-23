@@ -8,6 +8,7 @@ import { AuthPage } from "@pages/auth-page"
 import { Paths } from "@utils/const/paths"
 import { ResultModalPage } from "@pages/result-modal"
 import { ModalErrors } from "@utils/const/modal-errors"
+import { ConfirmEmailPage } from "@pages/confirm-email"
 
 export const App = () => {
     const { width } = useWindowSize()
@@ -23,6 +24,9 @@ export const App = () => {
                 <Route path={Paths.REGISTRATION_USER_EXIST_ERROR} element={<ResultModalPage mode={ModalErrors.RegistrationUserExistError} />}></Route>
                 <Route path={Paths.REGISTRATION_ERROR} element={<ResultModalPage mode={ModalErrors.RegistrationError} />}></Route>
                 <Route path={Paths.LOGIN_ERROR} element={<ResultModalPage mode={ModalErrors.LoginError} />}></Route>
+                <Route path={Paths.CONFIRM_EMAIL} element={<ConfirmEmailPage />}></Route>
+                <Route path={Paths.ERROR_CHECK_EMAIL_NO_EXIST} element={<ResultModalPage mode={ModalErrors.CheckEmailNoExistError} />}></Route>
+                <Route path={Paths.ERROR_CHECK_EMAIL} element={<ResultModalPage mode={ModalErrors.CheckEmailError} />}></Route>
             </Routes>
         </HistoryRouter>
     )
