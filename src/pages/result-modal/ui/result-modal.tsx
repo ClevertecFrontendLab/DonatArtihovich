@@ -1,5 +1,5 @@
 import { ModalPage } from "@components/modal"
-import cls from './auth-result.module.scss'
+import cls from './result-modal.module.scss'
 import Icon from "@ant-design/icons"
 import successIcon from '@assets/images/success-tick.svg'
 import crossIcon from '@assets/images/no-success-cross.svg'
@@ -18,7 +18,7 @@ interface RegistrationResultProps {
     mode: ModalErrors;
 }
 
-export const ModalResultPage = ({ mode }: RegistrationResultProps) => {
+export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
     const { width } = useWindowSize()
     const navigate = useNavigate()
     const [registerUser] = useRegisterUserMutation()
