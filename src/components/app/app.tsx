@@ -6,7 +6,8 @@ import { HistoryRouter } from "redux-first-history/rr6"
 import { history } from "@redux/configure-store"
 import { AuthPage } from "@pages/auth-page"
 import { Paths } from "@utils/const/paths"
-import { RegistrationResultPage } from "@pages/success-result"
+import { ModalResultPage } from "@pages/auth-result"
+import { ModalErrors } from "@utils/const/modal-errors"
 
 export const App = () => {
     const { width } = useWindowSize()
@@ -18,9 +19,10 @@ export const App = () => {
                 <Route path={Paths.MAIN} element={<MainPage isSiderCollapsed={isSiderCollapsed} setIsSiderCollapsed={setIsSiderCollapsed} />} />
                 <Route path={Paths.AUTH} element={<AuthPage mode='login' />}></Route>
                 <Route path={Paths.REGISTRATION} element={<AuthPage mode="registration" />}></Route>
-                <Route path={Paths.REGISTRATION_SUCCESS} element={<RegistrationResultPage success={true} />}></Route>
-                <Route path={Paths.REGISTRATION_USER_EXIST_ERROR} element={<RegistrationResultPage success={false} />}></Route>
-                <Route path={Paths.REGISTRATION_ERROR} element={<RegistrationResultPage success={false} isUncertainError={true} />}></Route>
+                <Route path={Paths.REGISTRATION_SUCCESS} element={<ModalResultPage mode={ModalErrors.RegistrationSuccess} />}></Route>
+                <Route path={Paths.REGISTRATION_USER_EXIST_ERROR} element={<ModalResultPage mode={ModalErrors.RegistrationUserExistError} />}></Route>
+                <Route path={Paths.REGISTRATION_ERROR} element={<ModalResultPage mode={ModalErrors.RegistrationError} />}></Route>
+                <Route path={Paths.LOGIN_ERROR} element={<ModalResultPage mode={ModalErrors.LoginError} />}></Route>
             </Routes>
         </HistoryRouter>
     )

@@ -59,7 +59,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         isLoading: isLoginLoading,
         isSuccess: isLoginSuccess,
         isError: isLoginError,
-        error: loginError,
     }] = useLoginUserMutation()
 
     useEffect(() => {
@@ -74,7 +73,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         }
 
         if (isLoginError) {
-            console.error(loginError)
+            navigate(Paths.LOGIN_ERROR);
         }
     }, [isLoginError, isRegisterError])
 

@@ -71,6 +71,14 @@
     }
 }
 
+.login {
+    height: 350px;
+
+    .wrapper {
+        gap: 5px;
+    }
+}
+
 @media (max-width: 600px) {
     .modal {
         width: 328px;
