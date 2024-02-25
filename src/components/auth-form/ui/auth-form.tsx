@@ -3,15 +3,16 @@ import logoIcon from '@assets/images/logo.svg'
 import cls from './auth-form.module.scss'
 import Icon from "@ant-design/icons"
 import { useEffect, useState } from "react"
-import { Link, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { GooglePlusOutlined } from "@ant-design/icons"
 import { classNames } from "@utils/lib"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { Paths } from "@utils/const/paths"
-import { useRegisterUserMutation, useLoginUserMutation } from "@redux/api/auth-api"
-import { useAppDispatch } from "@hooks/typed-react-redux-hooks"
-import { setUser } from "@redux/model/user/user-slice"
+import { useRegisterUserMutation, useLoginUserMutation, useCheckEmailMutation } from "@redux/api/auth-api"
+import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
+import { setUserToken, setUserEmail } from "@redux/model/user"
 import { AuthLoader } from "@components/loader"
+import { userSelector } from "@redux/model/user"
 
 interface AuthFormProps {
     mode: string;
@@ -44,9 +45,17 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
     const [isEmailValid, setIsEmailValid] = useState<boolean>(true)
     const [form] = Form.useForm()
+    const { getFieldValue } = form
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const user = useAppSelector(userSelector)
     const { width } = useWindowSize()
+    const [checkEmail,
+        {
+            isSuccess: isCheckEmailSuccess,
+            isError: isCheckEmailError,
+            error: checkEmailError
+        }] = useCheckEmailMutation()
 
     const [registerUser, {
         isLoading: isRegisterLoading,
@@ -66,7 +75,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         if (isRegisterError) {
             const error = registerError as IError;
 
-            if (error.data.statusCode === 409) {
+            if (error.status === 409) {
                 navigate(Paths.REGISTRATION_USER_EXIST_ERROR);
             } else {
                 navigate(Paths.REGISTRATION_ERROR);
@@ -76,7 +85,17 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         if (isLoginError) {
             navigate(Paths.LOGIN_ERROR);
         }
-    }, [isLoginError, isRegisterError])
+
+        if (isCheckEmailError) {
+            const error = checkEmailError as IError
+
+            if (error.status === 404 && error.data.message === 'Email не найден') {
+                navigate(Paths.ERROR_CHECK_EMAIL_NO_EXIST)
+            } else {
+                navigate(Paths.ERROR_CHECK_EMAIL)
+            }
+        }
+    }, [isLoginError, isRegisterError, isCheckEmailError])
 
     useEffect(() => {
         if (isRegisterSuccess) {
@@ -84,7 +103,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         }
 
         if (isLoginSuccess) {
-            dispatch(setUser({ token: loginData.accessToken }))
+            dispatch(setUserToken({ token: loginData.accessToken }))
 
             if (isChecked) {
                 localStorage.setItem('user', loginData.accessToken)
@@ -92,7 +111,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
             navigate(Paths.MAIN);
         }
-    }, [isLoginSuccess, isRegisterSuccess])
+
+        if (isCheckEmailSuccess) {
+            dispatch(setUserEmail({ ...user, email: getFieldValue('email') }))
+            navigate(Paths.CONFIRM_EMAIL)
+        }
+    }, [isLoginSuccess, isRegisterSuccess, isCheckEmailSuccess])
 
     const onMenuClick: MenuProps['onClick'] = (e) => {
         navigate(e.key === 'login' ? Paths.AUTH : Paths.REGISTRATION)
@@ -125,6 +149,13 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         }).catch(() => {
             setIsEmailValid(false)
         })
+    }
+
+    const onPasswordForgetClick = () => {
+        const { getFieldValue } = form
+
+        const email = getFieldValue('email')
+        checkEmail({ email })
     }
 
     return (
@@ -214,12 +245,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                 </Checkbox>
                             </Form.Item>
                             {isEmailValid
-                                ? <Link
-                                    to={Paths.CONFIRM_EMAIL}
+                                ? <span
                                     className={cls.passwordForgetLink}
+                                    onClick={onPasswordForgetClick}
                                 >
                                     Забыли пароль?
-                                </Link>
+                                </span>
                                 : <span
                                     className={cls.passwordForgetLink}
                                 >

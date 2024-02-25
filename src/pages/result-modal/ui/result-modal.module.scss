@@ -29,6 +29,23 @@
     }
 }
 
+.checkEmailError {
+    height: 550px;
+
+    .wrapper {
+        width: 475px;
+    }
+
+    .anticon,
+    img {
+        width: 255px;
+    }
+
+    .button {
+        width: 75px;
+    }
+}
+
 .headerTitle {
     margin: 0;
     font-family: var(--font-family);

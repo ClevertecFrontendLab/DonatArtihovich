@@ -13,6 +13,14 @@
     height: fit-content;
 }
 
+.errorModal {
+    :global {
+        .vi__character {
+            border: 1px solid var(--character-light-error);
+        }
+    }
+}
+
 .wrapper {
     width: 475px;
     display: flex;

@@ -1,2 +1,2 @@
 export {userSelector} from './selectors'
-export { userSlice, setUser } from './user-slice'
+export { userSlice, setUserEmail, setUserToken } from './user-slice'

@@ -1,5 +1,5 @@
 export enum Paths {
-    MAIN = '/',
+    MAIN = '/main',
     AUTH = '/auth',
     REGISTRATION = '/auth/registration',
     REGISTRATION_SUCCESS = '/result/success',
@@ -8,5 +8,6 @@ export enum Paths {
     LOGIN_ERROR = '/result/error-login',
     CONFIRM_EMAIL = '/auth/confirm-email',
     ERROR_CHECK_EMAIL_NO_EXIST = '/result/error-check-email-no-exist',
-    ERROR_CHECK_EMAIL = '/result/error-check-email'
+    ERROR_CHECK_EMAIL = '/result/error-check-email',
+    CHANGE_PASSWORD = '/auth/change-password'
 }

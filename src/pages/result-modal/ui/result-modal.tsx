@@ -2,7 +2,7 @@ import { ModalPage } from "@components/modal"
 import cls from './result-modal.module.scss'
 import Icon from "@ant-design/icons"
 import successIcon from '@assets/images/success-tick.svg'
-import crossIcon from '@assets/images/no-success-cross.svg'
+import crossIcon from '@assets/images/cross.svg'
 import loginErrorIcon from '@assets/images/login-error.svg'
 import checkEmailError from '@assets/images/check-email-error.svg'
 import { Button, Typography } from "antd"
@@ -62,18 +62,33 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
     } as Record<ModalErrors, string>
 
     const handleButtonClick = () => {
-        if (mode === ModalErrors.LoginError || mode === ModalErrors.RegistrationSuccess) {
-            navigate(Paths.AUTH)
-        } else if (mode === ModalErrors.RegistrationError) {
-            navigate(Paths.REGISTRATION)
-        } else {
-            navigate(Paths.REGISTRATION)
-            registerUser({ email, password } as { email: string, password: string })
+        switch (mode) {
+            case ModalErrors.LoginError:
+            case ModalErrors.RegistrationSuccess:
+                navigate(Paths.AUTH)
+                break;
+            case ModalErrors.RegistrationError:
+                navigate(Paths.REGISTRATION)
+                break;
+            case ModalErrors.RegistrationUserExistError:
+                navigate(Paths.REGISTRATION)
+                registerUser({ email, password } as { email: string, password: string })
+                break;
+            case ModalErrors.CheckEmailNoExistError:
+                navigate(Paths.AUTH)
+                break;
+            case ModalErrors.CheckEmailError:
+                navigate(Paths.AUTH)
+                break;
         }
     }
 
     return (
-        <ModalPage className={classNames(cls.modal, mode === ModalErrors.LoginError && cls.login)}>
+        <ModalPage className={classNames(
+            cls.modal,
+            mode === ModalErrors.LoginError && cls.login,
+            mode === ModalErrors.CheckEmailError && cls.checkEmailError
+        )}>
             <div className={cls.wrapper}>
                 <Icon component={() => <img src={icons[mode]} />} className={cls.icon} />
                 <Typography.Title className={cls.headerTitle}>{headerTitle[mode]}</Typography.Title>
