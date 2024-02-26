@@ -31,17 +31,21 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
         [ModalErrors.RegistrationError]: <Typography.Text className={cls.headerText}>Такой e-mail уже записан в системе. Попробуйте зарегистрироваться по {width && width < 600 && <br />} другому e-mail.</Typography.Text>,
         [ModalErrors.RegistrationUserExistError]: <Typography.Text className={cls.headerText}>Что-то пошло не так и ваша регистрация<br />не завершилась. Попробуйте ещё раз.</Typography.Text>,
         [ModalErrors.CheckEmailNoExistError]: <Typography.Text className={cls.headerText}>Мы не нашли в базе вашего e-mail.{width && width <= 600 && <br />} Попробуйте{width && width > 600 && <br />} войти с другим e-mail.</Typography.Text>,
-        [ModalErrors.CheckEmailError]: <Typography.Text className={cls.headerText}>Произошла ошибка, попробуйте {width && width <= 600 && <br />}отправить форму ещё раз.</Typography.Text>
+        [ModalErrors.CheckEmailError]: <Typography.Text className={cls.headerText}>Произошла ошибка, попробуйте {width && width <= 600 && <br />}отправить форму ещё раз.</Typography.Text>,
+        [ModalErrors.ChangePasswordSuccess]: <Typography.Text className={cls.headerText}>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль</Typography.Text>,
+        [ModalErrors.ChangePasswordError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз</Typography.Text>
     } as Record<ModalErrors, React.ReactNode>
 
     const headerTitle = {
-        [ModalErrors.LoginError]: 'Вход не выполнен',
-        [ModalErrors.RegistrationSuccess]: 'Регистрация успешна',
-        [ModalErrors.RegistrationUserExistError]: 'Данные не сохранились',
-        [ModalErrors.RegistrationError]: 'Данные не сохранились',
-        [ModalErrors.CheckEmailNoExistError]: 'Такой e-mail не зарегистрирован',
-        [ModalErrors.CheckEmailError]: 'Что-то пошло не так'
-    } as Record<ModalErrors, string>
+        [ModalErrors.LoginError]: <Typography.Title className={cls.headerTitle}>Вход не выполнен</Typography.Title>,
+        [ModalErrors.RegistrationSuccess]: <Typography.Title className={cls.headerTitle}>Регистрация успешна</Typography.Title>,
+        [ModalErrors.RegistrationUserExistError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>,
+        [ModalErrors.RegistrationError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>,
+        [ModalErrors.CheckEmailNoExistError]: <Typography.Title className={cls.headerTitle}>Такой e-mail не зарегистрирован</Typography.Title>,
+        [ModalErrors.CheckEmailError]: <Typography.Title className={cls.headerTitle}>Что-то пошло не так</Typography.Title>,
+        [ModalErrors.ChangePasswordSuccess]: <Typography.Title className={cls.headerTitle}>Пароль успешно{width && width <= 600 && <br />} изменен</Typography.Title>,
+        [ModalErrors.ChangePasswordError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>
+    } as Record<ModalErrors, React.ReactNode>
 
     const buttonText = {
         [ModalErrors.LoginError]: 'Повторить',
@@ -49,7 +53,9 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
         [ModalErrors.RegistrationUserExistError]: 'Повторить',
         [ModalErrors.RegistrationError]: 'Назад к регистрации',
         [ModalErrors.CheckEmailNoExistError]: 'Попробовать снова',
-        [ModalErrors.CheckEmailError]: 'Назад'
+        [ModalErrors.CheckEmailError]: 'Назад',
+        [ModalErrors.ChangePasswordSuccess]: 'Вход',
+        [ModalErrors.ChangePasswordError]: 'Повторить'
     } as Record<ModalErrors, string>
 
     const icons = {
@@ -58,13 +64,16 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
         [ModalErrors.RegistrationSuccess]: successIcon,
         [ModalErrors.RegistrationUserExistError]: crossIcon,
         [ModalErrors.CheckEmailNoExistError]: crossIcon,
-        [ModalErrors.CheckEmailError]: checkEmailError
+        [ModalErrors.CheckEmailError]: checkEmailError,
+        [ModalErrors.ChangePasswordSuccess]: successIcon,
+        [ModalErrors.ChangePasswordError]: crossIcon
     } as Record<ModalErrors, string>
 
     const handleButtonClick = () => {
         switch (mode) {
             case ModalErrors.LoginError:
             case ModalErrors.RegistrationSuccess:
+            case ModalErrors.ChangePasswordSuccess:
                 navigate(Paths.AUTH)
                 break;
             case ModalErrors.RegistrationError:
@@ -80,6 +89,9 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
             case ModalErrors.CheckEmailError:
                 navigate(Paths.AUTH)
                 break;
+            case ModalErrors.ChangePasswordError:
+                navigate(Paths.CHANGE_PASSWORD)
+                break;
         }
     }
 
@@ -87,11 +99,12 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
         <ModalPage className={classNames(
             cls.modal,
             mode === ModalErrors.LoginError && cls.login,
-            mode === ModalErrors.CheckEmailError && cls.checkEmailError
+            mode === ModalErrors.CheckEmailError && cls.checkEmailError,
+            mode === ModalErrors.ChangePasswordSuccess && cls.changePasswordSuccess
         )}>
             <div className={cls.wrapper}>
                 <Icon component={() => <img src={icons[mode]} />} className={cls.icon} />
-                <Typography.Title className={cls.headerTitle}>{headerTitle[mode]}</Typography.Title>
+                {headerTitle[mode]}
                 {headerText[mode]}
                 <Button className={cls.button} onClick={handleButtonClick}>{buttonText[mode]}</Button>
             </div>

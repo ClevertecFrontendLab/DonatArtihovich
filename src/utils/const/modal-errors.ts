@@ -4,5 +4,7 @@ export enum ModalErrors {
     RegistrationUserExistError,
     LoginError,
     CheckEmailNoExistError,
-    CheckEmailError    
+    CheckEmailError,
+    ChangePasswordSuccess,
+    ChangePasswordError,
 }

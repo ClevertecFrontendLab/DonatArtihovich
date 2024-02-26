@@ -29,6 +29,8 @@ export const App = () => {
                 <Route path={Paths.ERROR_CHECK_EMAIL_NO_EXIST} element={<ResultModalPage mode={ModalErrors.CheckEmailNoExistError} />} />
                 <Route path={Paths.ERROR_CHECK_EMAIL} element={<ResultModalPage mode={ModalErrors.CheckEmailError} />} />
                 <Route path={Paths.CHANGE_PASSWORD} element={<ChangePasswordPage />} />
+                <Route path={Paths.CHANGE_PASSWORD_SUCCESS} element={<ResultModalPage mode={ModalErrors.ChangePasswordSuccess} />} />
+                <Route path={Paths.CHANGE_PASSWORD_ERROR} element={<ResultModalPage mode={ModalErrors.ChangePasswordError} />} />
 
                 <Route path='*' element={<Navigate to={Paths.MAIN} />} />
             </Routes>

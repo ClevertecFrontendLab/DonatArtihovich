@@ -33,7 +33,8 @@ export const authApi = createApi({
             query: (body: {email: string, code: string}) => ({
                 url: 'auth/confirm-email',
                 method: 'post',
-                body
+                body,
+                credentials: 'include'
             })
         }),
         changePassword: builder.mutation({

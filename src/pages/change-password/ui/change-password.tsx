@@ -5,9 +5,12 @@ import Password from "antd/lib/input/Password"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { useChangePasswordMutation } from "@redux/api/auth-api"
 import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
+import { Paths } from "@utils/const/paths"
 
 export const ChangePasswordPage = () => {
     const { width } = useWindowSize()
+    const navigate = useNavigate()
     const [form] = Form.useForm()
     const { getFieldValue } = form
     const [changePassword, {
@@ -24,13 +27,14 @@ export const ChangePasswordPage = () => {
     }
 
     const onFormSubmit = (values: { password: string, confirmPassword: string }) => {
-        console.log(values)
         changePassword(values)
     }
 
     useEffect(() => {
         if (isChangePasswordSuccess) {
-            alert('success')
+            navigate(Paths.CHANGE_PASSWORD_SUCCESS)
+        } else if (isChangePasswordError) {
+            navigate(Paths.CHANGE_PASSWORD_ERROR)
         }
     }, [isChangePasswordError, isChangePasswordSuccess])
 

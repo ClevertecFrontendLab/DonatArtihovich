@@ -9,5 +9,7 @@ export enum Paths {
     CONFIRM_EMAIL = '/auth/confirm-email',
     ERROR_CHECK_EMAIL_NO_EXIST = '/result/error-check-email-no-exist',
     ERROR_CHECK_EMAIL = '/result/error-check-email',
-    CHANGE_PASSWORD = '/auth/change-password'
+    CHANGE_PASSWORD = '/auth/change-password',
+    CHANGE_PASSWORD_SUCCESS = '/result/success-change-password',
+    CHANGE_PASSWORD_ERROR = '/result/error-change-password',
 }
