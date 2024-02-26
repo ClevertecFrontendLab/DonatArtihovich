@@ -3,7 +3,7 @@ import logoIcon from '@assets/images/logo.svg'
 import cls from './auth-form.module.scss'
 import Icon from "@ant-design/icons"
 import { useEffect, useState } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { GooglePlusOutlined } from "@ant-design/icons"
 import { classNames } from "@utils/lib"
 import { useWindowSize } from "@uidotdev/usehooks"
@@ -13,6 +13,9 @@ import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { setUserToken, setUserEmail } from "@redux/model/user"
 import { AuthLoader } from "@components/loader"
 import { userSelector } from "@redux/model/user"
+import { useRequiredContext } from "@hooks/typed-use-context-hook"
+import { AuthContext } from "@processes/auth"
+// import { history } from "@redux/configure-store"
 
 interface AuthFormProps {
     mode: string;
@@ -43,13 +46,20 @@ const menuItems: MenuProps['items'] = [
 
 export const AuthForm = ({ mode }: AuthFormProps) => {
     const [isChecked, setIsChecked] = useState<boolean>(false)
-    const [isEmailValid, setIsEmailValid] = useState<boolean>(true)
+    const [isPasswordChangingDisabled, setIsPasswordChangingDisabled] = useState<boolean>(true)
     const [form] = Form.useForm()
     const { getFieldValue } = form
     const navigate = useNavigate()
+    const location = useLocation()
     const dispatch = useAppDispatch()
     const user = useAppSelector(userSelector)
     const { width } = useWindowSize()
+
+    const {
+        setIsLoginProcess,
+        setIsRegistrationProcess,
+        setIsChangePasswordProcess
+    } = useRequiredContext(AuthContext)
     const [checkEmail,
         {
             isSuccess: isCheckEmailSuccess,
@@ -70,6 +80,17 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         isSuccess: isLoginSuccess,
         isError: isLoginError,
     }] = useLoginUserMutation()
+
+    useEffect(() => {
+        if (mode === 'registration' && location.state?.from === Paths.REGISTRATION_USER_EXIST_ERROR) {
+            setIsRegistrationProcess(true)
+            registerUser({ email: user.email, password: user.password } as { email: string, password: string })
+        }
+        if (location.state?.from === Paths.ERROR_CHECK_EMAIL) {
+            setIsLoginProcess(true)
+            checkEmail({ email: user.email } as { email: string })
+        }
+    }, [])
 
     useEffect(() => {
         if (isRegisterError) {
@@ -123,11 +144,13 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
 
     const onSubmit = (values: IRegisterValues | ILoginValues) => {
-        console.log(mode, ': ', values)
-
         if (mode === 'registration') {
+            setIsRegistrationProcess(true)
+            dispatch(setUserEmail({ email: values.email }))
             registerUser(values)
         } else {
+            setIsLoginProcess(true)
+            dispatch(setUserEmail({ email: values.email }))
             loginUser(values)
         }
     }
@@ -145,17 +168,23 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     const onEmailChange = () => {
         console.log('email change')
         form.validateFields(['email']).then(() => {
-            setIsEmailValid(true)
+            setIsPasswordChangingDisabled(false)
         }).catch(() => {
-            setIsEmailValid(false)
+            setIsPasswordChangingDisabled(true)
         })
     }
 
     const onPasswordForgetClick = () => {
-        const { getFieldValue } = form
-
-        const email = getFieldValue('email')
-        checkEmail({ email })
+        form.validateFields(['email'])
+            .then(() => {
+                const { getFieldValue } = form
+                const email = getFieldValue('email')
+                setIsChangePasswordProcess(true)
+                checkEmail({ email })
+            })
+            .catch(() => {
+                setIsPasswordChangingDisabled(true)
+            })
     }
 
     return (
@@ -199,7 +228,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                             rules={[
                                 {
                                     required: true,
-                                    pattern: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+                                    pattern: /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{8,}$/
                                 }
                             ]}
                         >
@@ -244,7 +273,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                     Запомнить меня
                                 </Checkbox>
                             </Form.Item>
-                            {isEmailValid
+                            {!isPasswordChangingDisabled
                                 ? <span
                                     className={cls.passwordForgetLink}
                                     onClick={onPasswordForgetClick}

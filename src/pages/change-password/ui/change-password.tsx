@@ -5,10 +5,16 @@ import Password from "antd/lib/input/Password"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { useChangePasswordMutation } from "@redux/api/auth-api"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Paths } from "@utils/const/paths"
+import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
+import { userSelector } from "@redux/model/user"
+import { useRequiredContext } from "@hooks/typed-use-context-hook"
+import { AuthContext } from "@processes/auth"
+import { setUserPassword } from "@redux/model/user/user-slice"
 
 export const ChangePasswordPage = () => {
+    const { password } = useAppSelector(userSelector)
     const { width } = useWindowSize()
     const navigate = useNavigate()
     const [form] = Form.useForm()
@@ -17,6 +23,9 @@ export const ChangePasswordPage = () => {
         isSuccess: isChangePasswordSuccess,
         isError: isChangePasswordError,
     }] = useChangePasswordMutation()
+    const { setIsChangePasswordProcess } = useRequiredContext(AuthContext)
+    const dispatch = useAppDispatch()
+    const location = useLocation()
 
     const validatePassword = () => {
         if (getFieldValue('password') === getFieldValue('confirmPassword')) {
@@ -27,8 +36,16 @@ export const ChangePasswordPage = () => {
     }
 
     const onFormSubmit = (values: { password: string, confirmPassword: string }) => {
+        dispatch(setUserPassword({ password: values.password }))
         changePassword(values)
     }
+
+    useEffect(() => {
+        if (location.state?.from === Paths.CHANGE_PASSWORD_ERROR) {
+            setIsChangePasswordProcess(true)
+            changePassword({ password, confirmPassword: password } as { password: string, confirmPassword: string })
+        }
+    })
 
     useEffect(() => {
         if (isChangePasswordSuccess) {
@@ -50,7 +67,7 @@ export const ChangePasswordPage = () => {
                         rules={[
                             {
                                 required: true,
-                                pattern: /^(?=.*[A-Z])(?=.*\d).{8,}$/
+                                pattern: /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{8,}$/
                             }
                         ]}
                     >

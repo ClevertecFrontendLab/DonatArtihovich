@@ -22,8 +22,11 @@ export const userSlice = createSlice({
         },
         setUserEmail: (state, action: PayloadAction<{email: string}>) => {
             state.email = action.payload.email
+        },
+        setUserPassword: (state, action: PayloadAction<{password: string}>) => {
+            state.password = action.payload.password
         }
     }
 })
 
-export const { setUserToken, setUserEmail } = userSlice.actions
+export const { setUserToken, setUserEmail, setUserPassword } = userSlice.actions

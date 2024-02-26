@@ -9,11 +9,12 @@ import { Button, Typography } from "antd"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { useNavigate } from "react-router-dom"
 import { Paths } from "@utils/const/paths"
-import { useRegisterUserMutation } from "@redux/api/auth-api"
-import { useAppSelector } from "@hooks/typed-react-redux-hooks"
-import { userSelector } from "@redux/model/user/selectors"
 import { classNames } from "@utils/lib"
 import { ModalErrors } from "@utils/const/modal-errors"
+import { history } from "@redux/configure-store"
+import { useEffect } from "react"
+import { useRequiredContext } from "@hooks/typed-use-context-hook"
+import { AuthContext } from "@processes/auth"
 
 interface RegistrationResultProps {
     mode: ModalErrors;
@@ -22,8 +23,35 @@ interface RegistrationResultProps {
 export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
     const { width } = useWindowSize()
     const navigate = useNavigate()
-    const [registerUser] = useRegisterUserMutation()
-    const { email, password } = useAppSelector(userSelector)
+    const {
+        isLoginProcess,
+        isRegistrationProcess,
+        isChangePasswordProcess,
+        setIsLoginProcess,
+        setIsRegistrationProcess,
+        setIsChangePasswordProcess
+    } = useRequiredContext(AuthContext)
+
+    useEffect(() => {
+        switch (mode) {
+            case ModalErrors.LoginError:
+                !isLoginProcess && navigate(Paths.MAIN)
+                setIsLoginProcess(false)
+                break;
+            case ModalErrors.RegistrationSuccess:
+            case ModalErrors.RegistrationError:
+            case ModalErrors.RegistrationUserExistError:
+                !isRegistrationProcess && navigate(Paths.MAIN)
+                setIsRegistrationProcess(false)
+                break;
+            case ModalErrors.CheckEmailNoExistError:
+            case ModalErrors.CheckEmailError:
+            case ModalErrors.ChangePasswordError:
+            case ModalErrors.ChangePasswordSuccess:
+                !isChangePasswordProcess && navigate(Paths.MAIN)
+                setIsChangePasswordProcess(false)
+        }
+    }, [navigate])
 
     const headerText = {
         [ModalErrors.LoginError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте еще раз</Typography.Text>,
@@ -50,8 +78,8 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
     const buttonText = {
         [ModalErrors.LoginError]: 'Повторить',
         [ModalErrors.RegistrationSuccess]: 'Войти',
-        [ModalErrors.RegistrationUserExistError]: 'Повторить',
-        [ModalErrors.RegistrationError]: 'Назад к регистрации',
+        [ModalErrors.RegistrationUserExistError]: 'Назад к регистрации',
+        [ModalErrors.RegistrationError]: 'Повторить',
         [ModalErrors.CheckEmailNoExistError]: 'Попробовать снова',
         [ModalErrors.CheckEmailError]: 'Назад',
         [ModalErrors.ChangePasswordSuccess]: 'Вход',
@@ -77,20 +105,19 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
                 navigate(Paths.AUTH)
                 break;
             case ModalErrors.RegistrationError:
-                navigate(Paths.REGISTRATION)
+                history.push({ pathname: Paths.REGISTRATION }, { from: Paths.REGISTRATION_USER_EXIST_ERROR })
                 break;
             case ModalErrors.RegistrationUserExistError:
                 navigate(Paths.REGISTRATION)
-                registerUser({ email, password } as { email: string, password: string })
                 break;
             case ModalErrors.CheckEmailNoExistError:
                 navigate(Paths.AUTH)
                 break;
             case ModalErrors.CheckEmailError:
-                navigate(Paths.AUTH)
+                history.push({ pathname: Paths.AUTH }, { from: Paths.ERROR_CHECK_EMAIL })
                 break;
             case ModalErrors.ChangePasswordError:
-                navigate(Paths.CHANGE_PASSWORD)
+                history.push({ pathname: Paths.CHANGE_PASSWORD }, { from: Paths.CHANGE_PASSWORD_ERROR })
                 break;
         }
     }
