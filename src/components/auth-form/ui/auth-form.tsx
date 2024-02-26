@@ -217,6 +217,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                             addonBefore='e-mail:'
                             type='text'
                             onChange={onEmailChange}
+                            data-test-id={mode === 'login' ? 'login-email' : 'registration-email'}
                         />
                     </Form.Item>
                     {mode === 'registration' ?
@@ -233,11 +234,13 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                         >
                             <Input.Password
                                 placeholder="Пароль"
+                                data-test-id='registration-password'
                             />
                         </Form.Item>
                         : <Form.Item className={cls.passwordInput} name='password'>
                             <Input.Password
                                 placeholder="Пароль"
+                                data-test-id='login-password'
                             />
                         </Form.Item>
                     }
@@ -257,6 +260,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                         >
                             <Input.Password
                                 placeholder="Повторите пароль"
+                                data-test-id='registration-confirm-password'
                             />
                         </Form.Item>}
 
@@ -268,6 +272,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                     onChange={() => setIsChecked(!isChecked)}
                                     value={isChecked}
                                     className={cls.checkboxInput}
+                                    data-test-id='login-remember'
                                 >
                                     Запомнить меня
                                 </Checkbox>
@@ -276,6 +281,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                 ? <span
                                     className={cls.passwordForgetLink}
                                     onClick={onPasswordForgetClick}
+                                    data-test-id='login-forgot-button'
                                 >
                                     Забыли пароль?
                                 </span>
@@ -290,10 +296,24 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                 </div>
 
                 <div className={cls.buttonsWrapper}>
-                    <Button className={cls.submitButton} htmlType='submit' type='primary'>Войти</Button>
-                    <Button icon={width && width < 500 ? null : <GooglePlusOutlined />} className={cls.googleButton}>{mode === 'login' ? 'Войти' : 'Регистрация'} через Google</Button>
+                    <Button
+                        className={cls.submitButton}
+                        htmlType='submit'
+                        type='primary'
+                        data-test-id={mode === 'login'
+                            ? 'login-submit-button'
+                            : 'registration-submit-button'
+                        }
+                    >
+                        Войти
+                    </Button>
+                    <Button
+                        icon={width && width < 500 ? null : <GooglePlusOutlined />}
+                        className={cls.googleButton}>
+                        {mode === 'login' ? 'Войти' : 'Регистрация'} через Google
+                    </Button>
                 </div>
-            </Form>
+            </Form >
         </>
     )
 }

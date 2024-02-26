@@ -74,6 +74,7 @@ export const ChangePasswordPage = () => {
                         <Password
                             className={cls.passwordInput}
                             placeholder="Новый пароль"
+                            data-test-id='change-password'
                         />
                     </Form.Item>
                     <Form.Item
@@ -93,10 +94,16 @@ export const ChangePasswordPage = () => {
                         <Password
                             className={cls.passwordInput}
                             placeholder="Повторите пароль"
+                            data-test-id='change-confirm-password'
                         />
                     </Form.Item>
 
-                    <Button className={cls.submitButton} type="primary" htmlType="submit">Сохранить</Button>
+                    <Button
+                        className={cls.submitButton}
+                        type="primary"
+                        htmlType="submit"
+                        data-test-id='change-submit-button'
+                    >Сохранить</Button>
                 </Form>
             </div>
         </ModalPage>

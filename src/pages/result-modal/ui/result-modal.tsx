@@ -97,6 +97,17 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
         [ModalErrors.ChangePasswordError]: crossIcon
     } as Record<ModalErrors, string>
 
+    const testId = {
+        [ModalErrors.LoginError]: 'login-retry-button',
+        [ModalErrors.RegistrationError]: 'registration-retry-button',
+        [ModalErrors.RegistrationSuccess]: 'registration-enter-button',
+        [ModalErrors.RegistrationUserExistError]: 'registration-back-button',
+        [ModalErrors.CheckEmailNoExistError]: 'check-retry-button',
+        [ModalErrors.CheckEmailError]: 'check-back-button',
+        [ModalErrors.ChangePasswordSuccess]: 'change-entry-button',
+        [ModalErrors.ChangePasswordError]: 'change-retry-button'
+    } as Record<ModalErrors, string>
+
     const handleButtonClick = () => {
         switch (mode) {
             case ModalErrors.LoginError:
@@ -133,7 +144,7 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
                 <Icon component={() => <img src={icons[mode]} />} className={cls.icon} />
                 {headerTitle[mode]}
                 {headerText[mode]}
-                <Button className={cls.button} onClick={handleButtonClick}>{buttonText[mode]}</Button>
+                <Button className={cls.button} onClick={handleButtonClick} data-test-id={testId[mode]}>{buttonText[mode]}</Button>
             </div>
         </ModalPage>
     )
