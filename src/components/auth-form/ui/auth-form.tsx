@@ -166,7 +166,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }
 
     const onEmailChange = () => {
-        console.log('email change')
         form.validateFields(['email']).then(() => {
             setIsPasswordChangingDisabled(false)
         }).catch(() => {
