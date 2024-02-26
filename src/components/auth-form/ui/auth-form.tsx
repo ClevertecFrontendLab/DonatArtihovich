@@ -15,7 +15,7 @@ import { AuthLoader } from "@components/loader"
 import { userSelector } from "@redux/model/user"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
-// import { history } from "@redux/configure-store"
+import { history } from "@redux/configure-store"
 
 interface AuthFormProps {
     mode: string;
@@ -130,7 +130,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                 localStorage.setItem('user', loginData.accessToken)
             }
 
-            navigate(Paths.MAIN);
+            history.push({ pathname: Paths.MAIN }, { from: Paths.AUTH });
         }
 
         if (isCheckEmailSuccess) {

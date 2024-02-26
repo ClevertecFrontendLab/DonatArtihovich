@@ -6,7 +6,7 @@ import { Layout, Row } from 'antd';
 import backgroundImage from '@assets/images/background.png';
 import cls from './main-page.module.scss'
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
 
 interface MainPageProps {
@@ -16,9 +16,10 @@ interface MainPageProps {
 
 export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProps) => {
     const navigate = useNavigate()
+    const location = useLocation()
 
     useEffect(() => {
-        if (!localStorage.getItem('user')) {
+        if (!localStorage.getItem('user') && !location.state) {
             navigate(Paths.AUTH)
         }
     }, [])
