@@ -258,6 +258,15 @@
     margin-bottom: 10px;
 }
 
+.checkboxWrapper {
+    :global {
+        .ant-form-item-has-success {
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+
 .registrationForm {
     height: 686px;
 
