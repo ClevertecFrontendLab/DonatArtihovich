@@ -45,7 +45,7 @@ export const ChangePasswordPage = () => {
             setIsChangePasswordProcess(true)
             changePassword({ password, confirmPassword: password } as { password: string, confirmPassword: string })
         }
-    })
+    }, [])
 
     useEffect(() => {
         if (isChangePasswordSuccess) {

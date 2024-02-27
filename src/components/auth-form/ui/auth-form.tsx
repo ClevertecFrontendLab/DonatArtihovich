@@ -60,6 +60,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         setIsRegistrationProcess,
         setIsChangePasswordProcess
     } = useRequiredContext(AuthContext)
+
     const [checkEmail,
         {
             isSuccess: isCheckEmailSuccess,
@@ -87,10 +88,10 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             registerUser({ email: user.email, password: user.password } as { email: string, password: string })
         }
         if (location.state?.from === Paths.ERROR_CHECK_EMAIL) {
-            setIsLoginProcess(true)
+            setIsChangePasswordProcess(true)
             checkEmail({ email: user.email } as { email: string })
         }
-    }, [])
+    }, [navigate])
 
     useEffect(() => {
         if (isRegisterError) {
@@ -134,7 +135,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         }
 
         if (isCheckEmailSuccess) {
-            dispatch(setUserEmail({ ...user, email: getFieldValue('email') }))
+            const email = getFieldValue('email')
+            if (email) dispatch(setUserEmail({ email }))
             navigate(Paths.CONFIRM_EMAIL)
         }
     }, [isLoginSuccess, isRegisterSuccess, isCheckEmailSuccess])
@@ -178,7 +180,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             .then(() => {
                 const { getFieldValue } = form
                 const email = getFieldValue('email')
-                dispatch(setUserEmail(email))
+                console.log('passwordForget: ', email)
+                dispatch(setUserEmail({ email }))
                 setIsChangePasswordProcess(true)
                 checkEmail({ email })
             })

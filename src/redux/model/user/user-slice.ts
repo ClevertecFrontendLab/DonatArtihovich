@@ -22,6 +22,7 @@ export const userSlice = createSlice({
         },
         setUserEmail: (state, action: PayloadAction<{email: string}>) => {
             state.email = action.payload.email
+            console.log('payload: ', action.payload.email)
         },
         setUserPassword: (state, action: PayloadAction<{password: string}>) => {
             state.password = action.payload.password

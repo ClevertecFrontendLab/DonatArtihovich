@@ -15,6 +15,8 @@ import { history } from "@redux/configure-store"
 import { useEffect } from "react"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
+import { useAppSelector } from "@hooks/typed-react-redux-hooks"
+import { userSelector } from "@redux/model/user"
 
 interface RegistrationResultProps {
     mode: ModalErrors;
@@ -32,7 +34,13 @@ export const ResultModalPage = ({ mode }: RegistrationResultProps) => {
         setIsChangePasswordProcess
     } = useRequiredContext(AuthContext)
 
+    const { email } = useAppSelector(userSelector)
+
     useEffect(() => {
+        if (mode === ModalErrors.CheckEmailError || mode === ModalErrors.CheckEmailNoExistError) {
+            console.log(email)
+        }
+
         switch (mode) {
             case ModalErrors.LoginError:
                 !isLoginProcess && navigate(Paths.MAIN)

@@ -9,16 +9,21 @@ import { useWindowSize } from "@uidotdev/usehooks"
 import { useEffect, useState } from "react"
 import { useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { userSelector } from "@redux/model/user"
-import { useConfirmEmailMutation } from "@redux/api/auth-api"
+import { useCheckEmailMutation, useConfirmEmailMutation } from "@redux/api/auth-api"
 import { classNames } from "@utils/lib"
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom"
 import { Paths } from "@utils/const/paths"
+import { useRequiredContext } from "@hooks/typed-use-context-hook"
+import { AuthContext } from "@processes/auth"
 
 export const ConfirmEmailPage = () => {
     const [value, setValue] = useState<string>('')
     const { width } = useWindowSize()
     const { email } = useAppSelector(userSelector)
+    const { isChangePasswordProcess } = useRequiredContext(AuthContext)
     const navigate = useNavigate()
+    const location = useLocation()
+    const [checkEmail] = useCheckEmailMutation()
 
     const [confirmEmail, {
         isSuccess: isConfirmEmailSuccess,
@@ -26,7 +31,14 @@ export const ConfirmEmailPage = () => {
     }] = useConfirmEmailMutation()
 
     useEffect(() => {
-        console.log('changed, length: ', value.length, email)
+        if (location.state?.from === Paths.ERROR_CHECK_EMAIL) {
+            checkEmail({ email } as { email: string })
+        } else if (!isChangePasswordProcess) {
+            navigate(Paths.MAIN)
+        }
+    }, [navigate])
+
+    useEffect(() => {
         if (email && value.length === 6) {
             confirmEmail({ email, code: value })
         }
