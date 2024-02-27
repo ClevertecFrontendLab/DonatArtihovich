@@ -3,9 +3,11 @@ import cls from './header.module.scss'
 import { Button, Typography } from "antd"
 import { SettingOutlined } from "@ant-design/icons"
 import { useWindowSize } from "@uidotdev/usehooks"
-interface PageHeaderProps {
+
+type PageHeaderProps = {
     isSiderCollapsed: boolean;
 }
+
 export const PageHeader = ({ isSiderCollapsed }: PageHeaderProps) => {
     const { width } = useWindowSize()
 

@@ -1,0 +1,41 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.blur {
+    backdrop-filter: blur(6px);
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.content {
+    position: absolute;
+    z-index: 50;
+    top: 6%;
+}
+
+@media (max-width: 900px) {
+    .content {
+        top: 16.3%;
+    }
+}
+
+@media(max-width: 700px) {
+    .content {
+        top: 17%;
+    }
+}

@@ -1,0 +1,456 @@
+.form {
+    width: 539px;
+    height: 90vh;
+    background-color: #ffffff;
+    border-radius: 2px;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    -ms-border-radius: 2px;
+    -o-border-radius: 2px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 64px;
+    box-sizing: border-box;
+    max-height: 742px;
+}
+
+.logoImage {
+    img {
+        width: 309px;
+    }
+}
+
+.menu {
+    width: 368px;
+    margin: 48px 0 0;
+    padding: 0;
+    display: flex;
+
+    :global {
+        .ant-menu-item {
+            width: 50%;
+            text-align: center;
+            padding: 12.5px;
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: 16px;
+            line-height: 130%;
+            color: var(--character-light-title-85);
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .ant-menu-item-selected {
+            border-bottom: 2px solid var(--primary-light-6);
+            color: var(--primary-light-6);
+        }
+    }
+}
+
+.loginForm {
+    padding-top: 24px;
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+
+    :global {
+        .ant-form-item-has-success {
+            border: none;
+            box-shadow: none;
+        }
+
+        .ant-form-item-has-error:not(:first-child) {
+            border: 1px solid var(--character-light-border);
+        }
+    }
+}
+
+.emailInput {
+    border: none;
+
+    :global {
+        .ant-input-group {
+            border-radius: 2px;
+            overflow: hidden;
+            width: 368px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ant-input {
+            height: 40px;
+            width: 297px;
+            box-sizing: border-box;
+            background: var(--character-light-primary-inverse);
+            border: 1px solid var(--character-light-border);
+
+            &:focus {
+                outline: none;
+            }
+        }
+
+        .ant-input-group-addon {
+            border-bottom: 1px solid var(--character-light-border);
+            border-left: 1px solid var(--character-light-border);
+            border-top: 1px solid var(--character-light-border);
+            border-radius: 2px 0 0 2px;
+            padding: 10px 12px;
+            height: 40px;
+            width: 71px;
+            box-sizing: border-box;
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: 14px;
+            line-height: 130%;
+            text-align: center;
+            color: var(--character-light-title-85);
+            background: var(--character-light-table-header);
+        }
+
+        .ant-form-item-explain {
+            position: absolute;
+        }
+    }
+}
+
+.passwordInput {
+    border: 1px solid var(--character-light-border);
+    border-radius: 2px;
+    padding: 10px 12px;
+    width: 368px;
+    height: 40px !important;
+    box-sizing: border-box;
+    height: fit-content;
+    position: relative;
+
+    :global {
+        .ant-input-password {
+            border-radius: 2px;
+            width: 368px;
+            display: flex;
+            align-items: center;
+        }
+
+        .ant-input {
+            box-sizing: border-box;
+            padding: 1px 0px;
+            width: 326px;
+            height: 20px;
+            border: none;
+        }
+
+        .ant-input:focus {
+            outline: none !important;
+        }
+
+        .ant-input-suffix {
+            svg {
+                fill: var(--character-light-secondary-45);
+            }
+        }
+
+        .ant-form-item-explain {
+            font-family: var(--font-family);
+            font-weight: 400;
+            font-size: 12px;
+            line-height: 130%;
+            color: var(--character-light-secondary-45);
+            position: absolute;
+            left: 0;
+        }
+    }
+}
+
+:global {
+    .ant-form-item-explain {
+        font-family: var(--font-family);
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 130%;
+        color: var(--character-light-secondary-45);
+        margin-top: 10px;
+    }
+}
+
+.checkboxWrapper {
+    margin-top: 20px;
+    display: flex;
+    width: 368px;
+    justify-content: space-between;
+}
+
+.checkboxInput {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    :global {
+        .ant-checkbox {
+            display: flex;
+            align-items: center;
+        }
+
+        .ant-checkbox-input {
+            width: 16px;
+            height: 16px;
+        }
+    }
+}
+
+.passwordForgotButton {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--primary-light-6);
+    border: none;
+    outline: none;
+    text-decoration: none;
+    background: transparent;
+}
+
+.submitButton {
+    width: 368px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-primary-inverse);
+    border: 1px solid var(--primary-light-6);
+    border-radius: 2px;
+    padding: 6px 15px;
+    width: 368px;
+    height: 40px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
+    background: var(--primary-light-6);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.googleButton {
+    border: 1px solid var(--character-light-border);
+    border-radius: 2px;
+    width: 368px;
+    height: 40px;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
+    background: var(--character-light-primary-inverse);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    text-align: center;
+    color: var(--character-light-title-85);
+}
+
+.buttonsWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.checkboxWrapper {
+    :global {
+        .ant-form-item-has-success {
+            border: none;
+            box-shadow: none;
+        }
+    }
+}
+
+.registrationForm {
+    height: 686px;
+
+    .buttonsWrapper {
+        margin-top: 30px;
+    }
+
+    .passwordInput:last-child {
+        margin-top: 12px;
+    }
+
+    :global {
+        .ant-form-item-has-error {
+            border-color: var(--character-light-error);
+
+            .ant-form-item-explain-error {
+                color: var(--character-light-error);
+            }
+        }
+
+        .ant-form-item-has-success:not(:first-child) {
+            border: 1px solid var(--primary-light-5);
+            box-shadow: 0 0 0 2px rgba(47, 84, 235, 0.2);
+        }
+    }
+
+    .emailInput {
+        margin-top: 8px;
+
+        :global {
+            .ant-input-group-wrapper-status-error {
+                .ant-input {
+                    border-color: var(--character-light-error);
+                    border-left: 1px solid var(--character-light-border);
+                }
+
+                .ant-input-group-addon {
+                    border-bottom: 1px solid var(--character-light-error);
+                    border-left: 1px solid var(--character-light-error);
+                    border-top: 1px solid var(--character-light-error);
+                }
+            }
+        }
+    }
+}
+
+@media(max-height: 799px) {
+    .form {
+        min-height: 520px;
+    }
+}
+
+@media(max-width: 900px) {
+    .registrationForm {
+        height: 57.6vh;
+    }
+}
+
+@media(max-width: 700px) {
+    .form {
+        height: 612px;
+        width: 328px;
+    }
+
+    .logoImage {
+        img {
+            width: 203px;
+            height: 50px;
+        }
+    }
+
+    .menu {
+        width: 296px;
+        height: 46px;
+
+        :global {
+            .ant-menu-title-content {
+                font-size: 14px;
+            }
+        }
+    }
+
+    .emailInput {
+        width: 296px;
+
+        :global {
+            .ant-input-group {
+                width: 296px;
+            }
+
+            .ant-input {
+                width: 225px;
+
+                font-family: var(--font-family);
+                font-weight: 400;
+                font-size: 14px;
+                line-height: 130%;
+                color: var(--character-light-title-85);
+                padding: 11px 12px !important;
+            }
+
+        }
+    }
+
+    .passwordInput {
+        width: 296px;
+
+        :global {
+            .ant-input-password {
+                width: 296px;
+            }
+
+            .ant-input {
+                box-sizing: border-box;
+                padding: 1px 0px;
+                width: 254px;
+                height: 20px;
+                border: none;
+            }
+        }
+    }
+
+    .checkboxWrapper {
+        width: 296px;
+    }
+
+    .checkboxInput {
+        font-size: 14px;
+    }
+
+    .passwordForgetLink {
+        font-size: 14px;
+    }
+
+    .submitButton,
+    .googleButton {
+        width: 296px;
+        font-size: 14px;
+    }
+}
+
+@media(max-width: 600px) {
+    .form {
+        height: 65vh;
+        padding: 32px;
+    }
+
+    .menu {
+        margin-top: 30px;
+    }
+
+    .registrationForm {
+        height: 71vh;
+        gap: 0;
+
+        .menu {
+            margin-top: 34px;
+        }
+
+        .emailInput {
+            margin-bottom: 17px;
+        }
+
+        .passwordInput:last-child {
+            margin-top: 14px;
+        }
+
+        .loginForm {
+            padding-top: 16px;
+            gap: 0;
+        }
+
+        .buttonsWrapper {
+            margin-top: 26px;
+        }
+    }
+}

@@ -94,6 +94,10 @@
     line-height: 130%;
     text-align: center;
     color: var(--character-light-title-85);
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .toggleSidebarButtonWrapper {

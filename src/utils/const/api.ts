@@ -1,0 +1,1 @@
+export const API_PATH = 'https://marathon-api.clevertec.ru/'

@@ -8,8 +8,10 @@ import exitIcon from '@assets/images/exit.svg'
 import { MenuItemType } from 'antd/es/menu/hooks/useItems';
 import { classNames } from '@utils/lib/class-names';
 import { useWindowSize } from '@uidotdev/usehooks';
+import { useNavigate } from 'react-router-dom';
+import { Paths } from '@utils/const/paths';
 
-interface PageSiderProps {
+type PageSiderProps = {
     isCollapsed: boolean;
     setIsCollapsed: (b: boolean) => void;
 }
@@ -23,9 +25,15 @@ const menuItems: MenuItemType[] = [
 
 export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
     const { width } = useWindowSize()
+    const navigate = useNavigate()
 
     const toggleMenu = () => {
         setIsCollapsed(!isCollapsed)
+    }
+
+    const onLogoutClick = () => {
+        localStorage.clear()
+        navigate(Paths.AUTH)
     }
 
     return (
@@ -57,6 +65,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                     <Button
                         icon={<Icon component={() => <img src={exitIcon}></img>} />}
                         className={cls.exitButton}
+                        onClick={onLogoutClick}
                     >
                         {!isCollapsed && 'Выход'}
                     </Button>

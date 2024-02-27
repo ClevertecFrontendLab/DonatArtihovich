@@ -5,7 +5,7 @@ import cls from './footer.module.scss'
 import classNames from "classnames"
 import { useWindowSize } from "@uidotdev/usehooks"
 
-interface PageFooterProps {
+type PageFooterProps = {
     isSiderCollapsed: boolean;
 }
 

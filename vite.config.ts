@@ -22,6 +22,7 @@ export default defineConfig({
             '@components': path.resolve(__dirname, 'src/components'),
             '@shared': path.resolve(__dirname, 'src/shared'),
             '@app': path.resolve(__dirname, 'src/app'),
+            '@processes': path.resolve(__dirname, 'src/processes')
         },
     },
 });

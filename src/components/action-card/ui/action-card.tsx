@@ -2,7 +2,7 @@ import { Button, Card, Divider, Typography } from "antd"
 import { classNames } from "@utils/lib";
 import cls from './action-card.module.scss'
 
-interface IActionCardProps {
+type ActionCardProps = {
     className?: string;
     title: string;
     buttonTitle: string;
@@ -16,7 +16,7 @@ export const ActionCard = ({
     buttonTitle,
     buttonIcon,
     isStretched = false
-}: IActionCardProps) => (
+}: ActionCardProps) => (
     <Card className={classNames(className, cls.actionCard, isStretched && cls.cardStretched)}>
         <div className={cls.cardFlex}>
             <Typography.Text className={cls.cardTitle}>{title}</Typography.Text>
