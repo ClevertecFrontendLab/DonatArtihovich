@@ -11,11 +11,11 @@ import { Paths } from "@utils/const/paths"
 import { useRegisterUserMutation, useLoginUserMutation, useCheckEmailMutation } from "@redux/api/auth-api"
 import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { setUserToken, setUserEmail } from "@redux/model/user"
-import { AppLoader } from "@components/loader"
 import { userSelector } from "@redux/model/user"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
 import { history } from "@redux/configure-store"
+import { trackPromise } from "react-promise-tracker"
 
 type AuthFormProps = {
     mode: string;
@@ -69,7 +69,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         }] = useCheckEmailMutation()
 
     const [registerUser, {
-        isLoading: isRegisterLoading,
         isSuccess: isRegisterSuccess,
         isError: isRegisterError,
         error: registerError
@@ -77,7 +76,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
     const [loginUser, {
         data: loginData,
-        isLoading: isLoginLoading,
         isSuccess: isLoginSuccess,
         isError: isLoginError,
     }] = useLoginUserMutation()
@@ -85,11 +83,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     useEffect(() => {
         if (mode === 'registration' && location.state?.from === Paths.REGISTRATION_USER_EXIST_ERROR) {
             setIsRegistrationProcess(true)
-            registerUser({ email: user.email, password: user.password } as { email: string, password: string })
+            trackPromise(registerUser({ email: user.email, password: user.password } as { email: string, password: string }))
         }
         if (location.state?.from === Paths.ERROR_CHECK_EMAIL) {
             setIsChangePasswordProcess(true)
-            checkEmail({ email: user.email } as { email: string })
+            trackPromise(checkEmail({ email: user.email } as { email: string }))
         }
     }, [navigate])
 
@@ -149,11 +147,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         if (mode === 'registration') {
             setIsRegistrationProcess(true)
             dispatch(setUserEmail({ email: values.email }))
-            registerUser(values)
+            trackPromise(registerUser(values))
         } else {
             setIsLoginProcess(true)
             dispatch(setUserEmail({ email: values.email }))
-            loginUser(values)
+            trackPromise(loginUser(values))
         }
     }
 
@@ -183,7 +181,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                 console.log('passwordForget: ', email)
                 dispatch(setUserEmail({ email }))
                 setIsChangePasswordProcess(true)
-                checkEmail({ email })
+                trackPromise(checkEmail({ email }))
             })
             .catch(() => {
                 setIsPasswordChangingDisabled(true)
@@ -192,7 +190,6 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
 
     return (
         <>
-            {(isLoginLoading || isRegisterLoading) && <AppLoader />}
             <Form form={form} onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
                 <Icon
                     component={() => <img src={logoIcon} />}

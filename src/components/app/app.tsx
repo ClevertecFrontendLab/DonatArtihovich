@@ -2,6 +2,7 @@ import { useState } from "react"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { AuthContextProvider } from "@processes/auth"
 import { AppRouter } from "@utils/react"
+import { AppLoader } from "@components/loader"
 
 export const App = () => {
     const { width } = useWindowSize()
@@ -9,6 +10,7 @@ export const App = () => {
 
     return (
         <AuthContextProvider>
+            <AppLoader />
             <AppRouter
                 isSiderCollapsed={isSiderCollapsed}
                 setIsSiderCollapsed={setIsSiderCollapsed}

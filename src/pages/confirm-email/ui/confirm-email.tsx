@@ -15,6 +15,7 @@ import { useLocation, useNavigate } from "react-router-dom"
 import { Paths } from "@utils/const/paths"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
+import { trackPromise } from "react-promise-tracker"
 
 export const ConfirmEmailPage = () => {
     const [value, setValue] = useState<string>('')
@@ -32,7 +33,7 @@ export const ConfirmEmailPage = () => {
 
     useEffect(() => {
         if (location.state?.from === Paths.ERROR_CHECK_EMAIL) {
-            checkEmail({ email } as { email: string })
+            trackPromise(checkEmail({ email } as { email: string }))
         } else if (!isChangePasswordProcess) {
             navigate(Paths.MAIN)
         }

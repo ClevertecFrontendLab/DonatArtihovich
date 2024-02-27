@@ -12,6 +12,7 @@ import { userSelector } from "@redux/model/user"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
 import { setUserPassword } from "@redux/model/user/user-slice"
+import { trackPromise } from "react-promise-tracker"
 
 export const ChangePasswordPage = () => {
     const { password } = useAppSelector(userSelector)
@@ -43,7 +44,7 @@ export const ChangePasswordPage = () => {
     useEffect(() => {
         if (location.state?.from === Paths.CHANGE_PASSWORD_ERROR) {
             setIsChangePasswordProcess(true)
-            changePassword({ password, confirmPassword: password } as { password: string, confirmPassword: string })
+            trackPromise(changePassword({ password, confirmPassword: password } as { password: string, confirmPassword: string }))
         }
     }, [])
 
