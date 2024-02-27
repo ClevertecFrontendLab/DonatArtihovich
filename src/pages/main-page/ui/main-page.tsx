@@ -9,7 +9,7 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
 
-interface MainPageProps {
+type MainPageProps = {
     isSiderCollapsed: boolean;
     setIsSiderCollapsed: (b: boolean) => void;
 }

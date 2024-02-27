@@ -18,7 +18,7 @@ import { AuthContext } from "@processes/auth"
 import { useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { userSelector } from "@redux/model/user"
 
-interface RegistrationResultProps {
+type RegistrationResultProps = {
     mode: ModalErrors;
 }
 

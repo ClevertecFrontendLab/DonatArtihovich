@@ -2,7 +2,7 @@ import { classNames } from '@utils/lib';
 import cls from './modal.module.scss'
 import modalPageBackground from '@assets/images/modal-page-background.png'
 
-interface ModalPageProps {
+type ModalPageProps = {
     children: React.ReactNode;
     className?: string;
 }

@@ -6,7 +6,7 @@ import { CalendarOutlined, HeartFilled, IdcardOutlined } from "@ant-design/icons
 import { useWindowSize } from "@uidotdev/usehooks"
 import { classNames } from "@utils/lib/class-names"
 
-interface MainContentProps {
+type MainContentProps = {
     isSiderCollapsed: boolean;
 }
 export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {

@@ -4,11 +4,11 @@ import cls from './download-card.module.scss'
 import Link from "antd/es/typography/Link";
 import { AndroidFilled, AppleFilled } from "@ant-design/icons";
 
-interface IDownloadCardProps {
+type DownloadCardProps = {
     className?: string;
 }
 
-export const DownloadCard = ({ className }: IDownloadCardProps) => (
+export const DownloadCard = ({ className }: DownloadCardProps) => (
     <Card className={classNames(className, cls.downloadCard)}>
         <div className={cls.headerWrapper}>
             <Link className={cls.cardHeader}>Скачать на телефон</Link>

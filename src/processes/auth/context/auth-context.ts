@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-export interface IAuthContext {
+export type AuthContextType = {
     isLoginProcess: boolean;
     isRegistrationProcess: boolean;
     isChangePasswordProcess: boolean; 
@@ -9,4 +9,4 @@ export interface IAuthContext {
     setIsChangePasswordProcess: (b: boolean) => void;
 }
 
-export const AuthContext = createContext<IAuthContext | null>(null)
+export const AuthContext = createContext<AuthContextType | null>(null)

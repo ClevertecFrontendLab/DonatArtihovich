@@ -9,12 +9,12 @@ import { Paths } from "@utils/const/paths";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { HistoryRouter } from "redux-first-history/rr6";
 
-interface IAppRouterProps {
+type AppRouterProps = {
     isSiderCollapsed: boolean,
     setIsSiderCollapsed: (b: boolean) => void
 }
 
-export const AppRouter = ({ isSiderCollapsed, setIsSiderCollapsed }: IAppRouterProps) => (
+export const AppRouter = ({ isSiderCollapsed, setIsSiderCollapsed }: AppRouterProps) => (
     <HistoryRouter history={history}>
         <Routes>
             <Route path={Paths.MAIN} element={<MainPage isSiderCollapsed={isSiderCollapsed} setIsSiderCollapsed={setIsSiderCollapsed} />} />

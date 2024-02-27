@@ -3,7 +3,7 @@ import { AuthForm } from "@components/auth-form"
 import cls from './auth-page.module.scss'
 import { classNames } from "@utils/lib"
 
-interface AuthPageProps {
+type AuthPageProps = {
     mode?: 'login' | 'registration'
 }
 

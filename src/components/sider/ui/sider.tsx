@@ -11,7 +11,7 @@ import { useWindowSize } from '@uidotdev/usehooks';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
 
-interface PageSiderProps {
+type PageSiderProps = {
     isCollapsed: boolean;
     setIsCollapsed: (b: boolean) => void;
 }

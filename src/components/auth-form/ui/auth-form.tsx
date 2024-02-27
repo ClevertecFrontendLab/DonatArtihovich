@@ -17,17 +17,17 @@ import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
 import { history } from "@redux/configure-store"
 
-interface AuthFormProps {
+type AuthFormProps = {
     mode: string;
 }
 
-interface IRegisterValues {
+type RegisterValues = {
     email: string;
     password: string;
     passwordRepeat: string;
 }
 
-interface ILoginValues {
+type LoginValues = {
     email: string;
     password: string;
     remember: boolean;
@@ -145,7 +145,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         navigate(e.key === 'login' ? Paths.AUTH : Paths.REGISTRATION)
     }
 
-    const onSubmit = (values: IRegisterValues | ILoginValues) => {
+    const onSubmit = (values: RegisterValues | LoginValues) => {
         if (mode === 'registration') {
             setIsRegistrationProcess(true)
             dispatch(setUserEmail({ email: values.email }))
