@@ -1,1 +1,1 @@
-export {AuthLoader} from './ui/loader'
+export {AppLoader} from './ui/loader'
