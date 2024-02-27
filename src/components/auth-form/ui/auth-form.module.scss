@@ -63,6 +63,10 @@
             border: none;
             box-shadow: none;
         }
+
+        .ant-form-item-has-error {
+            border: 1px solid var(--character-light-border);
+        }
     }
 }
 
@@ -206,7 +210,7 @@
     }
 }
 
-.passwordForgetLink {
+.passwordForgotButton {
     font-family: var(--font-family);
     font-weight: 400;
     font-size: 16px;
@@ -216,6 +220,7 @@
     border: none;
     outline: none;
     text-decoration: none;
+    background: transparent;
 }
 
 .submitButton {

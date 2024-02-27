@@ -178,6 +178,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             .then(() => {
                 const { getFieldValue } = form
                 const email = getFieldValue('email')
+                dispatch(setUserEmail(email))
                 setIsChangePasswordProcess(true)
                 checkEmail({ email })
             })
@@ -220,30 +221,22 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                             data-test-id={mode === 'login' ? 'login-email' : 'registration-email'}
                         />
                     </Form.Item>
-                    {mode === 'registration' ?
-                        <Form.Item
-                            help='Пароль не менее 8 символов, с заглавной буквой и цифрой'
-                            className={cls.passwordInput}
-                            name='password'
-                            rules={[
-                                {
-                                    required: true,
-                                    pattern: /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{8,}$/
-                                }
-                            ]}
-                        >
-                            <Input.Password
-                                placeholder="Пароль"
-                                data-test-id='registration-password'
-                            />
-                        </Form.Item>
-                        : <Form.Item className={cls.passwordInput} name='password'>
-                            <Input.Password
-                                placeholder="Пароль"
-                                data-test-id='login-password'
-                            />
-                        </Form.Item>
-                    }
+                    <Form.Item
+                        help={mode === 'registration' ? 'Пароль не менее 8 символов, с заглавной буквой и цифрой' : ''}
+                        className={cls.passwordInput}
+                        name='password'
+                        rules={[
+                            {
+                                required: true,
+                                pattern: /^(?=.*[A-Z])(?=.*\d)[a-zA-Z0-9]{8,}$/
+                            }
+                        ]}
+                    >
+                        <Input.Password
+                            placeholder="Пароль"
+                            data-test-id={mode === 'registration' ? 'registration-password' : 'login-password'}
+                        />
+                    </Form.Item>
 
                     {mode === 'registration' &&
                         <Form.Item className={cls.passwordInput} name='passwordRepeat'
@@ -278,15 +271,16 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                 </Checkbox>
                             </Form.Item>
                             {!isPasswordChangingDisabled
-                                ? <span
-                                    className={cls.passwordForgetLink}
+                                ? <Button
+                                    className={cls.passwordForgotButton}
                                     onClick={onPasswordForgetClick}
                                     data-test-id='login-forgot-button'
                                 >
                                     Забыли пароль?
-                                </span>
+                                </Button>
                                 : <span
-                                    className={cls.passwordForgetLink}
+                                    className={cls.passwordForgotButton}
+                                    data-test-id='login-forgot-button'
                                 >
                                     Забыли пароль?
                                 </span>

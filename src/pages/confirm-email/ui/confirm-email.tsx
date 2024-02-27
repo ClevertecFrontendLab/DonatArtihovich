@@ -26,6 +26,7 @@ export const ConfirmEmailPage = () => {
     }] = useConfirmEmailMutation()
 
     useEffect(() => {
+        console.log('changed, length: ', value.length, email)
         if (email && value.length === 6) {
             confirmEmail({ email, code: value })
         }
@@ -67,7 +68,9 @@ export const ConfirmEmailPage = () => {
                     length={6}
                     value={value}
                     onChange={(value: string) => setValue(value)}
-                    data-test-id='verification-input'
+                    inputProps={{
+                        'data-test-id': 'verification-input'
+                    }}
                 />
                 <Typography.Text className={cls.helpText}>Не пришло письмо? Проверьте{width && width <= 600 && <br />} папку Спам.</Typography.Text>
             </div>
