@@ -64,16 +64,14 @@
             box-shadow: none;
         }
 
-        .ant-form-item-has-error {
+        .ant-form-item-has-error:not(:first-child) {
             border: 1px solid var(--character-light-border);
         }
     }
 }
 
 .emailInput {
-    // &.ant-form-item-has-error {
-    //     border: 5px solid red;
-    // }
+    border: none;
 
     :global {
         .ant-input-group {
@@ -322,6 +320,12 @@
                 }
             }
         }
+    }
+}
+
+@media(max-height: 700px) {
+    .form {
+        min-height: 600px;
     }
 }
 

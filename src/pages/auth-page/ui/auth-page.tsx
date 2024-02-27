@@ -10,7 +10,7 @@ interface AuthPageProps {
 export const AuthPage = ({ mode = 'login' }: AuthPageProps) => {
 
     return (
-        <ModalPage className={classNames(mode === 'registration' && cls.registrationModal)}>
+        <ModalPage className={classNames(cls.modal, mode === 'registration' && cls.registrationModal)}>
             <AuthForm
                 mode={mode}
             />

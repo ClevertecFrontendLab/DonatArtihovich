@@ -2,6 +2,12 @@
     top: 14%;
 }
 
+@media(max-height: 700px) {
+    .modal {
+        min-height: 600px;
+    }
+}
+
 @media(max-height: 760px) {
     .registrationModal {
         top: 0.6%;

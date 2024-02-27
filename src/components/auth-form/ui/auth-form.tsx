@@ -281,12 +281,12 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                                 >
                                     Забыли пароль?
                                 </Button>
-                                : <span
+                                : <Button
                                     className={cls.passwordForgotButton}
                                     data-test-id='login-forgot-button'
                                 >
                                     Забыли пароль?
-                                </span>
+                                </Button>
                             }
                         </div>
                     }
