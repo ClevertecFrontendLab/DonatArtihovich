@@ -3,6 +3,8 @@ import cls from './header.module.scss'
 import { Button, Typography } from "antd"
 import { SettingOutlined } from "@ant-design/icons"
 import { useWindowSize } from "@uidotdev/usehooks"
+import { Link, useLocation } from "react-router-dom"
+import { Paths } from "@utils/const/paths"
 
 type PageHeaderProps = {
     isSiderCollapsed: boolean;
@@ -10,12 +12,24 @@ type PageHeaderProps = {
 
 export const PageHeader = ({ isSiderCollapsed }: PageHeaderProps) => {
     const { width } = useWindowSize()
+    const { pathname } = useLocation()
+
+    const pageTitle = {
+        [Paths.FEEDBACKS]: 'Отзывы пользователей'
+    } as Record<Paths, string>
 
     if (width)
         return (
             <Header className={cls.header}>
                 <div style={{ flex: 1 }} className={cls.wrapper}>
-                    <Typography.Text className={cls.pageTitle}>Главная</Typography.Text>
+                    {pathname === '/main'
+                        ? <Typography.Text className={cls.pageTitle}>Главная</Typography.Text>
+                        : <div className={cls.pageTitleWrapper}>
+                            <Link className={cls.mainLink} to={Paths.MAIN}>Главная</Link>
+                            <Typography.Text className={cls.slash}>/</Typography.Text>
+                            <Typography.Text className={cls.pageTitle}>{pageTitle[pathname as Paths]}</Typography.Text>
+                        </div>
+                    }
                     <div className={cls.headerMainFlex}>
                         <Typography.Title
                             className={cls.headerTitle}

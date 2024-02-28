@@ -56,7 +56,22 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+}
 
+.pageTitleWrapper {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.mainLink,
+.slash {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+    text-decoration: none;
 }
 
 @media(max-width: 1200px) {
