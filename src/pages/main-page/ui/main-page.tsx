@@ -2,12 +2,11 @@ import { PageFooter } from '@components/footer';
 import { MainContent } from '@components/main-content';
 import { PageSider } from '@components/sider';
 import { PageHeader } from '@components/header';
-import { Layout, Row } from 'antd';
 import backgroundImage from '@assets/images/background.png';
-import cls from './main-page.module.scss'
 import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
+import { PageLayout } from '@components/page-layout';
 
 type MainPageProps = {
     isSiderCollapsed: boolean;
@@ -25,24 +24,12 @@ export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProp
     }, [])
 
     return (
-        <Row justify='center' className={cls.wrapper}>
-            <Layout className={cls.app} data-test-id='app' style={{ backgroundImage: `url(${backgroundImage})` }}>
-                <div style={{ display: 'flex' }}>
-                    <PageSider
-                        isCollapsed={isSiderCollapsed}
-                        setIsCollapsed={setIsSiderCollapsed}
-                    />
-                    <Layout style={{ background: 'transparent' }} className={cls.contentLayout}>
-                        <div style={{ display: 'flex', flexDirection: 'column' }}>
-                            <PageHeader
-                                isSiderCollapsed={isSiderCollapsed}
-                            />
-                            <MainContent isSiderCollapsed={isSiderCollapsed} />
-                            <PageFooter isSiderCollapsed={isSiderCollapsed} />
-                        </div>
-                    </Layout>
-                </div>
-            </Layout>
-        </Row>
+        <PageLayout
+            header={<PageHeader isSiderCollapsed={isSiderCollapsed} />}
+            content={<MainContent isSiderCollapsed={isSiderCollapsed} />}
+            footer={<PageFooter isSiderCollapsed={isSiderCollapsed} />}
+            sider={<PageSider isCollapsed={isSiderCollapsed} setIsCollapsed={setIsSiderCollapsed} />}
+            backgroundImage={backgroundImage}
+        />
     )
 };
