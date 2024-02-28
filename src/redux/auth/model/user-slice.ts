@@ -1,20 +1,20 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
 
-type UserState = {
+type AuthState = {
     email: string | null,
     password: string | null,
     token: string | null
 }
 
-const initialState: UserState = {
+const initialState: AuthState = {
     email: null,
     password: null,
     token: null
 }
 
-export const userSlice = createSlice({
-    name: 'user',
+export const authSlice = createSlice({
+    name: 'auth',
     initialState,
     reducers: {
         setUserToken: (state, action: PayloadAction<{token: string}>) => {
@@ -30,4 +30,4 @@ export const userSlice = createSlice({
     }
 })
 
-export const { setUserToken, setUserEmail, setUserPassword } = userSlice.actions
+export const { setUserToken, setUserEmail, setUserPassword } = authSlice.actions
