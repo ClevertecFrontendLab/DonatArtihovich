@@ -2,10 +2,10 @@ import { Layout, Row } from 'antd';
 import cls from './page-layout.module.scss'
 
 type PageLayoutProps = {
-    header: React.ReactNode;
-    content: React.ReactNode;
-    footer: React.ReactNode;
-    sider: React.ReactNode;
+    header: React.ReactNode | null;
+    content: React.ReactNode | null;
+    footer: React.ReactNode | null;
+    sider: React.ReactNode | null;
     backgroundImage: string;
 }
 

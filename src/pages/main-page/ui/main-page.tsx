@@ -1,4 +1,4 @@
-import { PageFooter } from '@components/footer';
+import { MainFooter } from '@components/main-footer';
 import { MainContent } from '@components/main-content';
 import { PageSider } from '@components/sider';
 import { PageHeader } from '@components/header';
@@ -33,7 +33,7 @@ export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProp
         <PageLayout
             header={<PageHeader isSiderCollapsed={isSiderCollapsed} />}
             content={<MainContent isSiderCollapsed={isSiderCollapsed} />}
-            footer={<PageFooter isSiderCollapsed={isSiderCollapsed} />}
+            footer={<MainFooter isSiderCollapsed={isSiderCollapsed} />}
             sider={<PageSider isCollapsed={isSiderCollapsed} setIsCollapsed={setIsSiderCollapsed} />}
             backgroundImage={backgroundImage}
         />

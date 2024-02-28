@@ -1,0 +1,1 @@
+export {FeedbacksContent} from './ui/feedbacks-content'

@@ -1,15 +1,16 @@
 import { DownloadCard } from "@components/download-card"
 import { Footer } from "antd/es/layout/layout"
-import Link from "antd/es/typography/Link"
-import cls from './footer.module.scss'
+import cls from './main-footer.module.scss'
 import classNames from "classnames"
 import { useWindowSize } from "@uidotdev/usehooks"
+import { Paths } from "@utils/const/paths"
+import { Link } from "react-router-dom"
 
 type PageFooterProps = {
     isSiderCollapsed: boolean;
 }
 
-export const PageFooter = ({ isSiderCollapsed }: PageFooterProps) => {
+export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
     const { width } = useWindowSize()
 
     if (width)
@@ -18,9 +19,9 @@ export const PageFooter = ({ isSiderCollapsed }: PageFooterProps) => {
                 <div
                     className={cls.footer}
                 >
-                    {width > 540 && <Link className={cls.footerLink}>Смотреть отзывы</Link>}
+                    {width > 540 && <Link className={cls.footerLink} to={Paths.FEEDBACKS}>Смотреть отзывы</Link>}
                     <DownloadCard />
-                    {width <= 540 && <Link className={cls.footerLink}>Смотреть отзывы</Link>}
+                    {width <= 540 && <Link className={cls.footerLink} to={Paths.FEEDBACKS}>Смотреть отзывы</Link>}
                 </div>
             </Footer>
         )

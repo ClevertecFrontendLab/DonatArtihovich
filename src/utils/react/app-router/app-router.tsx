@@ -1,6 +1,7 @@
 import { AuthPage } from "@pages/auth-page";
 import { ChangePasswordPage } from "@pages/change-password";
 import { ConfirmEmailPage } from "@pages/confirm-email";
+import { FeedbacksPage } from "@pages/feedbacks/ui/feedbacks-page";
 import { MainPage } from "@pages/main-page";
 import { ResultModalPage } from "@pages/result-modal";
 import { history } from "@redux/configure-store";
@@ -30,6 +31,7 @@ export const AppRouter = ({ isSiderCollapsed, setIsSiderCollapsed }: AppRouterPr
             <Route path={Paths.CHANGE_PASSWORD} element={<ChangePasswordPage />} />
             <Route path={Paths.CHANGE_PASSWORD_SUCCESS} element={<ResultModalPage mode={ModalErrors.ChangePasswordSuccess} />} />
             <Route path={Paths.CHANGE_PASSWORD_ERROR} element={<ResultModalPage mode={ModalErrors.ChangePasswordError} />} />
+            <Route path={Paths.FEEDBACKS} element={<FeedbacksPage isSiderCollapsed={isSiderCollapsed} setIsSiderCollapsed={setIsSiderCollapsed} />} />
 
             <Route path='*' element={<Navigate to={Paths.MAIN} />} />
         </Routes>
