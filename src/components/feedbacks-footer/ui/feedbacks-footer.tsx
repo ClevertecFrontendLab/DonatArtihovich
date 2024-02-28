@@ -1,7 +1,3 @@
+import cls from './feedbacks-footer.module.scss'
 
-
-export const FeedbacksFooter = () => {
-    return (
-        <></>
-    )
-}
+export const FeedbacksFooter = () => <div className={cls.footer} />

@@ -6,6 +6,9 @@ import { FeedbackType } from "@redux/feedbacks/types"
 import { Paths } from "@utils/const/paths"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
+import cls from './feedbacks-content.module.scss'
+import { Content } from "antd/lib/layout/layout"
+import { Button } from "antd"
 
 export const FeedbacksContent = () => {
     const { token } = useAppSelector(userSelector)
@@ -28,8 +31,17 @@ export const FeedbacksContent = () => {
     }, [isError, error])
 
     return (
-        <>
-            {data?.map((feedback: FeedbackType) => <FeedbackCard feedback={feedback} />)}
-        </>
+        <Content>
+            <div className={cls.feedbacksContent}>
+                <div className={cls.feedbacksList}>
+                    {data?.map((feedback: FeedbackType) => <FeedbackCard feedback={feedback} />)}
+                </div>
+                <div className={cls.buttonsWrapper}>
+                    <Button className={cls.writeButton}>Написать отзыв</Button>
+                    <Button className={cls.allFeedbacksButton}>Развернуть все отзывы</Button>
+                </div>
+            </div>
+
+        </Content>
     )
 }
