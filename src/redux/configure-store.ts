@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
-import { authApi } from './api/auth-api';
+import { authApi } from './auth/api/auth-api';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { userSlice } from './model/user';
+import { userSlice } from './auth/model';
 
 export const store = configureStore({
     reducer: {

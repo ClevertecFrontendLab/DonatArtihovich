@@ -8,7 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
 import { PageLayout } from '@components/page-layout';
 import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setUserToken } from '@redux/model/user';
+import { setUserToken } from '@redux/auth/model';
 
 type MainPageProps = {
     isSiderCollapsed: boolean;

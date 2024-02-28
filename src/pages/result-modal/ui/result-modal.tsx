@@ -16,7 +16,7 @@ import { useEffect } from "react"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
 import { useAppSelector } from "@hooks/typed-react-redux-hooks"
-import { userSelector } from "@redux/model/user"
+import { userSelector } from "@redux/auth/model"
 
 type RegistrationResultProps = {
     mode: ModalErrors;

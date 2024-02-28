@@ -1,4 +1,4 @@
-interface IError {
+type IError = {
     status: number,
     data: {
         statusCode: number,
