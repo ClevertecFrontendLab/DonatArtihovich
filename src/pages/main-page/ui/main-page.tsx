@@ -7,6 +7,8 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
 import { PageLayout } from '@components/page-layout';
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
+import { setUserToken } from '@redux/model/user';
 
 type MainPageProps = {
     isSiderCollapsed: boolean;
@@ -16,9 +18,13 @@ type MainPageProps = {
 export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProps) => {
     const navigate = useNavigate()
     const location = useLocation()
+    const dispatch = useAppDispatch()
 
     useEffect(() => {
-        if (!localStorage.getItem('user') && !location.state) {
+        const token = localStorage.getItem('user');
+        if (token) {
+            dispatch(setUserToken({ token }))
+        } else if (!location.state) {
             navigate(Paths.AUTH)
         }
     }, [])
