@@ -4,15 +4,17 @@ import defaultAvatar from '@assets/images/avatar.svg'
 import { Card, Rate, Typography } from "antd";
 import Icon from "@ant-design/icons/lib/components/Icon";
 import { StarFilled, StarOutlined } from "@ant-design/icons";
+import { classNames } from "@utils/lib";
 
 type FeedbackCardProps = {
     feedback: FeedbackType;
+    isSiderCollapsed: boolean;
 }
 
-export const FeedbackCard = ({ feedback }: FeedbackCardProps) => {
+export const FeedbackCard = ({ feedback, isSiderCollapsed }: FeedbackCardProps) => {
 
     return (
-        <Card className={cls.feedbackCard}>
+        <Card className={classNames(cls.feedbackCard, isSiderCollapsed && cls.stretched)}>
             <div className={cls.cardFlex}>
                 <div className={cls.userData}>
                     <div className={cls.avatarImageWrapper}>

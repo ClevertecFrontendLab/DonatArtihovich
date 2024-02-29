@@ -14,7 +14,7 @@ export const FeedbacksPage = ({ isSiderCollapsed, setIsSiderCollapsed }: Feedbac
     return (
         <PageLayout
             header={<PageHeader isSiderCollapsed={isSiderCollapsed} />}
-            content={<FeedbacksContent />}
+            content={<FeedbacksContent isSiderCollapsed={isSiderCollapsed} />}
             footer={<FeedbacksFooter />}
             sider={<PageSider isCollapsed={isSiderCollapsed} setIsCollapsed={setIsSiderCollapsed} />}
             backgroundImage={backgroundImage}

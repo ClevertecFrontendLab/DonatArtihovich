@@ -12,7 +12,11 @@ import { setUserToken, userSelector } from "@redux/auth/model"
 import { useGetFeedbacksQuery } from "@redux/feedbacks/api"
 import { trackPromise } from "react-promise-tracker"
 
-export const FeedbacksContent = () => {
+type FeedbacksContent = {
+    isSiderCollapsed: boolean;
+}
+
+export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     const { token } = useAppSelector(userSelector)
     const { feedbacks } = useAppSelector(feedbacksSelector)
     const location = useLocation()
@@ -53,7 +57,11 @@ export const FeedbacksContent = () => {
                         message: 'message '.repeat(210),
                         rating: 4,
                         createdAt: '2023-04-12'
-                    }]).map((feedback: FeedbackType) => <FeedbackCard key={feedback.id} feedback={feedback} />)}
+                    }]).map((feedback: FeedbackType) => <FeedbackCard
+                        key={feedback.id}
+                        feedback={feedback}
+                        isSiderCollapsed={isSiderCollapsed}
+                    />)}
                 </div>
                 <div className={cls.buttonsWrapper}>
                     <Button className={cls.writeButton}>Написать отзыв</Button>
