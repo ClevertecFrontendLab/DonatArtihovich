@@ -34,6 +34,7 @@ export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
                 history.push({ pathname: Paths.FEEDBACKS }, { from: Paths.MAIN })
             })
             .catch((err: IError) => {
+                console.log('main', err)
                 if (err.status === 403 && !token) {
                     const storageToken = localStorage.getItem('user')
                     if (!storageToken) {

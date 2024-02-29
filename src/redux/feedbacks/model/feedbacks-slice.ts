@@ -2,11 +2,11 @@ import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 import { FeedbackType } from "../types";
 
 export type FeedbacksState = {
-    feedbacks: FeedbackType[];
+    feedbacks: FeedbackType[] | null;
 }
 
 const initialState: FeedbacksState = {
-    feedbacks: []
+    feedbacks: null
 }
 
 export const feedbacksSlice = createSlice({

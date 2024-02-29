@@ -8,7 +8,7 @@ export const feedbacksApi = createApi({
     baseQuery: fetchBaseQuery({
         baseUrl: API_PATH,
         prepareHeaders: (headers, {getState} ) => {
-                const token = (getState() as RootState).auth.token;
+                const token = (getState() as RootState).auth.token || localStorage.getItem('user');
                 if (token) {
                     headers.set('Authorization', `Bearer ${token}`);
                 }

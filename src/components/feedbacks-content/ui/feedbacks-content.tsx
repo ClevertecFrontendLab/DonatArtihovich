@@ -3,27 +3,50 @@ import { FeedbackType } from "@redux/feedbacks/types"
 import cls from './feedbacks-content.module.scss'
 import { Content } from "antd/lib/layout/layout"
 import { Button } from "antd"
-import { feedbacksSelector } from "@redux/feedbacks/model"
-import { useAppSelector } from "@hooks/typed-react-redux-hooks"
+import { feedbacksSelector, setFeedbacks } from "@redux/feedbacks/model"
+import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { useLocation, useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { Paths } from "@utils/const/paths"
+import { setUserToken, userSelector } from "@redux/auth/model"
+import { useGetFeedbacksQuery } from "@redux/feedbacks/api"
+import { trackPromise } from "react-promise-tracker"
 
 export const FeedbacksContent = () => {
+    const { token } = useAppSelector(userSelector)
     const { feedbacks } = useAppSelector(feedbacksSelector)
     const location = useLocation()
     const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const { refetch: refetchFeedbacks } = useGetFeedbacksQuery({})
 
     useEffect(() => {
-        // if (location.state?.from !== Paths.MAIN) navigate(Paths.MAIN)
-        console.log(location.state?.from !== Paths.MAIN)
+        if (!token) {
+            const storageToken = localStorage.getItem('user')
+            if (!storageToken) {
+                navigate(Paths.AUTH)
+            } else {
+                dispatch(setUserToken({ token: storageToken }))
+
+                if (location.state?.from !== Paths.MAIN || !feedbacks) {
+                    trackPromise(refetchFeedbacks()
+                        .unwrap()
+                        .then((data) => {
+                            dispatch(setFeedbacks(data))
+                        })
+                        .catch((e: IError) => {
+                            console.log(e)
+                        }))
+                }
+            }
+        }
     }, [])
 
     return (
         <Content>
             <div className={cls.feedbacksContent}>
                 <div className={cls.feedbacksList}>
-                    {(feedbacks.length ? feedbacks.slice(-4) : [{
+                    {(feedbacks && feedbacks.length ? feedbacks.slice(-4) : [{
                         id: 'hdfjs',
                         fullName: 'Donat',
                         imageSrc: null,
