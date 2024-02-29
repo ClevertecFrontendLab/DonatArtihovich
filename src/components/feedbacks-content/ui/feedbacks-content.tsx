@@ -34,7 +34,13 @@ export const FeedbacksContent = () => {
         <Content>
             <div className={cls.feedbacksContent}>
                 <div className={cls.feedbacksList}>
-                    {data?.map((feedback: FeedbackType) => <FeedbackCard feedback={feedback} />)}
+                    {(data ? data.slice(-4) : [{
+                        fullName: 'Donat',
+                        imageSrc: null,
+                        message: 'message '.repeat(210),
+                        rating: 4,
+                        createdAt: '2023-04-12'
+                    }]).map((feedback: FeedbackType) => <FeedbackCard feedback={feedback} />)}
                 </div>
                 <div className={cls.buttonsWrapper}>
                     <Button className={cls.writeButton}>Написать отзыв</Button>
