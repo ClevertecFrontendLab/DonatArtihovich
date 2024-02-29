@@ -11,7 +11,7 @@ import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { userSelector } from "@redux/auth/model"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
-import { setUserPassword } from "@redux/auth/model/user-slice"
+import { setUserPassword } from "@redux/auth/model/auth-slice"
 import { trackPromise } from "react-promise-tracker"
 
 export const ChangePasswordPage = () => {

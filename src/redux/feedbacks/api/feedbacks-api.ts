@@ -4,7 +4,7 @@ import { FeedbackType } from "../types";
 import { RootState } from "@redux/configure-store";
 
 export const feedbacksApi = createApi({
-    reducerPath: 'feedbacks',
+    reducerPath: 'feedbacksApi',
     baseQuery: fetchBaseQuery({
         baseUrl: API_PATH,
         prepareHeaders: (headers, {getState} ) => {
