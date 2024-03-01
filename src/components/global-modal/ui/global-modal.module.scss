@@ -1,0 +1,34 @@
+.wrapper {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background-color: rgba(121, 156, 212, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modalBody {
+    background-color: var(--character-light-primary-inverse);
+    width: fit-content;
+    padding: 64px 32px 56px;
+}
+
+.getFeedbacksError {
+    width: 539px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@media(max-width: 700px) {
+    .modalBody {
+        width: 328px;
+        height: 568px;
+    }
+}

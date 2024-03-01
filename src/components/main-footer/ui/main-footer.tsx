@@ -12,6 +12,9 @@ import { FeedbackType } from "@redux/feedbacks/types"
 import { setFeedbacks } from "@redux/feedbacks/model"
 import { trackPromise } from "react-promise-tracker"
 import { history } from '@redux/configure-store'
+import { useRequiredContext } from "@hooks/typed-use-context-hook"
+import { ModalContext } from "@processes/modal"
+import { ModalErrors } from "@utils/const/modal-errors"
 
 type PageFooterProps = {
     isSiderCollapsed: boolean;
@@ -19,7 +22,7 @@ type PageFooterProps = {
 
 export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
     const { width } = useWindowSize()
-
+    const { setMode } = useRequiredContext(ModalContext)
     const { token } = useAppSelector(userSelector)
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
@@ -29,7 +32,6 @@ export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
         trackPromise(refetchFeedbacks()
             .unwrap()
             .then((data: FeedbackType[]) => {
-                console.log(data)
                 dispatch(setFeedbacks(data))
                 history.push({ pathname: Paths.FEEDBACKS }, { from: Paths.MAIN })
             })
@@ -42,17 +44,16 @@ export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
                     } else {
                         dispatch(setUserToken({ token: storageToken }))
                     }
+                } else {
+                    setMode(ModalErrors.GetFeedbacksError)
                 }
             }))
     }
 
-
     if (width)
         return (
             <Footer className={classNames(cls.footerWrapper, isSiderCollapsed && cls.footerStretched)}>
-                <div
-                    className={cls.footer}
-                >
+                <div className={cls.footer}>
                     {width > 540 && <span className={cls.footerLink} onClick={fetchFeedbacks}>Смотреть отзывы</span>}
                     <DownloadCard />
                     {width <= 540 && <span className={cls.footerLink} onClick={fetchFeedbacks}>Смотреть отзывы</span>}

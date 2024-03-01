@@ -5,6 +5,7 @@ import { App } from '@components/app/app';
 import { store } from '@redux/configure-store';
 import 'normalize.css';
 import './index.scss';
+import { ModalContextProvider } from '@processes/modal';
 
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
@@ -12,7 +13,9 @@ const root = createRoot(domNode);
 root.render(
     <React.StrictMode>
         <Provider store={store}>
-            <App />
+            <ModalContextProvider>
+                <App />
+            </ModalContextProvider>
         </Provider>
     </React.StrictMode>,
 );

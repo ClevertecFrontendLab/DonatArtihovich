@@ -7,4 +7,5 @@ export enum ModalErrors {
     CheckEmailError,
     ChangePasswordSuccess,
     ChangePasswordError,
+    GetFeedbacksError
 }
