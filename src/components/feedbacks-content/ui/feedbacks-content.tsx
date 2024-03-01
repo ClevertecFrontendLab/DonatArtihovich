@@ -3,14 +3,16 @@ import { FeedbackType } from "@redux/feedbacks/types"
 import cls from './feedbacks-content.module.scss'
 import { Content } from "antd/lib/layout/layout"
 import { Button } from "antd"
-import { feedbacksSelector, setFeedbacks } from "@redux/feedbacks/model"
 import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { useEffect } from "react"
 import { Paths } from "@utils/const/paths"
 import { setUserToken, userSelector } from "@redux/auth/model"
 import { useGetFeedbacksQuery } from "@redux/feedbacks/api"
-import { trackPromise } from "react-promise-tracker"
+import { useRequiredContext } from "@hooks/typed-use-context-hook"
+import { ModalContext } from "@processes/modal"
+import { ModalErrors } from "@utils/const/modal-errors"
+import { AppLoader } from "@components/loader"
 
 type FeedbacksContent = {
     isSiderCollapsed: boolean;
@@ -18,11 +20,10 @@ type FeedbacksContent = {
 
 export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     const { token } = useAppSelector(userSelector)
-    const { feedbacks } = useAppSelector(feedbacksSelector)
-    const location = useLocation()
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
-    const { refetch: refetchFeedbacks } = useGetFeedbacksQuery({})
+    const { setMode } = useRequiredContext(ModalContext)
+    const { data: feedbacks, isFetching: isFeedbacksFetching, isError: isFeedbacksError } = useGetFeedbacksQuery({})
 
     useEffect(() => {
         if (!token) {
@@ -31,23 +32,19 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
                 navigate(Paths.AUTH)
             } else {
                 dispatch(setUserToken({ token: storageToken }))
-
-                if (location.state?.from !== Paths.MAIN || !feedbacks) {
-                    trackPromise(refetchFeedbacks()
-                        .unwrap()
-                        .then((data) => {
-                            dispatch(setFeedbacks(data))
-                        })
-                        .catch((e: IError) => {
-                            console.log(e)
-                        }))
-                }
             }
         }
     }, [])
 
+    useEffect(() => {
+        if (isFeedbacksError) {
+            setMode(ModalErrors.GetFeedbacksError)
+        }
+    }, [isFeedbacksError])
+
     return (
         <Content>
+            <AppLoader isLoader={isFeedbacksFetching} />
             <div className={cls.feedbacksContent}>
                 <div className={cls.feedbacksList}>
                     {(feedbacks && feedbacks.length ? feedbacks.slice(-4) : [{

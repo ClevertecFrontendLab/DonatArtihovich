@@ -4,17 +4,7 @@ import cls from './main-footer.module.scss'
 import classNames from "classnames"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { Paths } from "@utils/const/paths"
-import { useNavigate } from "react-router-dom"
-import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
-import { setUserToken, userSelector } from "@redux/auth/model"
-import { useGetFeedbacksQuery } from "@redux/feedbacks/api"
-import { FeedbackType } from "@redux/feedbacks/types"
-import { setFeedbacks } from "@redux/feedbacks/model"
-import { trackPromise } from "react-promise-tracker"
-import { history } from '@redux/configure-store'
-import { useRequiredContext } from "@hooks/typed-use-context-hook"
-import { ModalContext } from "@processes/modal"
-import { ModalErrors } from "@utils/const/modal-errors"
+import { Link } from "react-router-dom"
 
 type PageFooterProps = {
     isSiderCollapsed: boolean;
@@ -22,41 +12,14 @@ type PageFooterProps = {
 
 export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
     const { width } = useWindowSize()
-    const { setMode } = useRequiredContext(ModalContext)
-    const { token } = useAppSelector(userSelector)
-    const navigate = useNavigate()
-    const dispatch = useAppDispatch()
-    const { refetch: refetchFeedbacks } = useGetFeedbacksQuery({})
-
-    const fetchFeedbacks = () => {
-        trackPromise(refetchFeedbacks()
-            .unwrap()
-            .then((data: FeedbackType[]) => {
-                dispatch(setFeedbacks(data))
-                history.push({ pathname: Paths.FEEDBACKS }, { from: Paths.MAIN })
-            })
-            .catch((err: IError) => {
-                console.log('main', err)
-                if (err.status === 403 && !token) {
-                    const storageToken = localStorage.getItem('user')
-                    if (!storageToken) {
-                        navigate(Paths.AUTH)
-                    } else {
-                        dispatch(setUserToken({ token: storageToken }))
-                    }
-                } else {
-                    setMode(ModalErrors.GetFeedbacksError)
-                }
-            }))
-    }
 
     if (width)
         return (
             <Footer className={classNames(cls.footerWrapper, isSiderCollapsed && cls.footerStretched)}>
                 <div className={cls.footer}>
-                    {width > 540 && <span className={cls.footerLink} onClick={fetchFeedbacks}>Смотреть отзывы</span>}
+                    {width > 540 && <Link to={Paths.FEEDBACKS} className={cls.footerLink}>Смотреть отзывы</Link>}
                     <DownloadCard />
-                    {width <= 540 && <span className={cls.footerLink} onClick={fetchFeedbacks}>Смотреть отзывы</span>}
+                    {width <= 540 && <Link to={Paths.FEEDBACKS} className={cls.footerLink}>Смотреть отзывы</Link>}
                 </div>
             </Footer>
         )
