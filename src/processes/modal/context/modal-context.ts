@@ -3,7 +3,7 @@ import { createContext } from "react";
 
 type ModalContextType = {
     mode: ModalErrors | null;
-    setMode: (m: ModalErrors) => void;
+    setMode: (m: ModalErrors | null) => void;
 }
 
 export const ModalContext = createContext<ModalContextType | null>(null)

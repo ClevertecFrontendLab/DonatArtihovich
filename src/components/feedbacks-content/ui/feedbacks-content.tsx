@@ -26,8 +26,8 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { setMode } = useRequiredContext(ModalContext)
-    const { /*data: feedbacks,*/ isFetching: isFeedbacksFetching, isError: isFeedbacksError } = useGetFeedbacksQuery({})
-    const feedbacks: FeedbackType[] = []
+    const { data: feedbacks, isFetching: isFeedbacksFetching, isError: isFeedbacksError } = useGetFeedbacksQuery({})
+
     useEffect(() => {
         if (!token) {
             const storageToken = localStorage.getItem('user')
@@ -44,6 +44,10 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
             setMode(ModalErrors.GetFeedbacksError)
         }
     }, [isFeedbacksError])
+
+    const onWriteButtonClick = () => {
+        setMode(ModalErrors.CreateFeedback)
+    }
 
     return (
         <Content>
@@ -63,7 +67,7 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
                             />)}
                         </div>
                         <div className={cls.buttonsWrapper}>
-                            <Button className={cls.writeButton}>Написать отзыв</Button>
+                            <Button className={cls.writeButton} onClick={onWriteButtonClick}>Написать отзыв</Button>
                             <Button className={cls.allFeedbacksButton}>Развернуть все отзывы</Button>
                         </div>
                     </>
@@ -74,7 +78,10 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
                                 <Typography.Title className={cls.NoFeedbacksTitle}>Оставьте свой отзыв первым</Typography.Title>
                                 <Typography.Text className={cls.NoFeedbacksText}>Вы можете быть первым, кто оставит отзыв об этом фитнесс приложении.<br />Поделитесь своим мнением и {width && width < 600 && <br />}опытом с другими пользователями,<br /> и помогите им сделать правильный выбор.</Typography.Text>
                             </div>
-                            <Button className={cls.writeButton}>Написать отзыв</Button>
+                            <Button
+                                className={cls.writeButton}
+                                onClick={onWriteButtonClick}
+                            >Написать отзыв</Button>
                         </div>
                     </>}
             </div>
