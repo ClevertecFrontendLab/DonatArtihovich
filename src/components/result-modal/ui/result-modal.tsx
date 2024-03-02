@@ -17,9 +17,10 @@ import { ModalContext } from "@processes/modal";
 type ResultModalProps = {
     mode: ModalErrors;
     className?: string;
+    buttons?: React.ReactNode;
 }
 
-export const ResultModal = ({ mode, className }: ResultModalProps) => {
+export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
     const navigate = useNavigate()
     const { width } = useWindowSize()
     const { setMode } = useRequiredContext(ModalContext)
@@ -34,7 +35,7 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.ChangePasswordSuccess]: <Typography.Text className={cls.headerText}>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль</Typography.Text>,
         [ModalErrors.ChangePasswordError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз</Typography.Text>,
         [ModalErrors.GetFeedbacksError]: <Typography.Text className={cls.headerText}>Произошла ошибка,{width && width <= 700 && <br />} попробуйте ещё раз.</Typography.Text>,
-        [ModalErrors.CreateFeedbackSuccess]: <></>
+        [ModalErrors.CreateFeedbackError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз.</Typography.Text>
     } as Record<ModalErrors, React.ReactNode>
 
     const headerTitle = {
@@ -48,6 +49,7 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.ChangePasswordError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>,
         [ModalErrors.GetFeedbacksError]: <Typography.Title className={cls.headerTitle}>Что-то пошло не так</Typography.Title>,
         [ModalErrors.CreateFeedbackSuccess]: <Typography.Title className={cls.headerTitle}>Отзыв успешно опубликован</Typography.Title>,
+        [ModalErrors.CreateFeedbackError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>
     } as Record<ModalErrors, React.ReactNode>
 
     const buttonText = {
@@ -73,7 +75,8 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.ChangePasswordSuccess]: successIcon,
         [ModalErrors.ChangePasswordError]: crossIcon,
         [ModalErrors.GetFeedbacksError]: anyError,
-        [ModalErrors.CreateFeedbackSuccess]: successIcon
+        [ModalErrors.CreateFeedbackSuccess]: successIcon,
+        [ModalErrors.CreateFeedbackError]: crossIcon
     } as Record<ModalErrors, string>
 
     const testId = {
@@ -121,12 +124,17 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
             className,
             mode === ModalErrors.LoginError && cls.login,
             (mode === ModalErrors.CheckEmailError || mode === ModalErrors.GetFeedbacksError) && cls.anyError,
-            mode === ModalErrors.ChangePasswordSuccess && cls.changePasswordSuccess,
         )}>
             <Icon component={() => <img src={icons[mode]} />} className={cls.icon} />
             {headerTitle[mode]}
             {headerText[mode]}
-            <Button className={cls.button} onClick={handleButtonClick} data-test-id={testId[mode]}>{buttonText[mode]}</Button>
+            {buttons ?? <Button
+                className={cls.button}
+                onClick={handleButtonClick}
+                data-test-id={testId[mode]}
+            >
+                {buttonText[mode]}
+            </Button>}
         </div>
     )
 }

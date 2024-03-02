@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { ModalErrors } from '@utils/const/modal-errors'
 import { classNames } from '@utils/lib'
 import { CreateFeedbackModal } from '@components/create-feedback-modal'
+import { CreateFeedbackErrorModal } from '@components/create-feedback-error-modal'
 
 export const GlobalModal = () => {
     const { mode } = useRequiredContext(ModalContext)
@@ -27,9 +28,11 @@ export const GlobalModal = () => {
                 : <div className={classNames(
                     cls.modalBody,
                     mode === ModalErrors.GetFeedbacksError && cls.getFeedbacksError,
-                    mode === ModalErrors.CreateFeedbackSuccess && cls.createFeedbackSuccess
+                    (mode === ModalErrors.ChangePasswordSuccess || mode === ModalErrors.CreateFeedbackError) && cls.wideMode,
                 )}>
-                    <ResultModal mode={mode} />
+                    {mode === ModalErrors.CreateFeedbackError
+                        ? <CreateFeedbackErrorModal />
+                        : <ResultModal mode={mode} />}
                 </div>
             }
         </div>

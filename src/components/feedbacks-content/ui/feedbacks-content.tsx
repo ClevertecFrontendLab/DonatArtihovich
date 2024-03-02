@@ -46,7 +46,7 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     }, [isFeedbacksError])
 
     const onWriteButtonClick = () => {
-        setMode(ModalErrors.CreateFeedback)
+        setMode(ModalErrors.CreateFeedbackError)
     }
 
     return (
