@@ -26,7 +26,8 @@ export const GlobalModal = () => {
                 ? <CreateFeedbackModal />
                 : <div className={classNames(
                     cls.modalBody,
-                    mode === ModalErrors.GetFeedbacksError && cls.getFeedbacksError
+                    mode === ModalErrors.GetFeedbacksError && cls.getFeedbacksError,
+                    mode === ModalErrors.CreateFeedbackSuccess && cls.createFeedbackSuccess
                 )}>
                     <ResultModal mode={mode} />
                 </div>

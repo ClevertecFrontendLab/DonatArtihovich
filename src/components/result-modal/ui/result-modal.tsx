@@ -11,6 +11,8 @@ import crossIcon from '@assets/images/cross.svg'
 import loginErrorIcon from '@assets/images/login-error.svg'
 import anyError from '@assets/images/check-email-error.svg'
 import { classNames } from "@utils/lib";
+import { useRequiredContext } from "@hooks/typed-use-context-hook";
+import { ModalContext } from "@processes/modal";
 
 type ResultModalProps = {
     mode: ModalErrors;
@@ -20,6 +22,7 @@ type ResultModalProps = {
 export const ResultModal = ({ mode, className }: ResultModalProps) => {
     const navigate = useNavigate()
     const { width } = useWindowSize()
+    const { setMode } = useRequiredContext(ModalContext)
 
     const headerText = {
         [ModalErrors.LoginError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте еще раз</Typography.Text>,
@@ -30,7 +33,8 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.CheckEmailError]: <Typography.Text className={cls.headerText}>Произошла ошибка, попробуйте {width && width <= 600 && <br />}отправить форму ещё раз.</Typography.Text>,
         [ModalErrors.ChangePasswordSuccess]: <Typography.Text className={cls.headerText}>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль</Typography.Text>,
         [ModalErrors.ChangePasswordError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз</Typography.Text>,
-        [ModalErrors.GetFeedbacksError]: <Typography.Text className={cls.headerText}>Произошла ошибка,{width && width <= 700 && <br />} попробуйте ещё раз.</Typography.Text>
+        [ModalErrors.GetFeedbacksError]: <Typography.Text className={cls.headerText}>Произошла ошибка,{width && width <= 700 && <br />} попробуйте ещё раз.</Typography.Text>,
+        [ModalErrors.CreateFeedbackSuccess]: <></>
     } as Record<ModalErrors, React.ReactNode>
 
     const headerTitle = {
@@ -43,6 +47,7 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.ChangePasswordSuccess]: <Typography.Title className={cls.headerTitle}>Пароль успешно{width && width <= 600 && <br />} изменен</Typography.Title>,
         [ModalErrors.ChangePasswordError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>,
         [ModalErrors.GetFeedbacksError]: <Typography.Title className={cls.headerTitle}>Что-то пошло не так</Typography.Title>,
+        [ModalErrors.CreateFeedbackSuccess]: <Typography.Title className={cls.headerTitle}>Отзыв успешно опубликован</Typography.Title>,
     } as Record<ModalErrors, React.ReactNode>
 
     const buttonText = {
@@ -55,6 +60,7 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.ChangePasswordSuccess]: 'Вход',
         [ModalErrors.ChangePasswordError]: 'Повторить',
         [ModalErrors.GetFeedbacksError]: 'Назад',
+        [ModalErrors.CreateFeedbackSuccess]: 'Отлично'
     } as Record<ModalErrors, string>
 
     const icons = {
@@ -67,6 +73,7 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
         [ModalErrors.ChangePasswordSuccess]: successIcon,
         [ModalErrors.ChangePasswordError]: crossIcon,
         [ModalErrors.GetFeedbacksError]: anyError,
+        [ModalErrors.CreateFeedbackSuccess]: successIcon
     } as Record<ModalErrors, string>
 
     const testId = {
@@ -102,6 +109,9 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
             case ModalErrors.ChangePasswordError:
                 history.push({ pathname: Paths.CHANGE_PASSWORD }, { from: Paths.CHANGE_PASSWORD_ERROR })
                 break;
+            case ModalErrors.CreateFeedbackSuccess:
+                setMode(null)
+                break;
         }
     }
 
@@ -111,7 +121,7 @@ export const ResultModal = ({ mode, className }: ResultModalProps) => {
             className,
             mode === ModalErrors.LoginError && cls.login,
             (mode === ModalErrors.CheckEmailError || mode === ModalErrors.GetFeedbacksError) && cls.anyError,
-            mode === ModalErrors.ChangePasswordSuccess && cls.changePasswordSuccess
+            mode === ModalErrors.ChangePasswordSuccess && cls.changePasswordSuccess,
         )}>
             <Icon component={() => <img src={icons[mode]} />} className={cls.icon} />
             {headerTitle[mode]}

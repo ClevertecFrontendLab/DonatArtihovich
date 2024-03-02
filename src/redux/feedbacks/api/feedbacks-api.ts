@@ -18,8 +18,16 @@ export const feedbacksApi = createApi({
     endpoints: (builder) => ({
         getFeedbacks: builder.query<FeedbackType[], {}>({
             query: () => 'feedback',
+        }),
+        createFeedback: builder.mutation({
+            query: (body: {rating: number, message: string}) => ({
+                url: 'feedback',
+                method: 'post',
+                body,
+                credentials: 'include'
+            })
         })
     })
 })
 
-export const {useGetFeedbacksQuery} = feedbacksApi
+export const {useGetFeedbacksQuery, useCreateFeedbackMutation} = feedbacksApi
