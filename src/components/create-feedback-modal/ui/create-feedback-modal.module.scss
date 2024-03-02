@@ -48,6 +48,12 @@
     max-height: 60vh;
     padding: 5px 12px;
     box-sizing: border-box;
+
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
 }
 
 .closeButton {
@@ -74,6 +80,10 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--primary-light-6);
     color: #ffffff;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .starRating {

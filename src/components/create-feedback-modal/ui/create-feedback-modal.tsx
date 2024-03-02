@@ -1,4 +1,4 @@
-import { Button, Divider, Modal, Typography } from 'antd'
+import { Button, Divider, Typography } from 'antd'
 import cls from './create-feedback-modal.module.scss'
 import { CloseOutlined } from '@ant-design/icons'
 import TextArea from 'antd/lib/input/TextArea'
