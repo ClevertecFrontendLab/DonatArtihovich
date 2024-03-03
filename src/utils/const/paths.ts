@@ -1,4 +1,5 @@
 export enum Paths {
+    ACCESS = '/',
     MAIN = '/main',
     AUTH = '/auth',
     REGISTRATION = '/auth/registration',

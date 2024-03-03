@@ -16,6 +16,7 @@ import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
 import { history } from "@redux/configure-store"
 import { trackPromise } from "react-promise-tracker"
+import { API_PATH } from "@utils/const/api"
 
 type AuthFormProps = {
     mode: string;
@@ -188,6 +189,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             })
     }
 
+    const onGoogleAuthClick = () => {
+        const path = `${API_PATH}auth/google`
+        window.location.href = path
+    }
+
     return (
         <>
             <Form form={form} onFinish={onSubmit} className={classNames(cls.form, mode === 'registration' && cls.registrationForm)}>
@@ -303,7 +309,9 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                     </Button>
                     <Button
                         icon={width && width < 500 ? null : <GooglePlusOutlined />}
-                        className={cls.googleButton}>
+                        className={cls.googleButton}
+                        onClick={onGoogleAuthClick}
+                    >
                         {mode === 'login' ? 'Войти' : 'Регистрация'} через Google
                     </Button>
                 </div>

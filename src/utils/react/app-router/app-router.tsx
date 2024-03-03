@@ -1,3 +1,4 @@
+import { AccessPage } from "@pages/access/ui/access";
 import { AuthPage } from "@pages/auth-page";
 import { ChangePasswordPage } from "@pages/change-password";
 import { ConfirmEmailPage } from "@pages/confirm-email";
@@ -18,6 +19,7 @@ type AppRouterProps = {
 export const AppRouter = ({ isSiderCollapsed, setIsSiderCollapsed }: AppRouterProps) => (
     <HistoryRouter history={history}>
         <Routes>
+            <Route path={Paths.ACCESS} element={<AccessPage />} />
             <Route path={Paths.MAIN} element={<MainPage isSiderCollapsed={isSiderCollapsed} setIsSiderCollapsed={setIsSiderCollapsed} />} />
             <Route path={Paths.AUTH} element={<AuthPage mode='login' />} />
             <Route path={Paths.REGISTRATION} element={<AuthPage mode="registration" />} />
