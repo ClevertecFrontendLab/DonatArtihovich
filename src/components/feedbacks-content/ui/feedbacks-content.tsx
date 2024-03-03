@@ -5,7 +5,7 @@ import { Content } from "antd/lib/layout/layout"
 import { Button, Typography } from "antd"
 import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
 import { useNavigate } from "react-router-dom"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { Paths } from "@utils/const/paths"
 import { setUserToken, userSelector } from "@redux/auth/model"
 import { useGetFeedbacksQuery } from "@redux/feedbacks/api"
@@ -27,6 +27,7 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     const dispatch = useAppDispatch()
     const { setMode } = useRequiredContext(ModalContext)
     const { data: feedbacks, isFetching: isFeedbacksFetching, isError: isFeedbacksError } = useGetFeedbacksQuery({})
+    const [showAll, setShowAll] = useState<boolean>(false)
 
     useEffect(() => {
         if (!token) {
@@ -46,7 +47,7 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     }, [isFeedbacksError])
 
     const onWriteButtonClick = () => {
-        setMode(ModalErrors.CreateFeedbackError)
+        setMode(ModalErrors.CreateFeedback)
     }
 
     return (
@@ -60,15 +61,15 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
                 {feedbacks.length ?
                     <>
                         <div className={cls.feedbacksList}>
-                            {feedbacks.slice(-4).map((feedback: FeedbackType) => <FeedbackCard
+                            {(showAll ? feedbacks : feedbacks.slice(-4)).map((feedback: FeedbackType) => <FeedbackCard
                                 key={feedback.id}
                                 feedback={feedback}
                                 isSiderCollapsed={isSiderCollapsed}
-                            />)}
+                            />).reverse()}
                         </div>
                         <div className={cls.buttonsWrapper}>
                             <Button className={cls.writeButton} onClick={onWriteButtonClick}>Написать отзыв</Button>
-                            <Button className={cls.allFeedbacksButton}>Развернуть все отзывы</Button>
+                            <Button className={cls.allFeedbacksButton} onClick={() => setShowAll(!showAll)}>{showAll ? 'Свернуть' : 'Развернуть'} все отзывы</Button>
                         </div>
                     </>
                     : <>
