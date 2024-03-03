@@ -22,7 +22,7 @@ export const FeedbackCard = ({ feedback, isSiderCollapsed }: FeedbackCardProps) 
                     />
                 </div>
 
-                <Typography.Title className={cls.nameTitle}>{feedback.fullName}</Typography.Title>
+                <Typography.Title className={cls.nameTitle}>{feedback.fullName ?? 'Пользователь'}</Typography.Title>
             </div>
             <div className={cls.feedbackData}>
                 <div className={cls.feedbackMarkWrapper}>

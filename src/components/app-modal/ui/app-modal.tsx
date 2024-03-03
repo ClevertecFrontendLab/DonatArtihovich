@@ -10,20 +10,18 @@ type AppModalProps = {
     modalClassName?: string;
 }
 
-export const AppModal = ({ children, open, title, className, modalClassName }: AppModalProps) => {
-    return (
-        <Modal
-            open={open}
-            onOk={() => console.log('ok')}
-            title={title}
-            closable={false}
-            className={classNames(cls.modal, modalClassName)}
-            wrapClassName={cls.wrapper}
-            mask
-        >
-            <div className={className}>
-                {children}
-            </div>
-        </Modal>
-    )
-}
+export const AppModal = ({ children, open, title, className, modalClassName }: AppModalProps) => (
+    <Modal
+        open={open}
+        onOk={() => console.log('ok')}
+        title={title}
+        closable={false}
+        className={classNames(cls.modal, modalClassName)}
+        wrapClassName={cls.wrapper}
+        mask
+    >
+        <div className={className}>
+            {children}
+        </div>
+    </Modal>
+)
