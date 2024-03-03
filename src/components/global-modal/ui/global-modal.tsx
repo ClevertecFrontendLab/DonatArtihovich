@@ -10,20 +10,18 @@ import { AppModal } from '@components/app-modal'
 import { ResultModal } from '@components/result-modal'
 import { CreateFeedbackErrorModal } from '@components/create-feedback-error-modal'
 import { classNames } from '@utils/lib'
-// import ModalModes from '@utils/const/modal-modes'
-// import { Modal } from 'antd'
 
 export const GlobalModal = () => {
     const { mode } = useRequiredContext(ModalContext)
 
     useEffect(() => {
-        // if (mode) {
-        //     document.body.style.overflow = 'hidden'
-        // }
+        if (mode) {
+            document.body.style.overflow = 'hidden'
+        }
 
-        // return () => {
-        //     document.body.style.overflow = 'auto'
-        // }
+        return () => {
+            document.body.style.overflow = 'auto'
+        }
     }, [mode])
 
     return (
