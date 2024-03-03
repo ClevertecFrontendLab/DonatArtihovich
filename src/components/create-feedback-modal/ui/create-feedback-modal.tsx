@@ -27,7 +27,7 @@ export const CreateFeedbackModal = () => {
 
     useEffect(() => {
         if (isCreateFeedbackError) {
-            console.log('error')
+            setMode(ModalModes.CreateFeedbackError)
         }
 
         if (isCreateFeedbackSuccess) {
