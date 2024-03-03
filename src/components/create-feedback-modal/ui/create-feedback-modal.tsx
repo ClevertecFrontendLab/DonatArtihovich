@@ -6,15 +6,20 @@ import { StarRating } from '@components/star-rating'
 import { useEffect, useState } from 'react'
 import { useRequiredContext } from '@hooks/typed-use-context-hook'
 import { ModalContext } from '@processes/modal'
-import { useCreateFeedbackMutation } from '@redux/feedbacks/api/feedbacks-api'
+import { useCreateFeedbackMutation, useGetFeedbacksQuery } from '@redux/feedbacks/api/feedbacks-api'
 import { trackPromise } from 'react-promise-tracker'
 import ModalModes from '@utils/const/modal-modes'
 import { AppModal } from '@components/app-modal'
+import { setFeedbacks } from '@redux/feedbacks/model'
+import { useAppDispatch } from '@hooks/typed-react-redux-hooks'
 
 export const CreateFeedbackModal = () => {
-    const [rating, setRating] = useState<number>(5)
+    const [rating, setRating] = useState<number>(0)
     const [message, setMessage] = useState<string>('')
     const { mode, setMode } = useRequiredContext(ModalContext)
+    const dispatch = useAppDispatch()
+    const { refetch: refetchFeedbacks } = useGetFeedbacksQuery({})
+
     const [createFeedback,
         {
             isSuccess: isCreateFeedbackSuccess,
@@ -31,6 +36,15 @@ export const CreateFeedbackModal = () => {
         }
 
         if (isCreateFeedbackSuccess) {
+            trackPromise(
+                refetchFeedbacks()
+                    .then(({ data }) => {
+                        if (data) dispatch(setFeedbacks(data))
+                    })
+                    .catch(() => {
+                        setMode(ModalModes.GetFeedbacksError)
+                    })
+            )
             setMode(ModalModes.CreateFeedbackSuccess);
         }
 

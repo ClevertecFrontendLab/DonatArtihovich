@@ -14,10 +14,6 @@ import { classNames } from "@utils/lib";
 import { useRequiredContext } from "@hooks/typed-use-context-hook";
 import { ModalContext } from "@processes/modal";
 import ModalModes from "@utils/const/modal-modes";
-import { trackPromise } from "react-promise-tracker";
-import { setFeedbacks } from "@redux/feedbacks/model";
-import { useAppDispatch } from "@hooks/typed-react-redux-hooks";
-import { useGetFeedbacksQuery } from "@redux/feedbacks/api";
 
 type ResultModalProps = {
     mode: ModalErrors | ModalModes;
@@ -29,8 +25,6 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
     const navigate = useNavigate()
     const { width } = useWindowSize()
     const { setMode } = useRequiredContext(ModalContext)
-    const dispatch = useAppDispatch()
-    const { refetch: refetchFeedbacks } = useGetFeedbacksQuery({})
 
     const headerText = {
         [ModalErrors.LoginError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте еще раз</Typography.Text>,
@@ -121,15 +115,6 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
                 break;
             case ModalModes.CreateFeedbackSuccess:
                 setMode(null);
-                trackPromise(
-                    refetchFeedbacks()
-                        .then(({ data }) => {
-                            if (data) dispatch(setFeedbacks(data))
-                        })
-                        .catch(() => {
-                            setMode(ModalModes.GetFeedbacksError)
-                        })
-                )
                 break;
             case ModalModes.GetFeedbacksError:
                 setMode(null)
