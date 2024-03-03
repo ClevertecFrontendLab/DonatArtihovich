@@ -11,10 +11,12 @@ import { setUserToken, userSelector } from "@redux/auth/model"
 import { useGetFeedbacksQuery } from "@redux/feedbacks/api"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { ModalContext } from "@processes/modal"
-import { ModalErrors } from "@utils/const/modal-errors"
 import { AppLoader } from "@components/loader"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { classNames } from "@utils/lib"
+import ModalModes from "@utils/const/modal-modes"
+import { feedbacksSelector, setFeedbacks } from "@redux/feedbacks/model"
+import { trackPromise } from "react-promise-tracker"
 
 type FeedbacksContent = {
     isSiderCollapsed: boolean;
@@ -26,8 +28,15 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const { setMode } = useRequiredContext(ModalContext)
-    const { data: feedbacks, isFetching: isFeedbacksFetching, isError: isFeedbacksError } = useGetFeedbacksQuery({})
+    const {
+        data: feedbacksData,
+        isFetching: isFeedbacksFetching,
+        isSuccess: isFeedbacksSuccess,
+        isError: isFeedbacksError,
+        refetch: refetchFeedbacks
+    } = useGetFeedbacksQuery({})
     const [showAll, setShowAll] = useState<boolean>(false)
+    const { feedbacks } = useAppSelector(feedbacksSelector)
 
     useEffect(() => {
         if (!token) {
@@ -42,12 +51,25 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
 
     useEffect(() => {
         if (isFeedbacksError) {
-            setMode(ModalErrors.GetFeedbacksError)
+            setMode(ModalModes.GetFeedbacksError)
         }
-    }, [isFeedbacksError])
+
+        if (isFeedbacksSuccess) {
+            dispatch(setFeedbacks(feedbacksData))
+        }
+    }, [isFeedbacksError, isFeedbacksSuccess])
 
     const onWriteButtonClick = () => {
-        setMode(ModalErrors.CreateFeedback)
+        setMode(ModalModes.CreateFeedback)
+        trackPromise(
+            refetchFeedbacks()
+                .then(({ data }) => {
+                    if (data) dispatch(setFeedbacks(data))
+                })
+                .catch(() => {
+                    setMode(ModalModes.GetFeedbacksError)
+                })
+        )
     }
 
     return (
@@ -68,8 +90,12 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
                             />).reverse()}
                         </div>
                         <div className={cls.buttonsWrapper}>
-                            <Button className={cls.writeButton} onClick={onWriteButtonClick}>Написать отзыв</Button>
-                            <Button className={cls.allFeedbacksButton} onClick={() => setShowAll(!showAll)}>{showAll ? 'Свернуть' : 'Развернуть'} все отзывы</Button>
+                            <Button className={cls.writeButton} onClick={onWriteButtonClick} data-test-id='write-review'>Написать отзыв</Button>
+                            <Button
+                                className={cls.allFeedbacksButton}
+                                onClick={() => setShowAll(!showAll)}
+                                data-test-id='all-reviews-button'
+                            >{showAll ? 'Свернуть' : 'Развернуть'} все отзывы</Button>
                         </div>
                     </>
                     : <>
@@ -82,6 +108,7 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
                             <Button
                                 className={cls.writeButton}
                                 onClick={onWriteButtonClick}
+                                data-test-id='write-review'
                             >Написать отзыв</Button>
                         </div>
                     </>}

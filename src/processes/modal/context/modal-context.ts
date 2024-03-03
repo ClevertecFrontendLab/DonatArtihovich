@@ -1,9 +1,9 @@
-import { ModalErrors } from "@utils/const/modal-errors";
+import ModalModes from "@utils/const/modal-modes";
 import { createContext } from "react";
 
 type ModalContextType = {
-    mode: ModalErrors | null;
-    setMode: (m: ModalErrors | null) => void;
+    mode: ModalModes | null;
+    setMode: (m: ModalModes | null) => void;
 }
 
 export const ModalContext = createContext<ModalContextType | null>(null)

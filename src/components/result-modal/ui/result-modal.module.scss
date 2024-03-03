@@ -68,6 +68,7 @@
     line-height: 130%;
     text-align: center;
     color: var(--character-light-primary-inverse);
+    display: block !important;
 
     &:hover {
         cursor: pointer;

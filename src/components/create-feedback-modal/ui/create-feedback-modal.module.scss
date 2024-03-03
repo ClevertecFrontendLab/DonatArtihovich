@@ -1,8 +1,7 @@
-.wrapper {
+.content {
     border-radius: 2px;
     min-width: 539px;
-    min-height: 247px;
-    box-shadow: 0 9px 28px 8px rgba(0, 0, 0, 0.05), 0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12);
+    min-height: 237px;
     background: var(--character-light-primary-inverse);
     display: flex;
     flex-direction: column;
@@ -59,6 +58,7 @@
 .closeButton {
     background: none;
     border: none;
+    display: block !important;
 
     &:hover {
         cursor: pointer;
@@ -80,6 +80,7 @@
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
     background: var(--primary-light-6);
     color: #ffffff;
+    display: block !important;
 
     &:hover {
         cursor: pointer;
@@ -103,8 +104,18 @@
     }
 }
 
+.modal {
+    :global {
+
+        .ant-modal-title,
+        .ant-modal-close {
+            display: none;
+        }
+    }
+}
+
 @media (max-width: 600px) {
-    .wrapper {
+    .content {
         min-width: 328px;
         width: 91.11vw;
     }

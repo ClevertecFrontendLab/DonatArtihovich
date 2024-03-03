@@ -17,9 +17,9 @@ export const MainFooter = ({ isSiderCollapsed }: PageFooterProps) => {
         return (
             <Footer className={classNames(cls.footerWrapper, isSiderCollapsed && cls.footerStretched)}>
                 <div className={cls.footer}>
-                    {width > 540 && <Link to={Paths.FEEDBACKS} className={cls.footerLink}>Смотреть отзывы</Link>}
+                    {width > 540 && <Link to={Paths.FEEDBACKS} className={cls.footerLink} data-test-id='see-reviews'>Смотреть отзывы</Link>}
                     <DownloadCard />
-                    {width <= 540 && <Link to={Paths.FEEDBACKS} className={cls.footerLink}>Смотреть отзывы</Link>}
+                    {width <= 540 && <Link to={Paths.FEEDBACKS} className={cls.footerLink} data-test-id='see-reviews'>Смотреть отзывы</Link>}
                 </div>
             </Footer>
         )

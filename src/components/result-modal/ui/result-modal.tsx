@@ -13,9 +13,10 @@ import anyError from '@assets/images/check-email-error.svg'
 import { classNames } from "@utils/lib";
 import { useRequiredContext } from "@hooks/typed-use-context-hook";
 import { ModalContext } from "@processes/modal";
+import ModalModes from "@utils/const/modal-modes";
 
 type ResultModalProps = {
-    mode: ModalErrors;
+    mode: ModalErrors | ModalModes;
     className?: string;
     buttons?: React.ReactNode;
 }
@@ -34,9 +35,9 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
         [ModalErrors.CheckEmailError]: <Typography.Text className={cls.headerText}>Произошла ошибка, попробуйте {width && width <= 600 && <br />}отправить форму ещё раз.</Typography.Text>,
         [ModalErrors.ChangePasswordSuccess]: <Typography.Text className={cls.headerText}>Теперь можно войти в аккаунт, используя<br />свой логин и новый пароль</Typography.Text>,
         [ModalErrors.ChangePasswordError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз</Typography.Text>,
-        [ModalErrors.GetFeedbacksError]: <Typography.Text className={cls.headerText}>Произошла ошибка,{width && width <= 700 && <br />} попробуйте ещё раз.</Typography.Text>,
-        [ModalErrors.CreateFeedbackError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз.</Typography.Text>
-    } as Record<ModalErrors, React.ReactNode>
+        [ModalModes.GetFeedbacksError]: <Typography.Text className={cls.headerText}>Произошла ошибка,{width && width <= 700 && <br />} попробуйте ещё раз.</Typography.Text>,
+        [ModalModes.CreateFeedbackError]: <Typography.Text className={cls.headerText}>Что-то пошло не так. Попробуйте ещё раз.</Typography.Text>
+    } as Record<ModalErrors | ModalModes, React.ReactNode>
 
     const headerTitle = {
         [ModalErrors.LoginError]: <Typography.Title className={cls.headerTitle}>Вход не выполнен</Typography.Title>,
@@ -47,10 +48,10 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
         [ModalErrors.CheckEmailError]: <Typography.Title className={cls.headerTitle}>Что-то пошло не так</Typography.Title>,
         [ModalErrors.ChangePasswordSuccess]: <Typography.Title className={cls.headerTitle}>Пароль успешно{width && width <= 600 && <br />} изменен</Typography.Title>,
         [ModalErrors.ChangePasswordError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>,
-        [ModalErrors.GetFeedbacksError]: <Typography.Title className={cls.headerTitle}>Что-то пошло не так</Typography.Title>,
-        [ModalErrors.CreateFeedbackSuccess]: <Typography.Title className={cls.headerTitle}>Отзыв успешно опубликован</Typography.Title>,
-        [ModalErrors.CreateFeedbackError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>
-    } as Record<ModalErrors, React.ReactNode>
+        [ModalModes.GetFeedbacksError]: <Typography.Title className={cls.headerTitle}>Что-то пошло не так</Typography.Title>,
+        [ModalModes.CreateFeedbackSuccess]: <Typography.Title className={cls.headerTitle}>Отзыв успешно опубликован</Typography.Title>,
+        [ModalModes.CreateFeedbackError]: <Typography.Title className={cls.headerTitle}>Данные не сохранились</Typography.Title>
+    } as Record<ModalErrors | ModalModes, React.ReactNode>
 
     const buttonText = {
         [ModalErrors.LoginError]: 'Повторить',
@@ -61,9 +62,9 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
         [ModalErrors.CheckEmailError]: 'Назад',
         [ModalErrors.ChangePasswordSuccess]: 'Вход',
         [ModalErrors.ChangePasswordError]: 'Повторить',
-        [ModalErrors.GetFeedbacksError]: 'Назад',
-        [ModalErrors.CreateFeedbackSuccess]: 'Отлично'
-    } as Record<ModalErrors, string>
+        [ModalModes.GetFeedbacksError]: 'Назад',
+        [ModalModes.CreateFeedbackSuccess]: 'Отлично'
+    } as Record<ModalErrors | ModalModes, string>
 
     const icons = {
         [ModalErrors.LoginError]: loginErrorIcon,
@@ -74,10 +75,10 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
         [ModalErrors.CheckEmailError]: anyError,
         [ModalErrors.ChangePasswordSuccess]: successIcon,
         [ModalErrors.ChangePasswordError]: crossIcon,
-        [ModalErrors.GetFeedbacksError]: anyError,
-        [ModalErrors.CreateFeedbackSuccess]: successIcon,
-        [ModalErrors.CreateFeedbackError]: crossIcon
-    } as Record<ModalErrors, string>
+        [ModalModes.GetFeedbacksError]: anyError,
+        [ModalModes.CreateFeedbackSuccess]: successIcon,
+        [ModalModes.CreateFeedbackError]: crossIcon
+    } as Record<ModalErrors | ModalModes, string>
 
     const testId = {
         [ModalErrors.LoginError]: 'login-retry-button',
@@ -88,7 +89,7 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
         [ModalErrors.CheckEmailError]: 'check-back-button',
         [ModalErrors.ChangePasswordSuccess]: 'change-entry-button',
         [ModalErrors.ChangePasswordError]: 'change-retry-button'
-    } as Record<ModalErrors, string>
+    } as Record<ModalErrors | ModalModes, string>
 
     const handleButtonClick = () => {
         switch (mode) {
@@ -112,8 +113,12 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
             case ModalErrors.ChangePasswordError:
                 history.push({ pathname: Paths.CHANGE_PASSWORD }, { from: Paths.CHANGE_PASSWORD_ERROR })
                 break;
-            case ModalErrors.CreateFeedbackSuccess:
+            case ModalModes.CreateFeedbackSuccess:
                 setMode(null)
+                break;
+            case ModalModes.GetFeedbacksError:
+                setMode(null)
+                navigate(Paths.MAIN)
                 break;
         }
     }
@@ -123,7 +128,7 @@ export const ResultModal = ({ mode, className, buttons }: ResultModalProps) => {
             cls.wrapper,
             className,
             mode === ModalErrors.LoginError && cls.login,
-            (mode === ModalErrors.CheckEmailError || mode === ModalErrors.GetFeedbacksError) && cls.anyError,
+            (mode === ModalErrors.CheckEmailError || mode === ModalModes.GetFeedbacksError) && cls.anyError,
         )}>
             <Icon component={() => <img src={icons[mode]} />} className={cls.icon} />
             {headerTitle[mode]}

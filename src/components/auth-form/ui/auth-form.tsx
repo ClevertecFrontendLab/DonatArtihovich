@@ -46,7 +46,7 @@ const menuItems: MenuProps['items'] = [
 ]
 
 export const AuthForm = ({ mode }: AuthFormProps) => {
-    const [isChecked, setIsChecked] = useState<boolean>(false)
+    const { isRemembered, setIsRemembered } = useRequiredContext(AuthContext)
     const [isPasswordChangingDisabled, setIsPasswordChangingDisabled] = useState<boolean>(true)
     const [form] = Form.useForm()
     const { getFieldValue } = form
@@ -82,6 +82,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }] = useLoginUserMutation()
 
     useEffect(() => {
+        setIsRemembered(false)
+
         if (mode === 'registration' && location.state?.from === Paths.REGISTRATION_USER_EXIST_ERROR) {
             setIsRegistrationProcess(true)
             trackPromise(registerUser({ email: user.email, password: user.password } as { email: string, password: string }))
@@ -126,7 +128,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         if (isLoginSuccess) {
             dispatch(setUserToken({ token: loginData.accessToken }))
 
-            if (isChecked) {
+            if (isRemembered) {
                 localStorage.setItem('user', loginData.accessToken)
             }
 
@@ -267,9 +269,9 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                         <div className={cls.checkboxWrapper}>
                             <Form.Item name='remember'>
                                 <Checkbox
-                                    checked={isChecked}
-                                    onChange={() => setIsChecked(!isChecked)}
-                                    value={isChecked}
+                                    checked={isRemembered}
+                                    onChange={() => setIsRemembered(!isRemembered)}
+                                    value={isRemembered}
                                     className={cls.checkboxInput}
                                     data-test-id='login-remember'
                                 >

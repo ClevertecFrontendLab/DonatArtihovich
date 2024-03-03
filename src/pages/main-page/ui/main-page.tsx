@@ -7,8 +7,8 @@ import { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
 import { PageLayout } from '@components/page-layout';
-import { useAppDispatch } from '@hooks/typed-react-redux-hooks';
-import { setUserToken } from '@redux/auth/model';
+import { useAppDispatch, useAppSelector } from '@hooks/typed-react-redux-hooks';
+import { setUserToken, userSelector } from '@redux/auth/model';
 
 type MainPageProps = {
     isSiderCollapsed: boolean;
@@ -19,12 +19,14 @@ export const MainPage = ({ isSiderCollapsed, setIsSiderCollapsed }: MainPageProp
     const navigate = useNavigate()
     const location = useLocation()
     const dispatch = useAppDispatch()
+    const { token } = useAppSelector(userSelector)
 
     useEffect(() => {
-        const token = localStorage.getItem('user');
-        if (token) {
-            dispatch(setUserToken({ token }))
-        } else if (!location.state) {
+        const storageToken = localStorage.getItem('user');
+        if (storageToken) {
+            dispatch(setUserToken({ token: storageToken }))
+        } else if (!location.state && !token || !token) {
+            console.log(location.state)
             navigate(Paths.AUTH)
         }
     }, [])

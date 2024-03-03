@@ -8,12 +8,13 @@ import { useRequiredContext } from '@hooks/typed-use-context-hook'
 import { ModalContext } from '@processes/modal'
 import { useCreateFeedbackMutation } from '@redux/feedbacks/api/feedbacks-api'
 import { trackPromise } from 'react-promise-tracker'
-import { ModalErrors } from '@utils/const/modal-errors'
+import ModalModes from '@utils/const/modal-modes'
+import { AppModal } from '@components/app-modal'
 
 export const CreateFeedbackModal = () => {
     const [rating, setRating] = useState<number>(5)
     const [message, setMessage] = useState<string>('')
-    const { setMode } = useRequiredContext(ModalContext)
+    const { mode, setMode } = useRequiredContext(ModalContext)
     const [createFeedback,
         {
             isSuccess: isCreateFeedbackSuccess,
@@ -30,40 +31,43 @@ export const CreateFeedbackModal = () => {
         }
 
         if (isCreateFeedbackSuccess) {
-            setMode(ModalErrors.CreateFeedbackSuccess);
+            setMode(ModalModes.CreateFeedbackSuccess);
         }
 
     }, [isCreateFeedbackError, isCreateFeedbackSuccess])
 
     return (
-        <div className={cls.wrapper}>
-            <div className={cls.headerWrapper}>
-                <Typography.Title className={cls.headerTitle}>Ваш отзыв</Typography.Title>
-                <Button
-                    className={cls.closeButton}
-                    icon={<CloseOutlined />}
-                    onClick={() => setMode(null)}
-                />
+        <AppModal open={mode === ModalModes.CreateFeedback} title='Ваш отзыв' modalClassName={cls.modal} className={cls.content}>
+            <div className={cls.wrapper}>
+                <div className={cls.headerWrapper}>
+                    <Typography.Title className={cls.headerTitle}>Ваш отзыв</Typography.Title>
+                    <Button
+                        className={cls.closeButton}
+                        icon={<CloseOutlined />}
+                        onClick={() => setMode(null)}
+                    />
+                </div>
+
+                <Divider className={cls.divider} />
+                <div className={cls.form}>
+                    <StarRating
+                        disabled={false}
+                        value={rating}
+                        onChange={setRating}
+                        className={cls.starRating}
+                    />
+                    <TextArea
+                        placeholder='Расскажите, почему Вам понравилось наше приложение'
+                        className={cls.textArea}
+                        onChange={(e) => setMessage(e.target.value)}
+                        value={message}
+                    />
+                </div>
+                <Divider className={cls.divider} />
+                <div className={cls.buttonWrapper}>
+                    <Button className={cls.postButton} onClick={onCreateFeedbackClick} data-test-id='new-review-submit-button'>Опубликовать</Button>
+                </div>
             </div>
-            <Divider className={cls.divider} />
-            <div className={cls.form}>
-                <StarRating
-                    disabled={false}
-                    value={rating}
-                    onChange={setRating}
-                    className={cls.starRating}
-                />
-                <TextArea
-                    placeholder='Autosize height based on content lines'
-                    className={cls.textArea}
-                    onChange={(e) => setMessage(e.target.value)}
-                    value={message}
-                />
-            </div>
-            <Divider className={cls.divider} />
-            <div className={cls.buttonWrapper}>
-                <Button className={cls.postButton} onClick={onCreateFeedbackClick}>Опубликовать</Button>
-            </div>
-        </div>
+        </AppModal>
     )
-}
+}   
