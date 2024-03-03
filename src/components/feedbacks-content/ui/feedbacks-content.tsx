@@ -16,7 +16,6 @@ import { useWindowSize } from "@uidotdev/usehooks"
 import { classNames } from "@utils/lib"
 import ModalModes from "@utils/const/modal-modes"
 import { feedbacksSelector, setFeedbacks } from "@redux/feedbacks/model"
-import { trackPromise } from "react-promise-tracker"
 
 type FeedbacksContent = {
     isSiderCollapsed: boolean;
@@ -33,7 +32,6 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
         isFetching: isFeedbacksFetching,
         isSuccess: isFeedbacksSuccess,
         isError: isFeedbacksError,
-        refetch: refetchFeedbacks
     } = useGetFeedbacksQuery({})
     const [showAll, setShowAll] = useState<boolean>(false)
     const { feedbacks } = useAppSelector(feedbacksSelector)
@@ -61,15 +59,6 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
 
     const onWriteButtonClick = () => {
         setMode(ModalModes.CreateFeedback)
-        trackPromise(
-            refetchFeedbacks()
-                .then(({ data }) => {
-                    if (data) dispatch(setFeedbacks(data))
-                })
-                .catch(() => {
-                    setMode(ModalModes.GetFeedbacksError)
-                })
-        )
     }
 
     return (
