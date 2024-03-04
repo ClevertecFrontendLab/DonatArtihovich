@@ -1,0 +1,112 @@
+.feedbackCard {
+    border-radius: 2px;
+    padding: 16px;
+    width: 82.22vw;
+    max-width: 1184px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.15);
+    background: var(--character-light-primary-inverse);
+}
+
+.stretched {
+    max-width: 1328px;
+    width: 90vw;
+}
+
+.cardFlex {
+    display: flex;
+    gap: 12px;
+}
+
+.userData {
+    min-width: 174px;
+    // height: 96px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.nameTitle {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    color: var(--character-light-title-85);
+}
+
+.avatarImageWrapper {
+    width: 42px;
+    height: 42px;
+    border-radius: 100px;
+    overflow: hidden;
+    -webkit-border-radius: 100px;
+    -moz-border-radius: 100px;
+    -ms-border-radius: 100px;
+    -o-border-radius: 100px;
+
+    img {
+        width: 42px;
+        height: 42px;
+    }
+}
+
+.feedbackText {
+    word-break: break-all;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 130%;
+    color: var(--character-light-secondary-45);
+}
+
+.feedbackTime {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 130%;
+    text-align: right;
+    color: var(--character-light-disable-25);
+}
+
+.feedbackMarkWrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+@media(max-width: 1300px) {
+    .feedbackCard {
+        width: 70vw;
+    }
+}
+
+@media(max-width: 930px) {
+    .feedbackCard {
+        width: 60vw;
+    }
+
+    .stretched {
+        width: 85vw;
+    }
+}
+
+@media(max-width: 700px) {
+    .feedbackCard {
+        width: 80vw;
+    }
+
+    .cardFlex {
+        flex-direction: column;
+    }
+
+    .userData {
+        flex-direction: row;
+        gap: 16px;
+    }
+}
+
+@media(max-width: 400px) {
+    .feedbackCard {
+        width: 328px;
+    }
+}

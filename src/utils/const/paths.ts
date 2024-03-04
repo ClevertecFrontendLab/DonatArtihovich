@@ -1,4 +1,5 @@
 export enum Paths {
+    ACCESS = '/',
     MAIN = '/main',
     AUTH = '/auth',
     REGISTRATION = '/auth/registration',
@@ -12,4 +13,5 @@ export enum Paths {
     CHANGE_PASSWORD = '/auth/change-password',
     CHANGE_PASSWORD_SUCCESS = '/result/success-change-password',
     CHANGE_PASSWORD_ERROR = '/result/error-change-password',
+    FEEDBACKS = '/feedbacks'
 }

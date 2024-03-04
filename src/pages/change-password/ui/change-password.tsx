@@ -3,15 +3,15 @@ import cls from './change-password.module.scss'
 import { Button, Form, Typography } from "antd"
 import Password from "antd/lib/input/Password"
 import { useWindowSize } from "@uidotdev/usehooks"
-import { useChangePasswordMutation } from "@redux/api/auth-api"
+import { useChangePasswordMutation } from "@redux/auth/api"
 import { useEffect } from "react"
 import { useLocation, useNavigate } from "react-router-dom"
 import { Paths } from "@utils/const/paths"
 import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
-import { userSelector } from "@redux/model/user"
+import { userSelector } from "@redux/auth/model"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
-import { setUserPassword } from "@redux/model/user/user-slice"
+import { setUserPassword } from "@redux/auth/model/auth-slice"
 import { trackPromise } from "react-promise-tracker"
 
 export const ChangePasswordPage = () => {

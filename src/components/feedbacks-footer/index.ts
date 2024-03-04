@@ -1,0 +1,1 @@
+export {FeedbacksFooter} from './ui/feedbacks-footer'

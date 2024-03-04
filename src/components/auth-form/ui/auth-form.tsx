@@ -8,14 +8,15 @@ import { GooglePlusOutlined } from "@ant-design/icons"
 import { classNames } from "@utils/lib"
 import { useWindowSize } from "@uidotdev/usehooks"
 import { Paths } from "@utils/const/paths"
-import { useRegisterUserMutation, useLoginUserMutation, useCheckEmailMutation } from "@redux/api/auth-api"
+import { useRegisterUserMutation, useLoginUserMutation, useCheckEmailMutation } from "@redux/auth/api"
 import { useAppDispatch, useAppSelector } from "@hooks/typed-react-redux-hooks"
-import { setUserToken, setUserEmail } from "@redux/model/user"
-import { userSelector } from "@redux/model/user"
+import { setUserToken, setUserEmail } from "@redux/auth/model"
+import { userSelector } from "@redux/auth/model"
 import { useRequiredContext } from "@hooks/typed-use-context-hook"
 import { AuthContext } from "@processes/auth"
 import { history } from "@redux/configure-store"
 import { trackPromise } from "react-promise-tracker"
+import { API_PATH } from "@utils/const/api"
 
 type AuthFormProps = {
     mode: string;
@@ -45,7 +46,7 @@ const menuItems: MenuProps['items'] = [
 ]
 
 export const AuthForm = ({ mode }: AuthFormProps) => {
-    const [isChecked, setIsChecked] = useState<boolean>(false)
+    const { isRemembered, setIsRemembered } = useRequiredContext(AuthContext)
     const [isPasswordChangingDisabled, setIsPasswordChangingDisabled] = useState<boolean>(true)
     const [form] = Form.useForm()
     const { getFieldValue } = form
@@ -81,6 +82,8 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
     }] = useLoginUserMutation()
 
     useEffect(() => {
+        setIsRemembered(false)
+
         if (mode === 'registration' && location.state?.from === Paths.REGISTRATION_USER_EXIST_ERROR) {
             setIsRegistrationProcess(true)
             trackPromise(registerUser({ email: user.email, password: user.password } as { email: string, password: string }))
@@ -125,7 +128,7 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
         if (isLoginSuccess) {
             dispatch(setUserToken({ token: loginData.accessToken }))
 
-            if (isChecked) {
+            if (isRemembered) {
                 localStorage.setItem('user', loginData.accessToken)
             }
 
@@ -186,6 +189,11 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
             .catch(() => {
                 setIsPasswordChangingDisabled(true)
             })
+    }
+
+    const onGoogleAuthClick = () => {
+        const path = `${API_PATH}auth/google`
+        window.location.href = path
     }
 
     return (
@@ -261,9 +269,9 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                         <div className={cls.checkboxWrapper}>
                             <Form.Item name='remember'>
                                 <Checkbox
-                                    checked={isChecked}
-                                    onChange={() => setIsChecked(!isChecked)}
-                                    value={isChecked}
+                                    checked={isRemembered}
+                                    onChange={() => setIsRemembered(!isRemembered)}
+                                    value={isRemembered}
                                     className={cls.checkboxInput}
                                     data-test-id='login-remember'
                                 >
@@ -303,7 +311,9 @@ export const AuthForm = ({ mode }: AuthFormProps) => {
                     </Button>
                     <Button
                         icon={width && width < 500 ? null : <GooglePlusOutlined />}
-                        className={cls.googleButton}>
+                        className={cls.googleButton}
+                        onClick={onGoogleAuthClick}
+                    >
                         {mode === 'login' ? 'Войти' : 'Регистрация'} через Google
                     </Button>
                 </div>

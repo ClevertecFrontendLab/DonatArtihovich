@@ -1,0 +1,1 @@
+export {ResultModal} from './ui/result-modal'

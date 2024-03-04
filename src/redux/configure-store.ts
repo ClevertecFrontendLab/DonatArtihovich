@@ -1,17 +1,22 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { createBrowserHistory } from 'history';
-import { authApi } from './api/auth-api';
+import { authApi } from './auth/api/auth-api';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { userSlice } from './model/user';
+import { authSlice } from './auth/model';
+import { feedbacksApi } from './feedbacks/api';
+import { feedbacksSlice } from './feedbacks/model';
 
 export const store = configureStore({
     reducer: {
-        [userSlice.name]: userSlice.reducer,
-        [authApi.reducerPath]: authApi.reducer
+        [authSlice.name]: authSlice.reducer,
+        [authApi.reducerPath]: authApi.reducer,
+        [feedbacksApi.reducerPath]: feedbacksApi.reducer,
+        [feedbacksSlice.name]: feedbacksSlice.reducer
     },
     middleware: (getDefaultMiddleware) => 
         getDefaultMiddleware()
         .concat(authApi.middleware)
+        .concat(feedbacksApi.middleware)
 });
 
 export const history = createBrowserHistory()

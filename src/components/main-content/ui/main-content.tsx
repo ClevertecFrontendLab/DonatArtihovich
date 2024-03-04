@@ -9,6 +9,7 @@ import { classNames } from "@utils/lib/class-names"
 type MainContentProps = {
     isSiderCollapsed: boolean;
 }
+
 export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
     const { width } = useWindowSize()
 
