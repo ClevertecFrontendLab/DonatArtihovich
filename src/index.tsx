@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import { App } from '@components/app/app';
 import { store } from '@redux/configure-store';
 import 'normalize.css';
+import 'antd/dist/antd.css'
 import './index.scss';
 import { ModalContextProvider } from '@processes/modal';
 

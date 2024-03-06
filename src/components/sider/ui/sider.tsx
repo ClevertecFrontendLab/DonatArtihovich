@@ -17,10 +17,10 @@ type PageSiderProps = {
 }
 
 const menuItems: MenuItemType[] = [
-    { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined style={{ color: 'var(--primary-light-9)' }} /> },
-    { label: 'Тренировки', key: 'workouts', icon: <HeartFilled style={{ color: 'var(--primary-light-9)' }} /> },
-    { label: 'Достижения', key: 'scores', icon: <TrophyFilled style={{ color: 'var(--primary-light-9)' }} /> },
-    { label: 'Профиль', key: 'profile', icon: <IdcardOutlined style={{ color: 'var(--primary-light-9)' }} /> },
+    { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined /> },
+    { label: 'Тренировки', key: 'workouts', icon: <HeartFilled /> },
+    { label: 'Достижения', key: 'scores', icon: <TrophyFilled /> },
+    { label: 'Профиль', key: 'profile', icon: <IdcardOutlined /> },
 ]
 
 export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
@@ -82,7 +82,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                             width={width && width < 540 ? 16 : undefined}
                         />}
                     onClick={toggleMenu}
-                    style={{ width: 20, height: 32 }}
+                    style={{ width: 20, height: 32, border: 'none' }}
                     data-test-id={width && width >= 702 ? 'sider-switch' : 'sider-switch-mobile'}
                 />
             </div>

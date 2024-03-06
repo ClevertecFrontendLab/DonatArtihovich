@@ -61,8 +61,8 @@ export const FeedbacksContent = ({ isSiderCollapsed }: FeedbacksContent) => {
         setMode(ModalModes.CreateFeedback)
     }
 
-    return (
-        <Content>
+    return !width ? null : (
+        <Content style={{ width: width > 700 ? (width > 1440 ? 1440 : width) - (isSiderCollapsed ? 64 : 208) : undefined }}>
             <AppLoader isLoader={isFeedbacksFetching} />
             {feedbacks && <div className={classNames(
                 cls.feedbacksContent,

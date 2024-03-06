@@ -14,7 +14,9 @@
 }
 
 .contentLayout {
-    flex-basis: 100%;
+    // flex: 1 !important;
+    // flex-basis: 100% !important;
+    min-height: 100vh !important;
 }
 
 @media(max-width: 702px) {

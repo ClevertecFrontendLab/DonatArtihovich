@@ -39,19 +39,19 @@
 .helpText {
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--character-light-secondary-45);
+    color: var(--character-light-secondary-45) !important;
 }
 
 .headerTitle {
     font-family: var(--font-family);
     font-weight: 500;
-    font-size: 24px;
+    font-size: 24px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--character-light-title-85);
+    color: var(--character-light-title-85) !important;
     margin: 0;
 }
 
@@ -62,10 +62,10 @@
 .headerText {
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--character-light-secondary-45);
+    color: var(--character-light-secondary-45) !important;
 }
 
 :global {

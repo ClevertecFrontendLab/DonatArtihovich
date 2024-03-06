@@ -6,11 +6,7 @@
 
     :global {
         .ant-rate-star-full {
-            color: var(--character-light-warning);
-        }
-
-        .ant-rate-star-second {
-            display: none;
+            color: var(--character-light-warning) !important;
         }
     }
 }

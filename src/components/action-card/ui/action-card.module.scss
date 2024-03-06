@@ -5,6 +5,10 @@
     width: 240px;
 }
 
+.cardDivider {
+    margin: 0 !important;
+}
+
 .actionCard {
     padding: 0;
     border-radius: 2px;
@@ -19,17 +23,18 @@
 
 .cardTitle {
     font-family: var(--font-family);
-    font-weight: 400;
-    font-size: 16px;
+    font-weight: 400 !important;
+    font-size: 16px !important;
     line-height: 130%;
-    color: var(--character-light-title-85);
-    margin: 12px;
+    color: var(--character-light-title-85) !important;
+    margin: 12px !important;
+    text-align: center;
 }
 
 .cardButton {
-    border: none;
+    border: none !important;
     margin: 12px;
-    box-shadow: none;
+    box-shadow: none !important;
     background: var(--character-light-primary-inverse);
     display: flex;
     padding: 8px;

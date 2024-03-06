@@ -29,6 +29,8 @@ export const FeedbackCard = ({ feedback, isSiderCollapsed }: FeedbackCardProps) 
                     <StarRating
                         disabled
                         value={feedback.rating}
+                        className={cls.starRating}
+                        starWidth={16}
                     />
                     <Typography.Text className={cls.feedbackTime}>
                         {feedback.createdAt

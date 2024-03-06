@@ -3,7 +3,7 @@
 }
 
 .noFeedbacks {
-    min-height: 74vh;
+    min-height: 74vh !important;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -30,20 +30,20 @@
 }
 
 .writeButton {
-    border: 1px solid var(--primary-light-6);
+    border: 1px solid var(--primary-light-6) !important;
     border-radius: 2px;
-    padding: 4px 15px;
+    padding: 4px 15px !important;
     width: 142px;
     height: 40px;
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
-    background: var(--primary-light-6);
-    color: white;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04) !important;
+    background: var(--primary-light-6) !important;
+    color: white !important;
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--character-light-primary-inverse);
+    color: var(--character-light-primary-inverse) !important;
 
     &:hover {
         cursor: pointer;
@@ -53,12 +53,12 @@
 .allFeedbacksButton {
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--primary-light-6);
-    background: transparent;
-    border: none;
+    color: var(--primary-light-6) !important;
+    background: transparent !important;
+    border: none !important;
 
     &:hover {
         cursor: pointer;
@@ -87,22 +87,23 @@
 }
 
 .NoFeedbacksTitle {
-    margin: 0;
-    font-family: var(--font-family);
-    font-weight: 500;
-    font-size: 24px;
+    margin: 0 !important;
+    font-family: var(--font-family) !important;
+    font-weight: 500 !important;
+    font-size: 24px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--primary-light-9);
+    color: var(--primary-light-9) !important;
 }
 
 .NoFeedbacksText {
-    font-family: var(--font-family);
+    margin: 0 !important;
+    font-family: var(--font-family) !important;
     font-weight: 400;
-    font-size: 14px;
+    font-size: 14px !important;
     line-height: 130%;
     text-align: center;
-    color: var(--character-light-secondary-45);
+    color: var(--character-light-secondary-45) !important;
 }
 
 .stretched {

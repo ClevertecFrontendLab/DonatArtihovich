@@ -1,4 +1,4 @@
-import { Card, Row, Typography } from "antd"
+import { Card, Typography } from "antd"
 import { Content } from "antd/es/layout/layout"
 import cls from './main-content.module.scss'
 import { ActionCard } from "@components/action-card"
@@ -15,7 +15,7 @@ export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
 
     if (width)
         return (
-            <Content>
+            <Content style={{ width: width > 700 ? (width > 1440 ? 1440 : width) - (isSiderCollapsed ? 64 : 208) : undefined }}>
                 <div className={cls.content}>
                     <Card className={classNames(cls.abilitiesCard, isSiderCollapsed && cls.abilitiesCardStretched)}>
                         <Typography.Text className={cls.abilitiesCardText}>
@@ -31,7 +31,7 @@ export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
                             CleverFit — это не просто приложение, а твой{width && width < 900 && !isSiderCollapsed && <br />} личный помощник{width && (width > 900 || (width < 900 && isSiderCollapsed && width > 702)) && <br />} в мире фитнеса.{width < 540 && isSiderCollapsed && <br />}Не откладывай{width && width < 900 && !isSiderCollapsed && <br />} на завтра — {width < 540 && <br />}начни тренироваться{width && (width > 900 || (isSiderCollapsed && width > 702)) && <br />} уже сегодня!
                         </Typography.Text>
                     </Card>
-                    <Row justify='space-between' align='middle' className={classNames(cls.actionCardsWrapper, isSiderCollapsed && cls.actionCardsWrapperStretched)}>
+                    <div className={classNames(cls.actionCardsWrapper, isSiderCollapsed && cls.actionCardsWrapperStretched)}>
                         <ActionCard
                             title='Расписать тренировки'
                             buttonTitle='Тренировки'
@@ -50,7 +50,7 @@ export const MainContent = ({ isSiderCollapsed }: MainContentProps) => {
                             buttonIcon={<IdcardOutlined style={{ color: 'var(--primary-light-6)' }} />}
                             isStretched={isSiderCollapsed}
                         />
-                    </Row>
+                    </div>
                 </div>
             </Content >
         )

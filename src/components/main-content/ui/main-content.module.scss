@@ -22,7 +22,7 @@
 }
 
 .actionCardsWrapper {
-    display: flex;
+    display: flex !important;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -75,12 +75,6 @@
 
     .abilitiesCard {
         padding: 27px;
-
-        :global {
-            .ant-card-body {
-                padding: 0 !important;
-            }
-        }
     }
 }
 
@@ -133,7 +127,7 @@
     .actionCardsWrapper {
         gap: 8px;
         flex-direction: column;
-        align-items: center;
+        align-items: center !important;
     }
 
     .abilitiesCard,
@@ -141,13 +135,4 @@
         padding: 17px;
         padding-left: 16px;
     }
-
-    // .abilitiesCard,
-    // .aboutCard {
-    //     :global {
-    //         .ant-card-body {
-    //             padding: 16px;
-    //         }
-    //     }
-    // }
 }

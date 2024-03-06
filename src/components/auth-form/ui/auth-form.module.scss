@@ -11,7 +11,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 64px;
+    padding: 64px !important;
     box-sizing: border-box;
     max-height: 742px;
 }
@@ -24,7 +24,7 @@
 
 .menu {
     width: 368px;
-    margin: 48px 0 0;
+    margin: 48px 0 0 !important;
     padding: 0;
     display: flex;
 
@@ -32,7 +32,7 @@
         .ant-menu-item {
             width: 50%;
             text-align: center;
-            padding: 12.5px;
+            padding: 12.5px !important;
             font-family: var(--font-family);
             font-weight: 400;
             font-size: 16px;
@@ -45,23 +45,31 @@
         }
 
         .ant-menu-item-selected {
-            border-bottom: 2px solid var(--primary-light-6);
-            color: var(--primary-light-6);
+            border-bottom: 2px solid var(--primary-light-6) !important;
+            color: var(--primary-light-6) !important;
+
+            &::after {
+                display: none;
+            }
         }
     }
 }
 
 .loginForm {
     padding-top: 24px;
-    margin-bottom: 28px;
+    // margin-bottom: 0;
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 6px;
 
     :global {
         .ant-form-item-has-success {
-            border: none;
-            box-shadow: none;
+            border: none !important;
+            box-shadow: none !important;
+        }
+
+        .ant-input-status-success {
+            background-color: transparent !important;
         }
 
         .ant-form-item-has-error:not(:first-child) {
@@ -71,7 +79,7 @@
 }
 
 .emailInput {
-    border: none;
+    border: none !important;
 
     :global {
         .ant-input-group {
@@ -88,7 +96,8 @@
             width: 297px;
             box-sizing: border-box;
             background: var(--character-light-primary-inverse);
-            border: 1px solid var(--character-light-border);
+            border: 1px solid var(--character-light-border) !important;
+            box-shadow: none !important;
 
             &:focus {
                 outline: none;
@@ -96,9 +105,9 @@
         }
 
         .ant-input-group-addon {
-            border-bottom: 1px solid var(--character-light-border);
-            border-left: 1px solid var(--character-light-border);
-            border-top: 1px solid var(--character-light-border);
+            border-bottom: 1px solid var(--character-light-border) !important;
+            border-left: 1px solid var(--character-light-border) !important;
+            border-top: 1px solid var(--character-light-border) !important;
             border-radius: 2px 0 0 2px;
             padding: 10px 12px;
             height: 40px;
@@ -109,20 +118,20 @@
             font-size: 14px;
             line-height: 130%;
             text-align: center;
-            color: var(--character-light-title-85);
+            color: var(--character-light-title-85) !important;
             background: var(--character-light-table-header);
         }
 
         .ant-form-item-explain {
-            position: absolute;
+            position: absolute !important;
+            margin: 0 !important;
         }
     }
 }
 
 .passwordInput {
-    border: 1px solid var(--character-light-border);
+    border: none !important;
     border-radius: 2px;
-    padding: 10px 12px;
     width: 368px;
     height: 40px !important;
     box-sizing: border-box;
@@ -135,6 +144,9 @@
             width: 368px;
             display: flex;
             align-items: center;
+            height: 40px;
+            border: 1px solid var(--character-light-border) !important;
+            box-shadow: none !important;
         }
 
         .ant-input {
@@ -142,7 +154,6 @@
             padding: 1px 0;
             width: 326px;
             height: 20px;
-            border: none;
         }
 
         .ant-input:focus {
@@ -174,7 +185,7 @@
         font-size: 12px;
         line-height: 130%;
         color: var(--character-light-secondary-45);
-        margin-top: 10px;
+        margin-top: 0 !important;
     }
 }
 
@@ -205,6 +216,10 @@
             width: 16px;
             height: 16px;
         }
+
+        span {
+            padding: 0 !important;
+        }
     }
 }
 
@@ -215,7 +230,7 @@
     line-height: 130%;
     text-align: center;
     color: var(--primary-light-6);
-    border: none;
+    border: none !important;
     outline: none;
     text-decoration: none;
     background: transparent;
@@ -225,17 +240,17 @@
     width: 368px;
     font-family: var(--font-family);
     font-weight: 400;
-    font-size: 16px;
+    font-size: 16px !important;
     line-height: 130%;
     text-align: center;
     color: var(--character-light-primary-inverse);
     border: 1px solid var(--primary-light-6);
     border-radius: 2px;
-    padding: 6px 15px;
+    padding: 6px 15px !important;
     width: 368px;
-    height: 40px;
-    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04);
-    background: var(--primary-light-6);
+    height: 40px !important;
+    box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.04) !important;
+    background: var(--primary-light-6) !important;
 
     &:hover {
         cursor: pointer;
@@ -246,7 +261,7 @@
     border: 1px solid var(--character-light-border);
     border-radius: 2px;
     width: 368px;
-    height: 40px;
+    height: 40px !important;
     box-shadow: 0 2px 0 0 rgba(0, 0, 0, 0.02);
     background: var(--character-light-primary-inverse);
     display: flex;
@@ -265,7 +280,7 @@
     display: flex;
     flex-direction: column;
     gap: 16px;
-    margin-bottom: 10px;
+    // margin-bottom: 
 }
 
 .checkboxWrapper {
@@ -279,6 +294,7 @@
 
 .registrationForm {
     height: 686px;
+    margin-bottom: 12px;
 
     .buttonsWrapper {
         margin-top: 30px;
@@ -290,16 +306,20 @@
 
     :global {
         .ant-form-item-has-error {
-            border-color: var(--character-light-error);
+
+            .ant-input-password,
+            #email {
+                border: 1px solid var(--character-light-error) !important;
+            }
 
             .ant-form-item-explain-error {
-                color: var(--character-light-error);
+                color: var(--character-light-error) !important;
             }
         }
 
         .ant-form-item-has-success:not(:first-child) {
-            border: 1px solid var(--primary-light-5);
-            box-shadow: 0 0 0 2px rgba(47, 84, 235, 0.2);
+            border: 1px solid var(--primary-light-5) !important;
+            box-shadow: 0 0 0 2px rgba(47, 84, 235, 0.2) !important;
         }
     }
 
@@ -329,15 +349,9 @@
     }
 }
 
-@media(max-width: 900px) {
-    .registrationForm {
-        height: 57.6vh;
-    }
-}
-
 @media(max-width: 700px) {
     .form {
-        height: 612px;
+        height: 612px !important;
         width: 328px;
     }
 
@@ -421,11 +435,11 @@
 @media(max-width: 600px) {
     .form {
         height: 65vh;
-        padding: 32px;
+        padding: 32px !important;
     }
 
     .menu {
-        margin-top: 30px;
+        margin-top: 30px !important;
     }
 
     .registrationForm {

@@ -13,12 +13,15 @@ type AppModalProps = {
 export const AppModal = ({ children, open, title, className, modalClassName }: AppModalProps) => (
     <Modal
         open={open}
-        onOk={() => console.log('ok')}
         title={title}
         closable={false}
         className={classNames(cls.modal, modalClassName)}
         wrapClassName={cls.wrapper}
-        mask
+        maskStyle={{
+            backgroundColor: 'rgba(121, 156, 212, 0.5)',
+            backdropFilter: 'blur(5px)'
+
+        }}
     >
         <div className={className}>
             {children}

@@ -8,14 +8,15 @@ type StarRatingProps = {
     value: number;
     onChange?: (v: number) => void;
     className?: string;
+    starWidth?: number;
 }
 
-export const StarRating = ({ disabled, value, className, onChange }: StarRatingProps) => {
+export const StarRating = ({ disabled, value, className, onChange, starWidth = 20 }: StarRatingProps) => {
     return (
         <Rate
             character={({ index }) => index !== undefined && index + 1 <= value
-                ? <StarFilled style={{ color: 'var(--character-light-warning)', width: '20px' }} />
-                : <StarOutlined style={{ color: 'var(--character-light-warning)', width: '20px' }} />}
+                ? <StarFilled style={{ color: 'var(--character-light-warning)', width: `${starWidth}px` }} />
+                : <StarOutlined style={{ color: 'var(--character-light-warning)', width: `${starWidth}px` }} />}
             value={value}
             count={5}
             disabled={disabled}
