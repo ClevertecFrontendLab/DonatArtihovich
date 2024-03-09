@@ -36,6 +36,10 @@
     justify-content: 'flex-start';
     align-items: 'flex-end';
     height: fit-content;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
 
 .siderMenu {
@@ -163,22 +167,16 @@
                 position: relative;
                 width: 64px;
                 padding: 0 !important;
-                background: none !important;
-                box-shadow: none;
-
-                svg {
-                    color: var(--primary-light-9);
-                }
             }
 
             .ant-menu-item-icon {
                 position: absolute;
-                top: 30%;
+                top: 10%;
                 left: 36.5%;
             }
 
             .ant-menu-title-content {
-                display: none;
+                display: none !important;
             }
         }
     }

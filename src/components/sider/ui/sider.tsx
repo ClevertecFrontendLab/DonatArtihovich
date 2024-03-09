@@ -1,4 +1,5 @@
 import { Button, Divider, Layout, Menu } from 'antd'
+import { useMemo } from 'react';
 import cls from './sider.module.scss'
 import { CalendarOutlined, HeartFilled, IdcardOutlined, MenuFoldOutlined, MenuUnfoldOutlined, TrophyFilled } from '@ant-design/icons';
 import Icon from '@ant-design/icons/lib/components/Icon';
@@ -10,22 +11,25 @@ import { classNames } from '@utils/lib/class-names';
 import { useWindowSize } from '@uidotdev/usehooks';
 import { useNavigate } from 'react-router-dom';
 import { Paths } from '@utils/const/paths';
+import { MainContent } from '@utils/const/main-content';
 
 type PageSiderProps = {
     isCollapsed: boolean;
     setIsCollapsed: (b: boolean) => void;
+    setContent: (c: MainContent) => void;
+    content: MainContent;
 }
 
-const menuItems: MenuItemType[] = [
-    { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined /> },
-    { label: 'Тренировки', key: 'workouts', icon: <HeartFilled /> },
-    { label: 'Достижения', key: 'scores', icon: <TrophyFilled /> },
-    { label: 'Профиль', key: 'profile', icon: <IdcardOutlined /> },
-]
-
-export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
+export const PageSider = ({ isCollapsed, setIsCollapsed, setContent, content }: PageSiderProps) => {
     const { width } = useWindowSize()
     const navigate = useNavigate()
+
+    const menuItems: MenuItemType[] = useMemo(() => [
+        { label: 'Календарь', key: 'calendar', icon: <CalendarOutlined />, onClick: () => setContent(MainContent.Calendar) },
+        { label: 'Тренировки', key: 'workouts', icon: <HeartFilled />, onClick: () => setContent(MainContent.Workouts) },
+        { label: 'Достижения', key: 'scores', icon: <TrophyFilled />, onClick: () => setContent(MainContent.Scores) },
+        { label: 'Профиль', key: 'profile', icon: <IdcardOutlined />, onClick: () => setContent(MainContent.Profile) },
+    ], [setContent])
 
     const toggleMenu = () => {
         setIsCollapsed(!isCollapsed)
@@ -47,6 +51,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                 <div className={cls.siderMainWrapper}>
                     <div
                         className={cls.logoWrapper}
+                        onClick={() => setContent(MainContent.Main)}
                     >
                         {isCollapsed
                             ? <Icon component={() => <img src={fitIcon} className={cls.fitIcon} />} />
@@ -57,6 +62,7 @@ export const PageSider = ({ isCollapsed, setIsCollapsed }: PageSiderProps) => {
                         mode='inline'
                         className={cls.siderMenu}
                         items={menuItems}
+                        selectedKeys={[content]}
                     />
                 </div>
 
