@@ -2,7 +2,8 @@ enum ModalModes {
     GetFeedbacksError = 1000,
     CreateFeedback,
     CreateFeedbackError,
-    CreateFeedbackSuccess
+    CreateFeedbackSuccess,
+    GetTrainingsError
 }
 
 export default ModalModes

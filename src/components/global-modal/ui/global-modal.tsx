@@ -1,9 +1,7 @@
 import { useRequiredContext } from '@hooks/typed-use-context-hook'
 import cls from './global-modal.module.scss'
 import { ModalContext } from '@processes/modal'
-// import { ResultModal } from '@components/result-modal'
 import { useEffect } from 'react'
-// import { classNames } from '@utils/lib'
 import { CreateFeedbackModal } from '@components/create-feedback-modal'
 import ModalModes from '@utils/const/modal-modes'
 import { AppModal } from '@components/app-modal'
@@ -39,31 +37,13 @@ export const GlobalModal = () => {
                         <CreateFeedbackErrorModal />
                     </div>
                 </AppModal>}
-            {mode === ModalModes.GetFeedbacksError &&
-                <AppModal open={mode === ModalModes.GetFeedbacksError}>
-                    <div className={cls.resultModalBody}>
+            {(mode === ModalModes.GetFeedbacksError || mode === ModalModes.GetTrainingsError) &&
+                <AppModal open={mode === ModalModes.GetFeedbacksError || mode === ModalModes.GetTrainingsError}>
+                    <div className={classNames(cls.resultModalBody, cls.wideBody)}>
                         <ResultModal mode={ModalModes.GetFeedbacksError} />
                     </div>
                 </AppModal>
             }
         </>
     )
-
-
-    // return !mode ? mode : (
-    //     <div className={cls.wrapper}>
-    //         {mode === ModalModes.CreateFeedback
-    //             ? <CreateFeedbackModal />
-    //             : <div className={classNames(
-    //                 cls.modalBody,
-    //                 mode === ModalModes.GetFeedbacksError && cls.getFeedbacksError,
-    //                 (mode === ModalModes.CreateFeedbackError) && cls.wideMode,
-    //             )}>
-    //                 {mode === ModalModes.CreateFeedbackError
-    //                     ? <CreateFeedbackErrorModal />
-    //                     : <ResultModal mode={mode} />}
-    //             </div>
-    //         }
-    //     </div>
-    // )
 }
